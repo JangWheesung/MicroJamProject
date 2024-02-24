@@ -34,7 +34,7 @@ public class Slice : MonoBehaviour
             sliceRb.velocity = Vector2.zero;
             sliceRb.transform.position = Vector2.zero;
         }
-        //pop
-        Destroy(gameObject);
+
+        PoolingManager.instance.Push(gameObject);
     }
 }

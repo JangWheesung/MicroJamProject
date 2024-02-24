@@ -14,15 +14,13 @@ public class DieState : BaseState
 
     public override void OnStateEnter()
     {
-        Slice slices = Instantiate(sliceObj, transform.position, Quaternion.identity);
+        Slice slices = PoolingManager.instance.Pop<Slice>(sliceObj.name, transform.position);
         slices.BreakEffect(breakPower);
     }
 
     public override void OnStateExit()
     {
-        //»ç¶óÁü(pop)
-        Debug.Log("ÁøÂ¥ Á×À½");
-        Destroy(enemy.gameObject);
+        PoolingManager.instance.Push(enemy.gameObject);
     }
 
     public override void OnStateUpdate()

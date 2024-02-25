@@ -22,7 +22,10 @@ public class AnyState : BaseState
 
     public override void OnStateUpdate() //일시정지될떄, 죽일때, 게임오버 시
     {
-        
+        if (enemy.isDie)
+        {
+            fsm.ChangeState(FSM_State.Die);
+        }
     }
 
     protected override void OnStateAction()

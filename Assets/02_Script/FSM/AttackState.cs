@@ -42,7 +42,6 @@ public class AttackState : BaseState
     {
         if (currentTime <= 0)
         {
-            Debug.Log("공격");
             //시간 늘리기
             enemy.AttackEffect();
             currentTime = attackDelay;

@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 614977996633932789}
   - component: {fileID: 614977996633932791}
   - component: {fileID: 614977996633932788}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,6 +241,7 @@ MonoBehaviour:
   jumpPower: 12
   moveSpeed: 4
   attackDelay: 1
+  isDie: 0
 --- !u!61 &614977996633932791
 BoxCollider2D:
   m_ObjectHideFlags: 0

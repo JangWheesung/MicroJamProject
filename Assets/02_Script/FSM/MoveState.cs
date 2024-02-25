@@ -47,11 +47,10 @@ public class MoveState : BaseState
     {
         float distance = Mathf.Clamp(playerTrs.position.x - transform.position.x, -1, 1);
         rb.velocity = new Vector2(distance * moveSpeed, rb.velocity.y);
-        sp.flipX = distance == -1 ? true : false;
+        sp.flipX = distance <= 0 ? true : false;
 
         if (Mathf.Abs(rb.velocity.y) == 0)
         {
-            Debug.Log("มกวม");
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         }
     }

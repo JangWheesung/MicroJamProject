@@ -13,7 +13,7 @@ public class IdleState : BaseState
 
     public override void OnStateEnter()
     {
-        Debug.Log("พฦภฬต้");
+        
     }
 
     public override void OnStateExit()

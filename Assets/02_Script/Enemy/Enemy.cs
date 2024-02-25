@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 
 public class Enemy : MonoBehaviour
@@ -16,21 +17,32 @@ public class Enemy : MonoBehaviour
     public float moveSpeed;
     public float attackDelay;
 
+    public bool isDie;
+
+    private void OnEnable()
+    {
+        OnAttackEvt += AttackEffectSystem.Instance.CinemachineShaking;
+        OnAttackEvt += AttackEffectSystem.Instance.CircleEffect;
+        OnAttackEvt += AttackEffectSystem.Instance.SmashingEffect;
+    }
+
     private void Start()
     {
         playerTrs = GameObject.FindWithTag("Player").transform;
         sp = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
-
-        //이건 적 스폰에서 해주기
-        OnAttackEvt += AttackEffectSystem.Instance.CinemachineShaking;
-        OnAttackEvt += AttackEffectSystem.Instance.CircleEffect;
-        OnAttackEvt += AttackEffectSystem.Instance.SmashingEffect;
     }
 
     public void AttackEffect()
     {
         OnAttackEvt?.Invoke(playerTrs);
+    }
+
+    private void OnDisable()
+    {
+        OnAttackEvt -= AttackEffectSystem.Instance.CinemachineShaking;
+        OnAttackEvt -= AttackEffectSystem.Instance.CircleEffect;
+        OnAttackEvt -= AttackEffectSystem.Instance.SmashingEffect;
     }
 }

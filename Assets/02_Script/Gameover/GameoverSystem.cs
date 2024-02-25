@@ -53,7 +53,7 @@ public class GameoverSystem : MonoBehaviour
         gameoverPanel.DOMoveY(540f, 0.5f).SetEase(Ease.OutBounce);
     }
 
-    private void GetKillCount(Transform pos) // 플레이어 어택 이벤트에 달아주기
+    public void GetKillCount()
     {
         highSocre_kill++;
     }

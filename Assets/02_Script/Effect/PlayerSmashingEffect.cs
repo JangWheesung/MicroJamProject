@@ -28,6 +28,7 @@ public class PlayerSmashingEffect : MonoBehaviour
             if (collider.TryGetComponent<Enemy>(out Enemy enemy))
             {
                 enemy.Death();
+                GameoverSystem.Instance.GetKillCount();
                 TimeSystem.Instance.PlusTime(1);
             }
         }

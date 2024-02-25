@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using DG.Tweening;
 
 public class AttackEffectSystem : MonoBehaviour
 {
@@ -37,6 +38,17 @@ public class AttackEffectSystem : MonoBehaviour
 
     IEnumerator ShakeCor()
     {
+        float rotateZ = Random.Range(-4f, 4f);
+        while (Mathf.Abs(rotateZ) < 3f)
+        {
+            rotateZ = Random.Range(-4f, 4f);
+        }
+
+        vcam.transform.DORotate(new Vector3(0, 0, rotateZ), 0.1f).SetEase(Ease.OutBack).OnComplete(() => 
+        {
+            vcam.transform.DORotate(Vector3.zero, 0.3f);
+        });
+
         noiseCam.m_AmplitudeGain = 6;
         yield return new WaitForSeconds(0.4f);
         noiseCam.m_AmplitudeGain = 0;

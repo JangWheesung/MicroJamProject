@@ -11,11 +11,13 @@ public class CircleEffect : MonoBehaviour
     {
         sp = GetComponent<SpriteRenderer>();
 
-        transform.DOScale(new Vector3(3, 3, 1), 0.5f).SetEase(Ease.OutElastic);
-        sp.DOFade(0.2f, 0.5f).OnComplete(() => 
+        transform.DOScale(new Vector3(3, 3, 1), 0.5f).SetEase(Ease.OutElastic).OnComplete(() => 
         {
-            OrgSet();
-            PoolingManager.instance.Push(gameObject);
+            sp.DOFade(0.2f, 0.2f).OnComplete(() =>
+            {
+                OrgSet();
+                PoolingManager.instance.Push(gameObject);
+            });
         });
     }
 

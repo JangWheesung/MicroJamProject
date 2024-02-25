@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
 
-        //이건 적 스폰에서 해주기d
+        //이건 적 스폰에서 해주기
         OnAttackEvt += AttackEffectSystem.Instance.CinemachineShaking;
         OnAttackEvt += AttackEffectSystem.Instance.CircleEffect;
         OnAttackEvt += AttackEffectSystem.Instance.SmashingEffect;

@@ -241,7 +241,6 @@ MonoBehaviour:
   jumpPower: 12
   moveSpeed: 4
   attackDelay: 1
-  isDie: 0
 --- !u!61 &614977996633932791
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -258,10 +257,10 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.9765625, y: 0.9765625}
+    newSize: {x: 0.9765625, y: 0.9765625}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0

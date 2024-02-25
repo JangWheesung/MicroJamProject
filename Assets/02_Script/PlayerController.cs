@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     BoxCollider2D _box;
     Animator _animator;
 
+    [SerializeField] private PlayerSmashingEffect playerSmashingEffect;
+
     [SerializeField] private float _moveSpeed = 1f;
     [SerializeField] private float _jumpImpulse = 5f;
     [SerializeField] private float _dashSpeed = 5f;
@@ -50,26 +52,14 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // 벽에 붙어있지 않을 때만 캐릭터를 움직이게 합니다.
-        if (!_isAttacking && !_isTouchingWall)
-            _rigid.velocity = new Vector2(_moveInput.x * _moveSpeed, _rigid.velocity.y);
-
-        // 벽에 붙어있을 때 수직 속도를 줄여서 빠르게 올라가지 못하게 합니다.
-        if (_isTouchingWall)
-        {
-            // 벽에 닿았을 때 수직 속도를 줄이거나, 멈추게 하고 싶으면 아래 코드를 조정하세요.
-            _rigid.velocity = new Vector2(_rigid.velocity.x, Mathf.Max(_rigid.velocity.y, 0));
-        }
+        _rigid.velocity = new Vector2(_moveInput.x * _moveSpeed, _rigid.velocity.y);
     }
 
 
     private void Update()
     {
-        if (!_isAttacking)
-        {
-            SetFacingDirection(_moveInput);
-            Attack();
-        }
+        SetFacingDirection(_moveInput);
+        Attack();
     }
 
     private void SetFacingDirection(Vector2 moveInput)
@@ -102,39 +92,7 @@ public class PlayerController : MonoBehaviour
                 }
                 _isGrounded = false;
             }
-            else if (_isTouchingWall && !_isGrounded)
-            {
-                // 벽 점프 속도를 증가시킵니다.
-                float wallJumpDirection = _isFacingRight ? -1f : 1f;
-                // 여기서 _jumpImpulse를 더 큰 값으로 조정하면 벽 타기 속도가 증가합니다.
-                _rigid.velocity = new Vector2(_dashSpeed * wallJumpDirection, _dashSpeed);
-                _isTouchingWall = false; // 벽에서 떨어지면 벽에 닿지 않았다고 표시합니다.
-            }
         }
-    }
-
-
-
-    public void OnDash(InputAction.CallbackContext context)
-    {
-        if (context.started && !_isDashing && !_isAttacking)
-        {
-            _isDashing = true;
-            float dashDirection = isFacingRight ? 1 : -1;
-            _rigid.velocity = new Vector2(dashDirection * _dashSpeed, _rigid.velocity.y);
-            Invoke("ResetDash", _dashDuration);
-            Invoke("ResetDashState", _dashCooldown);
-        }
-    }
-
-    private void ResetDash()
-    {
-        _rigid.velocity = Vector2.zero;
-    }
-
-    private void ResetDashState()
-    {
-        _isDashing = false;
     }
 
     public void Attack()
@@ -142,9 +100,19 @@ public class PlayerController : MonoBehaviour
         if (Mouse.current.leftButton.wasPressedThisFrame && !_isAttacking)
         {
             _isAttacking = true;
-            _animator.SetTrigger("Attack");
-            // 공격 애니메이션 이벤트에 대한 처리 추가
+            StartCoroutine(AttackDelay());
+
+            Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
+                Input.mousePosition.y, -Camera.main.transform.position.z));
+
+            Vector3 attackVec = point - transform.position;
+            attackVec.Normalize();
+            Vector3 effectPosition = transform.position + attackVec * 2f;
             
+            PlayerSmashingEffect effect = PoolingManager.instance.Pop<PlayerSmashingEffect>(playerSmashingEffect.name, effectPosition);
+            effect.transform.up = -attackVec;
+
+            AttackEffectSystem.Instance.CinemachineShaking(null);
         }
     }
 
@@ -160,39 +128,11 @@ public class PlayerController : MonoBehaviour
             _isGrounded = true;
             _doubleJumped = false;
         }
-        else if (collision.gameObject.CompareTag("Wall"))
-        {
-            _isTouchingWall = true;
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            _isTouchingWall = true;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            _isTouchingWall = false;
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ceiling") && _isTouchingWall)
-        {
-            // 천장과 벽에 붙어 있는 상태에서 처리할 로직 추가
-        }
     }
 
     IEnumerator AttackDelay()
     {
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.3f);
         FinishAttack();
     }
 }

@@ -17,10 +17,12 @@ public class Enemy : MonoBehaviour
     public float moveSpeed;
     public float attackDelay;
 
-    public bool isDie;
+    public bool isDie { get; private set; }
 
     private void OnEnable()
     {
+        isDie = false;
+
         OnAttackEvt += AttackEffectSystem.Instance.CinemachineShaking;
         OnAttackEvt += AttackEffectSystem.Instance.CircleEffect;
         OnAttackEvt += AttackEffectSystem.Instance.SmashingEffect;
@@ -37,6 +39,11 @@ public class Enemy : MonoBehaviour
     public void AttackEffect()
     {
         OnAttackEvt?.Invoke(playerTrs);
+    }
+
+    public void Death()
+    {
+        isDie = true;
     }
 
     private void OnDisable()

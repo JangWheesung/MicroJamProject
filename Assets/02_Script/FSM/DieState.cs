@@ -16,6 +16,7 @@ public class DieState : BaseState
     {
         Slice slices = PoolingManager.instance.Pop<Slice>(sliceObj.name, transform.position);
         slices.BreakEffect(breakPower);
+        fsm.ChangeState(FSM_State.Idle);
     }
 
     public override void OnStateExit()
@@ -25,7 +26,9 @@ public class DieState : BaseState
 
     public override void OnStateUpdate()
     {
-        fsm.ChangeState(FSM_State.Idle);
+        //Slice slices = PoolingManager.instance.Pop<Slice>(sliceObj.name, transform.position);
+        //slices.BreakEffect(breakPower);
+        //fsm.ChangeState(FSM_State.Idle);
     }
 
     protected override void OnStateAction()

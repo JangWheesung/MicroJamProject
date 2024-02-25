@@ -16,6 +16,8 @@ public class Slice : MonoBehaviour
     {
         foreach (Rigidbody2D sliceRb in slicesRigbody)
         {
+            sliceRb.transform.position = transform.position;
+
             float x = Random.Range(-1f, 1f);
             float y = 1 - Mathf.Pow(Mathf.Abs(x), 2);
 
@@ -32,7 +34,7 @@ public class Slice : MonoBehaviour
         foreach (Rigidbody2D sliceRb in slicesRigbody)
         {
             sliceRb.velocity = Vector2.zero;
-            sliceRb.transform.position = Vector2.zero;
+            sliceRb.transform.position = transform.position;
         }
 
         PoolingManager.instance.Push(gameObject);

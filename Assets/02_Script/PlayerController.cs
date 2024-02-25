@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D _rigid;
     BoxCollider2D _box;
+    Animator _animator;
 
     [SerializeField] private float _moveSpeed = 1f;
     [SerializeField] private float _jumpImpulse = 5f;
@@ -15,22 +16,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _dashDuration = 0.2f;
     [SerializeField] private float _dashCooldown = 1f;
 
-    private bool _isGrounded;
+    public bool _isGrounded = false;
     private bool _doubleJumped = false;
     private bool _isDashing = false;
+    private bool _isAttacking = false;
+    private bool _isTouchingWall = false; // 벽에 닿았는지 여부 추가
 
     private Vector2 _moveInput;
-
-    private void Awake()
-    {
-        _rigid = GetComponent<Rigidbody2D>();
-        _box = GetComponent<BoxCollider2D>();
-    }
-
-    void FixedUpdate()
-    {
-        _rigid.velocity = new Vector2(_moveInput.x * _moveSpeed, _rigid.velocity.y);
-    }
 
     [SerializeField]
     private bool _isFacingRight = true;
@@ -42,8 +34,41 @@ public class PlayerController : MonoBehaviour
             if (_isFacingRight != value)
             {
                 transform.localScale *= new Vector2(-1, 1);
+
+                //transform.localScale = new Vector3(value ? 1 : -1, 1, 1);
             }
             _isFacingRight = value;
+        }
+    }
+
+    private void Awake()
+    {
+        _rigid = GetComponent<Rigidbody2D>();
+        _box = GetComponent<BoxCollider2D>();
+        _animator = GetComponent<Animator>();
+    }
+
+    void FixedUpdate()
+    {
+        // 벽에 붙어있지 않을 때만 캐릭터를 움직이게 합니다.
+        if (!_isAttacking && !_isTouchingWall)
+            _rigid.velocity = new Vector2(_moveInput.x * _moveSpeed, _rigid.velocity.y);
+
+        // 벽에 붙어있을 때 수직 속도를 줄여서 빠르게 올라가지 못하게 합니다.
+        if (_isTouchingWall)
+        {
+            // 벽에 닿았을 때 수직 속도를 줄이거나, 멈추게 하고 싶으면 아래 코드를 조정하세요.
+            _rigid.velocity = new Vector2(_rigid.velocity.x, Mathf.Max(_rigid.velocity.y, 0));
+        }
+    }
+
+
+    private void Update()
+    {
+        if (!_isAttacking)
+        {
+            SetFacingDirection(_moveInput);
+            Attack();
         }
     }
 
@@ -61,45 +86,45 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        Vector2 movement = new Vector2(Keyboard.current.dKey.isPressed ? 1 : Keyboard.current.aKey.isPressed ? -1 : 0, 0);
         _moveInput = context.ReadValue<Vector2>();
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-
-        //TODO Check if alice as well
-        if (context.started && !_isGrounded)
+        if (context.started)
         {
-            _isGrounded = false;
-            _rigid.velocity = new Vector2(_rigid.velocity.x, _jumpImpulse);
-        }
-        else if(context.started && !_isGrounded)
-        {
-            _doubleJumped = true;
-        }
-        else if(context.started && _doubleJumped)
-        {
-            return;
+            if (_isGrounded || (!_isGrounded && !_doubleJumped))
+            {
+                _rigid.velocity = new Vector2(_rigid.velocity.x, _jumpImpulse);
+                if (!_isGrounded && !_doubleJumped)
+                {
+                    _doubleJumped = true;
+                }
+                _isGrounded = false;
+            }
+            else if (_isTouchingWall && !_isGrounded)
+            {
+                // 벽 점프 속도를 증가시킵니다.
+                float wallJumpDirection = _isFacingRight ? -1f : 1f;
+                // 여기서 _jumpImpulse를 더 큰 값으로 조정하면 벽 타기 속도가 증가합니다.
+                _rigid.velocity = new Vector2(_dashSpeed * wallJumpDirection, _dashSpeed);
+                _isTouchingWall = false; // 벽에서 떨어지면 벽에 닿지 않았다고 표시합니다.
+            }
         }
     }
 
+
+
     public void OnDash(InputAction.CallbackContext context)
     {
-        _isDashing = true;
-        _rigid.velocity = new Vector2(_rigid.velocity.x, 0f); // 대쉬 중에 수직 이동 방지
-
-        if (Keyboard.current.dKey.isPressed)
+        if (context.started && !_isDashing && !_isAttacking)
         {
-            _rigid.AddForce(Vector2.right * _dashSpeed, ForceMode2D.Impulse);
+            _isDashing = true;
+            float dashDirection = isFacingRight ? 1 : -1;
+            _rigid.velocity = new Vector2(dashDirection * _dashSpeed, _rigid.velocity.y);
+            Invoke("ResetDash", _dashDuration);
+            Invoke("ResetDashState", _dashCooldown);
         }
-        else if (Keyboard.current.aKey.isPressed)
-        {
-            _rigid.AddForce(Vector2.left * _dashSpeed, ForceMode2D.Impulse);
-        }
-
-        Invoke("ResetDash", _dashDuration);
-        Invoke("ResetDashState", _dashCooldown);
     }
 
     private void ResetDash()
@@ -112,12 +137,62 @@ public class PlayerController : MonoBehaviour
         _isDashing = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void Attack()
     {
-        if (CompareTag("Ground"))
+        if (Mouse.current.leftButton.wasPressedThisFrame && !_isAttacking)
         {
-            _isGrounded = true;
+            _isAttacking = true;
+            _animator.SetTrigger("Attack");
+            // 공격 애니메이션 이벤트에 대한 처리 추가
+            
         }
     }
 
+    private void FinishAttack()
+    {
+        _isAttacking = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            _isGrounded = true;
+            _doubleJumped = false;
+        }
+        else if (collision.gameObject.CompareTag("Wall"))
+        {
+            _isTouchingWall = true;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            _isTouchingWall = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            _isTouchingWall = false;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ceiling") && _isTouchingWall)
+        {
+            // 천장과 벽에 붙어 있는 상태에서 처리할 로직 추가
+        }
+    }
+
+    IEnumerator AttackDelay()
+    {
+        yield return new WaitForSeconds(0.05f);
+        FinishAttack();
+    }
 }

@@ -26,7 +26,7 @@ public class TimeSystem : MonoBehaviour
         private set 
         {
             nowTime = value;
-            float outTime = Mathf.Floor(nowTime * 10f) / 10f;
+            string outTime = nowTime.ToString("F1");
             timeText.text = $"{outTime}s";
         }
     }
@@ -39,7 +39,8 @@ public class TimeSystem : MonoBehaviour
 
     private void Update()
     {
-        NowTime -= Time.deltaTime;
+        if(!GameoverSystem.Instance.isDeath)
+            NowTime -= Time.deltaTime;
     }
 
     public void PlusTime(float value)

@@ -19,7 +19,7 @@ public class EnemySpawnSystem : MonoBehaviour
         int enemyCnt = 2;
         float spawnTime = 0.5f;
 
-        while (true)
+        while (!GameoverSystem.Instance.isDeath)
         {
             enemyCnt += Random.Range(2, 5);
             spawnTime = waveCnt switch
@@ -28,8 +28,6 @@ public class EnemySpawnSystem : MonoBehaviour
                 < 20 => 0.4f,
                 < 30 => 0.3f
             };
-
-            Debug.Log(spawnTime);
 
             float delayTime = Random.Range(3f, 5f);
             yield return new WaitForSeconds(delayTime);

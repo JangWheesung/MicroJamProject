@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class IdleState : BaseState
 {
-    bool isStop; //게임 중 일시정지일때를 고려해 임시선언
-
     protected override void Awake()
     {
         base.Awake();
@@ -23,7 +21,7 @@ public class IdleState : BaseState
 
     public override void OnStateUpdate()
     {
-        if (!isStop)
+        if (!GameoverSystem.Instance.isDeath)
         {
             fsm.ChangeState(FSM_State.Move);
         }

@@ -37,6 +37,12 @@ public class AttackEffectSystem : MonoBehaviour
         PoolingManager.instance.Pop<SmashingEffect>(smashingEffect.name, pos.position);
     }
 
+    public void SoundEffect(Transform pos)
+    {
+        int random = Random.Range(1, 4);
+        AudioManager.Instance.StartSfx($"Smashing{random}");
+    }
+
     IEnumerator ShakeCor()
     {
         float rotateZ = Random.Range(-4f, 4f);

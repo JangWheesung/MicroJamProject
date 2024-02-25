@@ -62,6 +62,8 @@ public class TimeSystem : MonoBehaviour
 
     public void PlusTime(float value)
     {
+        AudioManager.Instance.StartSfx("TimeValue");
+
         NowTime += value;
 
         TimeEffect(Color.blue);
@@ -69,6 +71,8 @@ public class TimeSystem : MonoBehaviour
 
     public void MinusTime(float value)
     {
+        AudioManager.Instance.StartSfx("TimeValue");
+
         NowTime -= value;
 
         TimeEffect(Color.red);

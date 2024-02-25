@@ -16,6 +16,9 @@ public class DieState : BaseState
     {
         Slice slices = PoolingManager.instance.Pop<Slice>(sliceObj.name, transform.position);
         slices.BreakEffect(breakPower);
+
+        AudioManager.Instance.StartSfx("EnemyDeath");
+
         fsm.ChangeState(FSM_State.Idle);
     }
 

@@ -31,6 +31,8 @@ public class IntroController : MonoBehaviour
 
         fadeImage.DOFade(0, 0.5f).OnComplete(() => { fadeImage.gameObject.SetActive(false); });
         buttonPanel.DOMoveX(50, 0.5f).SetEase(Ease.OutBack);
+
+        AudioManager.Instance.StartBgm("Intro");
     }
 
     public void Play()

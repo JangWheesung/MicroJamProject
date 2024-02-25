@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
         OnAttackEvt += AttackEffectSystem.Instance.CinemachineShaking;
         OnAttackEvt += AttackEffectSystem.Instance.CircleEffect;
         OnAttackEvt += AttackEffectSystem.Instance.SmashingEffect;
+        OnAttackEvt += AttackEffectSystem.Instance.SoundEffect;
     }
 
     private void Start()
@@ -48,8 +49,10 @@ public class Enemy : MonoBehaviour
 
     private void OnDisable()
     {
+        Debug.Log("¿ÃπÍ∆Æ ª∞¿Á???");
         OnAttackEvt -= AttackEffectSystem.Instance.CinemachineShaking;
         OnAttackEvt -= AttackEffectSystem.Instance.CircleEffect;
         OnAttackEvt -= AttackEffectSystem.Instance.SmashingEffect;
+        OnAttackEvt -= AttackEffectSystem.Instance.SoundEffect;
     }
 }

@@ -130,6 +130,7 @@ public class PlayerController : MonoBehaviour
             effect.transform.up = -attackVec;
 
             AttackEffectSystem.Instance.CinemachineShaking(null);
+            AttackEffectSystem.Instance.SoundEffect(null);
         }
     }
 

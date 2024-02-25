@@ -33,6 +33,8 @@ public class GameoverSystem : MonoBehaviour
         TimeSystem.Instance.OnGameoverEvt += GetDeath;
         TimeSystem.Instance.OnGameoverEvt += GameoverPanel;
         mainBtn.onClick.AddListener(FadeInScene);
+
+        AudioManager.Instance.StartBgm("InGame");
     }
 
     private void Update()
@@ -47,6 +49,8 @@ public class GameoverSystem : MonoBehaviour
 
     private void GameoverPanel()
     {
+        AudioManager.Instance.StartSfx("GameEnd");
+
         highSocre_timeText.text = $"Time : {highSocre_time}";
         highSocre_killText.text = $"Kill : {highSocre_kill}";
 
@@ -60,6 +64,8 @@ public class GameoverSystem : MonoBehaviour
 
     private void FadeInScene()
     {
+        AudioManager.Instance.StartSfx("Click");
+
         fadeImage.gameObject.SetActive(true);
         fadeImage.DOFade(1, 1f).OnComplete(() => 
         {

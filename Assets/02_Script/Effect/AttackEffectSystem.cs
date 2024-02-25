@@ -12,8 +12,9 @@ public class AttackEffectSystem : MonoBehaviour
     private CinemachineBasicMultiChannelPerlin noiseCam;
 
     [SerializeField] private CircleEffect circleEffect;
-
     [SerializeField] private SmashingEffect smashingEffect;
+
+    private Sequence camSequence;
 
     private void Awake()
     {
@@ -44,10 +45,11 @@ public class AttackEffectSystem : MonoBehaviour
             rotateZ = Random.Range(-4f, 4f);
         }
 
-        vcam.transform.DORotate(new Vector3(0, 0, rotateZ), 0.1f).SetEase(Ease.OutBack).OnComplete(() => 
-        {
-            vcam.transform.DORotate(Vector3.zero, 0.3f);
-        });
+        camSequence.Kill();
+        camSequence = DOTween.Sequence();
+        camSequence
+            .Append(vcam.transform.DORotate(new Vector3(0, 0, rotateZ), 0.1f).SetEase(Ease.OutBack))
+            .Append(vcam.transform.DORotate(Vector3.zero, 0.3f));
 
         noiseCam.m_AmplitudeGain = 6;
         yield return new WaitForSeconds(0.4f);

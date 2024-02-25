@@ -42,7 +42,7 @@ public class AttackState : BaseState
     {
         if (currentTime <= 0)
         {
-            //½Ã°£ ´Ã¸®±â
+            TimeSystem.Instance.MinusTime(1);
             enemy.AttackEffect();
             currentTime = attackDelay;
         }

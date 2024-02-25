@@ -26,6 +26,17 @@ public class TimeSystem : MonoBehaviour
         private set 
         {
             nowTime = value;
+
+            if (nowTime <= 0f)
+            {
+                nowTime = 0f;
+                OnGameoverEvt?.Invoke();
+            }
+            else if (nowTime >= 120f)
+            {
+                nowTime = 120f;
+            }
+
             string outTime = nowTime.ToString("F1");
             timeText.text = $"{outTime}s";
         }
@@ -39,29 +50,26 @@ public class TimeSystem : MonoBehaviour
 
     private void Update()
     {
-        if(!GameoverSystem.Instance.isDeath)
+        if (!GameoverSystem.Instance.isDeath)
+        {
             NowTime -= Time.deltaTime;
+            if (NowTime <= 0f)
+            {
+                OnGameoverEvt?.Invoke();
+            }
+        }
     }
 
     public void PlusTime(float value)
     {
-        if (NowTime + value > 120f)
-            NowTime = 120f;
-        else
-            NowTime += value;
+        NowTime += value;
 
         TimeEffect(Color.blue);
     }
 
     public void MinusTime(float value)
     {
-        if (NowTime - value <= 0f)
-        {
-            NowTime = 0f;
-            OnGameoverEvt?.Invoke();
-        }
-        else
-            NowTime -= value;
+        NowTime -= value;
 
         TimeEffect(Color.red);
     }

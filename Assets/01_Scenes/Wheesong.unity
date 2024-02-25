@@ -1189,7 +1189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeText: {fileID: 17756586}
-  timeSettingValue: 120
+  timeSettingValue: 5
 --- !u!1 &1195046806
 GameObject:
   m_ObjectHideFlags: 0
@@ -1246,6 +1246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSmashingEffect: {fileID: 9020618509035426424, guid: f7543fc9e5aab224ab22707cb70824af, type: 3}
+  playerSlice: {fileID: 4892012691573461814, guid: 7281b3ec2ffe0c2469aa69255c4c9232, type: 3}
   _moveSpeed: 7
   _jumpImpulse: 10
   _dashSpeed: 5
@@ -6990,6 +6991,7 @@ MonoBehaviour:
   obj:
   - {fileID: 614977996633932779, guid: 468ae4925348a0c4e9e06ff93cf80e5d, type: 3}
   - {fileID: 7761267448587464987, guid: 40008038fc7957547b318d8b9d8af5d4, type: 3}
+  - {fileID: 2972840601913203142, guid: 7281b3ec2ffe0c2469aa69255c4c9232, type: 3}
   - {fileID: 2536656943247742537, guid: 221f79deee1c13f4ab4610e15d82b21b, type: 3}
   - {fileID: 9194131634135372549, guid: 4a6c76fa11f3c2448accff407c9aa8e2, type: 3}
   - {fileID: 9020618509035426420, guid: f7543fc9e5aab224ab22707cb70824af, type: 3}

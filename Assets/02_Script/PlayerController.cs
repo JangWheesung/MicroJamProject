@@ -7,9 +7,11 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D _rigid;
     BoxCollider2D _box;
+    SpriteRenderer _sp;
     Animator _animator;
 
     [SerializeField] private PlayerSmashingEffect playerSmashingEffect;
+    [SerializeField] private Slice playerSlice;
 
     [SerializeField] private float _moveSpeed = 1f;
     [SerializeField] private float _jumpImpulse = 5f;
@@ -47,7 +49,22 @@ public class PlayerController : MonoBehaviour
     {
         _rigid = GetComponent<Rigidbody2D>();
         _box = GetComponent<BoxCollider2D>();
+        _sp = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        TimeSystem.Instance.OnGameoverEvt += DeathPlayer;
+    }
+
+    private void DeathPlayer()
+    {
+        Slice slice = PoolingManager.instance.Pop<Slice>(playerSlice.name, transform.position);
+        slice.BreakEffect();
+
+        _sp.enabled = false;
+        enabled = false;
     }
 
     void FixedUpdate()

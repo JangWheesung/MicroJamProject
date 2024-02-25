@@ -11,6 +11,7 @@ public class IntroController : MonoBehaviour
 {
     [SerializeField] private RectTransform buttonPanel;
     [SerializeField] private Image fadeImage;
+    [SerializeField] private TextMeshProUGUI mainText;
     [SerializeField] private ParticleSystem introParticle;
     [SerializeField] private CinemachineVirtualCamera vcam;
     private CinemachineBasicMultiChannelPerlin noiseCam;
@@ -32,6 +33,8 @@ public class IntroController : MonoBehaviour
         introParticle.gravityModifier = 5;
 
         noiseCam.m_AmplitudeGain = 0;
+
+        mainText.DOFade(0, 0.5f);
 
         buttonPanel.DOMoveX(-500, 0.5f).SetEase(Ease.InBack).OnComplete(() => 
         {

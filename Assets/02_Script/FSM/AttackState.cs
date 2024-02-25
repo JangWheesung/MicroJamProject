@@ -28,8 +28,6 @@ public class AttackState : BaseState
 
     public override void OnStateUpdate()
     {
-        fsm.ChangeState(FSM_State.Die);
-
         if (Vector2.Distance(transform.position, playerTrs.position) > radius)
         {
             fsm.ChangeState(FSM_State.Move);

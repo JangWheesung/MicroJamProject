@@ -24,12 +24,13 @@ public class EnemySpawnSystem : MonoBehaviour
             enemyCnt += Random.Range(2, 5);
             spawnTime = waveCnt switch
             {
-                < 10 => 0.5f,
-                < 20 => 0.4f,
-                < 30 => 0.3f
+                < 8 => 0.5f,
+                < 16 => 0.4f,
+                < 24 => 0.3f,
+                < 30 => 0.2f
             };
 
-            float delayTime = Random.Range(3f, 5f);
+            float delayTime = Random.Range(4f, 5f);
             yield return new WaitForSeconds(delayTime);
 
             for (int i = 0; i < enemyCnt; i++)

@@ -29,7 +29,9 @@ public class PlayerSmashingEffect : MonoBehaviour
             {
                 enemy.Death();
                 GameoverSystem.Instance.GetKillCount();
-                TimeSystem.Instance.PlusTime(1);
+
+                int score = Random.Range(1, 3); //1~2
+                TimeSystem.Instance.PlusTime(score);
             }
         }
     }

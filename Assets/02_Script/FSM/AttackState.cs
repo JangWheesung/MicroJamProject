@@ -23,7 +23,7 @@ public class AttackState : BaseState
 
     public override void OnStateExit()
     {
-        //currentTime = 0;
+        currentTime = 0;
     }
 
     public override void OnStateUpdate()
@@ -42,7 +42,7 @@ public class AttackState : BaseState
     {
         if (currentTime <= 0)
         {
-            TimeSystem.Instance.MinusTime(1);
+            TimeSystem.Instance.MinusTime(2);
             enemy.AttackEffect();
             currentTime = attackDelay;
         }

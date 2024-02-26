@@ -23,7 +23,7 @@ public class AttackState : BaseState
 
     public override void OnStateExit()
     {
-        //currentTime = 0;
+        currentTime = 0;
     }
 
     public override void OnStateUpdate()

@@ -11,7 +11,7 @@ public class TimeSystem : MonoBehaviour
 
     public event Action OnGameoverEvt;
 
-    [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private TextMeshPro timeText;
     [SerializeField] private float timeSettingValue;
 
     private Sequence effectSequence;

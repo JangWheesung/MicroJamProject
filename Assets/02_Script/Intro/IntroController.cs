@@ -19,7 +19,7 @@ public class IntroController : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera vcam;
     private CinemachineBasicMultiChannelPerlin noiseCam;
 
-    [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private TextMeshPro timeText;
     [SerializeField] private Transform ground;
 
     [Header("HowToPlay")]
@@ -42,11 +42,13 @@ public class IntroController : MonoBehaviour
 
         noiseCam.m_AmplitudeGain = 0;
 
+        howtoplayPanel.SetActive(false);
+
         mainText.transform.DOMoveX(-1000, 0.5f).SetEase(Ease.InBack);
 
         buttonPanel.DOMoveX(-500, 0.5f).SetEase(Ease.InBack).OnComplete(() => 
         {
-            timeText.transform.DOMoveY(1080, 0.5f);
+            timeText.DOFade(1, 0.5f);
             ground.DOMoveY(-5, 0.5f).OnComplete(() => 
             {
                 SceneManager.LoadScene("Wheesong"); 

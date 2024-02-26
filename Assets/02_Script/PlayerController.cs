@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
@@ -61,11 +62,7 @@ public class PlayerController : MonoBehaviour
 
     private void DeathPlayer()
     {
-        Slice slice = PoolingManager.instance.Pop<Slice>(playerSlice.name, transform.position);
-        slice.BreakEffect();
-
-        _sp.enabled = false;
-        enabled = false;
+        StartCoroutine(DeathEvent());
     }
 
     void FixedUpdate()
@@ -104,6 +101,8 @@ public class PlayerController : MonoBehaviour
         {
             if (_isGrounded || (!_isGrounded && !_doubleJumped))
             {
+                AudioManager.Instance.StartSfx($"Jump");
+
                 _rigid.velocity = new Vector2(_rigid.velocity.x, _jumpImpulse);
                 if (!_isGrounded && !_doubleJumped)
                 {
@@ -118,6 +117,8 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started && _possibleDashing)
         {
+            AudioManager.Instance.StartSfx($"Dash");
+
             StartCoroutine(Dash());
         }
     }
@@ -185,5 +186,20 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.25f);
         FinishAttack();
+    }
+
+    private IEnumerator DeathEvent()
+    {
+        Time.timeScale = 0.1f;
+        _sp.DOColor(Color.red, 0.1f);
+        yield return new WaitForSeconds(0.1f);
+
+        Time.timeScale = 1f;
+
+        Slice slice = PoolingManager.instance.Pop<Slice>(playerSlice.name, transform.position);
+        slice.BreakEffect();
+
+        _sp.enabled = false;
+        enabled = false;
     }
 }

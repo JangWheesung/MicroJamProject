@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerSmashingEffect : MonoBehaviour
 {
+    [SerializeField] private SmashingEffect stickEffect;
     [SerializeField] private float radius;
     [SerializeField] private LayerMask enemyLayer;
 
@@ -28,6 +29,9 @@ public class PlayerSmashingEffect : MonoBehaviour
             if (collider.TryGetComponent<Enemy>(out Enemy enemy))
             {
                 enemy.Death();
+
+                SmashingEffect stick = PoolingManager.instance.Pop<SmashingEffect>(stickEffect.name, enemy.transform.position);
+
                 GameoverSystem.Instance.GetKillCount();
 
                 int score = Random.Range(1, 3); //1~2

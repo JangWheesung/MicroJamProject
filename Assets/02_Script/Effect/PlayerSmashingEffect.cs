@@ -15,12 +15,10 @@ public class PlayerSmashingEffect : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.SetBool("Smashing", true);
 
-        EnemyHit();
-
         StartCoroutine(PopEffect());
     }
 
-    private void EnemyHit()
+    public void EnemyHit()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
         

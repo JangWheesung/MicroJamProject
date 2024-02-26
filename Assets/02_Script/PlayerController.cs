@@ -128,6 +128,7 @@ public class PlayerController : MonoBehaviour
             
             PlayerSmashingEffect effect = PoolingManager.instance.Pop<PlayerSmashingEffect>(playerSmashingEffect.name, effectPosition);
             effect.transform.up = -attackVec;
+            effect.EnemyHit();
 
             AttackEffectSystem.Instance.CinemachineShaking(null);
             AttackEffectSystem.Instance.SoundEffect(null);

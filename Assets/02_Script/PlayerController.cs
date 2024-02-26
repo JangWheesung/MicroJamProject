@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private bool _doubleJumped = false;
     private bool _isDashing = false;
     private bool _isAttacking = false;
+    private bool _possibleDashing = true;
     private bool _isTouchingWall = false; // 벽에 닿았는지 여부 추가
 
     private Vector2 _moveInput;
@@ -69,7 +70,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        _rigid.velocity = new Vector2(_moveInput.x * _moveSpeed, _rigid.velocity.y);
+        if(!_isDashing)
+            _rigid.velocity = new Vector2(_moveInput.x * _moveSpeed, _rigid.velocity.y);
     }
 
 
@@ -112,6 +114,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.started && _possibleDashing)
+        {
+            StartCoroutine(Dash());
+        }
+    }
+
     public void Attack()
     {
         if (Mouse.current.leftButton.wasPressedThisFrame && !_isAttacking)
@@ -149,7 +159,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator AttackDelay()
+    private IEnumerator Dash()
+    {
+        _isDashing = true;
+        _possibleDashing = false;
+
+        // 대시하는 동안의 이동 속도 설정
+        Vector2 dashVelocity = new Vector2(_isFacingRight ? _dashSpeed : -_dashSpeed, _rigid.velocity.y);
+        _rigid.velocity = dashVelocity;
+
+        // 대시 지속 시간만큼 대기
+        yield return new WaitForSeconds(_dashDuration);
+
+        // 대시 끝난 후 속도 초기화
+        _rigid.velocity = Vector2.zero;
+        _isDashing = false;
+
+        // 대시 쿨다운 적용
+        yield return new WaitForSeconds(_dashCooldown);
+
+        _possibleDashing = true;
+    }
+
+    private IEnumerator AttackDelay()
     {
         yield return new WaitForSeconds(0.25f);
         FinishAttack();

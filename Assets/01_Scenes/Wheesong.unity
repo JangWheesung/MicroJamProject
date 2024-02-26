@@ -1398,8 +1398,8 @@ MonoBehaviour:
   playerSlice: {fileID: 4892012691573461814, guid: 7281b3ec2ffe0c2469aa69255c4c9232, type: 3}
   _moveSpeed: 7
   _jumpImpulse: 12
-  _dashSpeed: 5
-  _dashDuration: 0.5
+  _dashSpeed: 40
+  _dashDuration: 0.1
   _dashCooldown: 1
   _isGrounded: 0
   _isFacingRight: 1

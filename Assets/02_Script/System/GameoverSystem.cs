@@ -28,18 +28,23 @@ public class GameoverSystem : MonoBehaviour
 
     private void Start()
     {
-        fadeImage.gameObject.SetActive(false);
-
         TimeSystem.Instance.OnGameoverEvt += GetDeath;
         TimeSystem.Instance.OnGameoverEvt += GameoverPanel;
         mainBtn.onClick.AddListener(FadeInScene);
 
         AudioManager.Instance.StartBgm("InGame");
+
+        fadeImage.gameObject.SetActive(false);
     }
 
     private void Update()
     {
         highSocre_time += Time.deltaTime;
+    }
+
+    public void GetKillCount()
+    {
+        highSocre_kill++;
     }
 
     private void GetDeath()
@@ -55,11 +60,6 @@ public class GameoverSystem : MonoBehaviour
         highSocre_killText.text = $"Kill : {highSocre_kill}";
 
         gameoverPanel.DOMoveY(540f, 0.5f).SetEase(Ease.OutBounce);
-    }
-
-    public void GetKillCount()
-    {
-        highSocre_kill++;
     }
 
     private void FadeInScene()

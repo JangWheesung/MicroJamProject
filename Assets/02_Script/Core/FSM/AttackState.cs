@@ -42,8 +42,13 @@ public class AttackState : BaseState
     {
         if (currentTime <= 0)
         {
+            NormalEffectBase effect = PoolingManager.instance.Pop<NormalEffectBase>(enemy.enemyEffect.name, enemy.transform.position);
+            effect.PopEffect();
+
             TimeSystem.Instance.MinusTime(2);
-            enemy.AttackEffect();
+            CinemachineEffectSystem.Instance.CinemachineShaking();
+            AudioManager.Instance.StartSfx("Smashing1");
+
             currentTime = attackDelay;
         }
         else

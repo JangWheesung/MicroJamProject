@@ -1,0 +1,236 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using DG.Tweening;
+
+public class PlayerBase : MonoBehaviour
+{
+    [Header("Base_Prefab")]
+    [SerializeField] protected AttackEffeectBase attackEffect;
+    [SerializeField] protected Slice playerSlice;
+
+    [Header("Base_Value")]
+    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float jumpPower = 5f;
+    [SerializeField] private float dashSpeed = 5f;
+    [SerializeField] private float dashDuration = 0.2f;
+    [SerializeField] private float dashCooldown = 1f;
+
+    protected Rigidbody2D rb;
+    protected SpriteRenderer sp;
+
+    private bool isFacingRight = true;
+    private bool IsFacingRight
+    {
+        get { return isFacingRight; }
+        set
+        {
+            if (isFacingRight != value)
+            {
+                transform.localScale *= new Vector2(-1, 1);
+            }
+            isFacingRight = value;
+        }
+    }
+
+    protected bool isGrounded = false;
+    protected bool doubleJumped = false;
+    protected bool isDashing = false;
+    protected bool isAttacking = false;
+    protected bool possibleDashing = true;
+
+    private Camera cam;
+
+    [HideInInspector] public Vector2 MovementVector { get; private set; }
+
+    #region LifeCycle
+
+    protected virtual void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        sp = GetComponent<SpriteRenderer>();
+
+        cam = Camera.main;
+    }
+
+    protected virtual void Start() //죽는 이벤트 구독
+    {
+        TimeSystem.Instance.OnGameoverEvt += () => { StartCoroutine(DeathEvent()); };
+    }
+
+    protected virtual void Update() //앙옆 전환
+    {
+        SetFacingDirection(MovementVector);
+    }
+
+    protected virtual void FixedUpdate() //움직임(물리연산)
+    {
+        if (!isDashing)
+            rb.velocity = new Vector2(MovementVector.x * moveSpeed, rb.velocity.y);
+    }
+
+    private void SetFacingDirection(Vector2 moveInput)
+    {
+        if (moveInput.x > 0 && !IsFacingRight)
+        {
+            IsFacingRight = true;
+        }
+        else if (moveInput.x < 0 && IsFacingRight)
+        {
+            IsFacingRight = false;
+        }
+    }
+
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+            doubleJumped = false;
+        }
+    }
+
+    #endregion
+
+    #region Input
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        Move(context.ReadValue<Vector2>());
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Jump();
+        }
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Dash();
+        }
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Attack();
+        }
+    }
+
+    #endregion
+
+    #region Virtual
+
+    protected virtual void Move(Vector2 vec)
+    {
+        MovementVector = vec;
+    }
+
+    protected virtual void Jump()
+    {
+        if (isGrounded || (!isGrounded && !doubleJumped))
+        {
+            AudioManager.Instance.StartSfx($"Jump");
+
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            if (!isGrounded && !doubleJumped)
+            {
+                doubleJumped = true;
+            }
+            isGrounded = false;
+        }
+    }
+
+    protected virtual void Dash()
+    {
+        AudioManager.Instance.StartSfx($"Dash");
+
+        isDashing = true;
+        possibleDashing = false;
+
+        Vector2 dashVelocity = new Vector2(isFacingRight ? dashSpeed : -dashSpeed, rb.velocity.y);
+        rb.velocity = dashVelocity;
+
+        StartCoroutine(DashDelay());
+    }
+
+    protected virtual void Attack()
+    {
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            StartCoroutine(AttackDelay());
+
+            AttackEffeectBase effect = PoolingManager.instance.Pop<AttackEffeectBase>(attackEffect.name, transform.position);
+            effect.PopEffect();
+
+            CinemachineEffectSystem.Instance.CinemachineShaking();
+        }
+    }
+
+    #endregion
+
+    #region Return
+
+    protected Vector3 MousePos()
+    {
+        Vector3 point = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
+                Input.mousePosition.y, -Camera.main.transform.position.z));
+
+        return point;
+    }
+
+    protected Vector3 MouseVec()
+    {
+        Vector3 vec = MousePos() - transform.position;
+        return vec.normalized;
+    }
+
+    #endregion
+
+    #region Coroutine
+
+    protected IEnumerator DashDelay()
+    {
+        yield return new WaitForSeconds(dashDuration);
+
+        rb.velocity = Vector2.zero;
+        isDashing = false;
+
+        yield return new WaitForSeconds(dashCooldown);
+
+        possibleDashing = true;
+    }
+
+    protected IEnumerator AttackDelay()
+    {
+        yield return new WaitForSeconds(0.25f);
+        isAttacking = false;
+    }
+
+    private IEnumerator DeathEvent()
+    {
+        Time.timeScale = 0.1f;
+        sp.DOColor(Color.red, 0.1f);
+        yield return new WaitForSeconds(0.1f);
+
+        Time.timeScale = 1f;
+
+        Slice slice = PoolingManager.instance.Pop<Slice>(playerSlice.name, transform.position);
+        slice.BreakEffect();
+
+        sp.enabled = false;
+        enabled = false;
+    }
+
+    #endregion
+
+}

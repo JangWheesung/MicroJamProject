@@ -6,8 +6,7 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
-    public event Action<Transform> OnAttackEvt;
-
+    public NormalEffectBase enemyEffect;
     [HideInInspector] public Transform playerTrs;
     [HideInInspector] public SpriteRenderer sp;
     [HideInInspector] public Rigidbody2D rb;
@@ -22,11 +21,6 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         isDie = false;
-
-        OnAttackEvt += AttackEffectSystem.Instance.CinemachineShaking;
-        OnAttackEvt += AttackEffectSystem.Instance.CircleEffect;
-        OnAttackEvt += AttackEffectSystem.Instance.SmashingEffect;
-        OnAttackEvt += AttackEffectSystem.Instance.SoundEffect;
     }
 
     private void Start()
@@ -37,21 +31,8 @@ public class Enemy : MonoBehaviour
         col = GetComponent<Collider2D>();
     }
 
-    public void AttackEffect()
-    {
-        OnAttackEvt?.Invoke(playerTrs);
-    }
-
     public void Death()
     {
         isDie = true;
-    }
-
-    private void OnDisable()
-    {
-        OnAttackEvt -= AttackEffectSystem.Instance.CinemachineShaking;
-        OnAttackEvt -= AttackEffectSystem.Instance.CircleEffect;
-        OnAttackEvt -= AttackEffectSystem.Instance.SmashingEffect;
-        OnAttackEvt -= AttackEffectSystem.Instance.SoundEffect;
     }
 }

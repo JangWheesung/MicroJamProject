@@ -4,15 +4,12 @@ using UnityEngine;
 using Cinemachine;
 using DG.Tweening;
 
-public class AttackEffectSystem : MonoBehaviour
+public class CinemachineEffectSystem : MonoBehaviour
 {
-    public static AttackEffectSystem Instance;
+    public static CinemachineEffectSystem Instance;
 
     [SerializeField] private CinemachineVirtualCamera vcam;
     private CinemachineBasicMultiChannelPerlin noiseCam;
-
-    [SerializeField] private CircleEffect circleEffect;
-    [SerializeField] private SmashingEffect smashingEffect;
 
     private Sequence camSequence;
 
@@ -22,25 +19,9 @@ public class AttackEffectSystem : MonoBehaviour
         noiseCam = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
-    public void CinemachineShaking(Transform pos)
+    public void CinemachineShaking()
     {
         StartCoroutine(ShakeCor());
-    }
-
-    public void CircleEffect(Transform pos)
-    {
-        PoolingManager.instance.Pop<CircleEffect>(circleEffect.name, pos.position);
-    }
-
-    public void SmashingEffect(Transform pos)
-    {
-        PoolingManager.instance.Pop<SmashingEffect>(smashingEffect.name, pos.position);
-    }
-
-    public void SoundEffect(Transform pos)
-    {
-        int random = Random.Range(1, 4);
-        AudioManager.Instance.StartSfx($"Smashing{random}");
     }
 
     IEnumerator ShakeCor()

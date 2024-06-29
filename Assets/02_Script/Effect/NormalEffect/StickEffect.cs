@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StickEffect :NormalEffectBase
+public class StickEffect :EffectBase
 {
     private Animator anim;
 

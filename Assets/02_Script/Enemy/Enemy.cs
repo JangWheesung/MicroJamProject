@@ -6,7 +6,7 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
-    public NormalEffectBase enemyEffect;
+    public EffectBase enemyEffect;
     [HideInInspector] public PlayerBase player;
     [HideInInspector] public Transform playerTrs;
     [HideInInspector] public SpriteRenderer sp;

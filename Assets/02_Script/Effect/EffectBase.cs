@@ -2,22 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalEffectBase : MonoBehaviour
+public class EffectBase : MonoBehaviour
 {
     [Header("Base")]
     [SerializeField] private float liveTime;
 
     private Coroutine lifeCor;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         lifeCor = StartCoroutine(LifeEffectCor());
     }
 
-    public virtual void PopEffect() 
-    {
-        DisableEffect();
-    }
+    public virtual void PopEffect() { }
 
     protected virtual void DisableEffect()
     {

@@ -7,12 +7,12 @@ public class Beta : PlayerBase
 {
     protected override void Dash()
     {
-        if (!possibleDashing) return;
+        if (!pDash) return;
 
         base.Dash();
 
-        int spinDown = IsFacingRight ? -180 : 180;
-        int spinUp = IsFacingRight ? -360 : 360;
+        int spinDown = isFacingRight ? -180 : 180;
+        int spinUp = isFacingRight ? -360 : 360;
 
         isInvincibility = true;
         sp.color = Color.gray;
@@ -30,20 +30,17 @@ public class Beta : PlayerBase
 
     protected override void Attack()
     {
-        if (!isAttacking)
-        {
-            AudioManager.Instance.StartSfx($"Smashing3");
+        if (!pAttack) return;
 
-            isAttacking = true;
-            StartCoroutine(AttackDelay());
+        pAttack = false;
+        StartCoroutine(AttackDelay());
 
-            Vector2 effectPos = transform.position + (MouseVec() * 3.5f);
+        Vector2 effectPos = transform.position + (MouseVec() * 3.5f);
 
-            AttackEffeectBase effect = PoolingManager.instance.Pop<AttackEffeectBase>(attackEffect.name, effectPos);
-            effect.transform.up = -MouseVec();
-            effect.PopEffect();
+        AttackEffeectBase effect = PoolingManager.instance.Pop<AttackEffeectBase>(attackEffect.name, effectPos);
+        effect.PopEffect(-MouseVec());
 
-            CinemachineEffectSystem.Instance.CinemachineShaking();
-        }
+        AudioManager.Instance.StartSfx($"Smashing3");
+        CinemachineEffectSystem.Instance.CinemachineShaking();
     }
 }

@@ -6,21 +6,18 @@ public class SmashingAttackEffect : AttackEffeectBase
 {
     [SerializeField] private float attackRadius;
 
-    public override void PopEffect()
+    public override void PopEffect(Vector2 vec)
     {
+        transform.up = vec;
+
         EnemyRader(transform.position, attackRadius);
     }
 
     protected override void EnemyHit(Enemy enemy)
     {
-        enemy.Death();
+        base.EnemyHit(enemy);
 
-        NormalEffectBase effect = PoolingManager.instance.Pop<NormalEffectBase>(normalEffect.name, enemy.transform.position);
-        effect.PopEffect();
-
-        GameoverSystem.Instance.GetKillCount();
-
-        int score = Random.Range(1, 3); //1~2
+        int score = Random.Range(1, 3); //1 ~ 2
         TimeSystem.Instance.PlusTime(score);
     }
 

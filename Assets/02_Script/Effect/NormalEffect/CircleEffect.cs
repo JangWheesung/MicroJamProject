@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class CircleEffect : NormalEffectBase
+public class CircleEffect : EffectBase
 {
     private SpriteRenderer sp;
 

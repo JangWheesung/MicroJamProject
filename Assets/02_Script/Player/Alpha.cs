@@ -6,21 +6,18 @@ public class Alpha : PlayerBase
 {
     protected override void Attack()
     {
-        if (!isAttacking)
-        {
-            int idx = Random.Range(1, 3);
-            AudioManager.Instance.StartSfx($"Smashing{idx}"); //1 ~ 2
+        if (!pAttack) return;
 
-            isAttacking = true;
-            StartCoroutine(AttackDelay());
-            
-            Vector2 effectPos = transform.position + (MouseVec() * 2f);
+        pAttack = false;
+        StartCoroutine(AttackDelay());
 
-            AttackEffeectBase effect = PoolingManager.instance.Pop<AttackEffeectBase>(attackEffect.name, effectPos);
-            effect.transform.up = -MouseVec();
-            effect.PopEffect();
+        Vector2 effectPos = transform.position + (MouseVec() * 2f);
 
-            CinemachineEffectSystem.Instance.CinemachineShaking();
-        }
+        AttackEffeectBase effect = PoolingManager.instance.Pop<AttackEffeectBase>(attackEffect.name, effectPos);
+        effect.PopEffect(-MouseVec());
+
+        int idx = Random.Range(1, 3);
+        AudioManager.Instance.StartSfx($"Smashing{idx}"); //1 ~ 2
+        CinemachineEffectSystem.Instance.CinemachineShaking();
     }
 }

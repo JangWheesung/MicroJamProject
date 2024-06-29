@@ -42,7 +42,7 @@ public class AttackState : BaseState
     {
         if (currentTime <= 0)
         {
-            NormalEffectBase effect = PoolingManager.instance.Pop<NormalEffectBase>(enemy.enemyEffect.name, enemy.transform.position);
+            EffectBase effect = PoolingManager.instance.Pop<EffectBase>(enemy.enemyEffect.name, enemy.transform.position);
             effect.PopEffect();
 
             enemy.player.Hit();

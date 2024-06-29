@@ -18,8 +18,6 @@ public class IntroController : MonoBehaviour
     [SerializeField] private ParticleSystem introParticle;
     [SerializeField] private CinemachineVirtualCamera vcam;
     private CinemachineBasicMultiChannelPerlin noiseCam;
-
-    [SerializeField] private TextMeshPro timeText;
     [SerializeField] private Transform ground;
 
     [Header("HowToPlay")]
@@ -37,8 +35,9 @@ public class IntroController : MonoBehaviour
 
     public void Play()
     {
-        introParticle.loop = false;
-        introParticle.gravityModifier = 5;
+        var mainModule = introParticle.main;
+        mainModule.loop = false;
+        mainModule.gravityModifier = 5;
 
         noiseCam.m_AmplitudeGain = 0;
 
@@ -48,7 +47,6 @@ public class IntroController : MonoBehaviour
 
         buttonPanel.DOMoveX(-500, 0.5f).SetEase(Ease.InBack).OnComplete(() => 
         {
-            timeText.DOFade(1, 0.5f);
             ground.DOMoveY(-5, 0.5f).OnComplete(() => 
             {
                 SceneManager.LoadScene("Wheesong"); 

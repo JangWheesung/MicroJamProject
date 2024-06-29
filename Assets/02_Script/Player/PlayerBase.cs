@@ -17,30 +17,19 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] protected int jumpCount = 2;
     [SerializeField] protected float dashSpeed = 23f;
     [SerializeField] protected float dashDuration = 0.2f;
-    [SerializeField] protected float dashCooldown = 1f;
+    [SerializeField] protected float dashDelay = 1f;
+    [SerializeField] protected float attackDelay = 0.25f;
 
     protected Rigidbody2D rb;
     protected SpriteRenderer sp;
 
-    private bool isFacingRight = true;
-    protected bool IsFacingRight
-    {
-        get { return isFacingRight; }
-        set
-        {
-            if (isFacingRight != value)
-            {
-                transform.localScale *= new Vector2(-1, 1);
-            }
-            isFacingRight = value;
-        }
-    }
-
+    protected bool isFacingRight = true;
     protected bool isGrounded = false;
-    protected bool doubleJumped = false;
-    protected bool isDashing = false;
-    protected bool isAttacking = false;
-    protected bool possibleDashing = true;
+    protected bool isDash = false;
+
+    protected bool pAttack = true;
+    protected bool pDash = true;
+
     protected int currentJumpCount = 0;
     protected bool isInvincibility = false;
 
@@ -70,19 +59,21 @@ public class PlayerBase : MonoBehaviour
 
     protected virtual void FixedUpdate() //움직임(물리연산)
     {
-        if (!isDashing)
+        if (!isDash)
             rb.velocity = new Vector2(MovementVector.x * moveSpeed, rb.velocity.y);
     }
 
     private void SetFacingDirection(Vector2 moveInput)
     {
-        if (moveInput.x > 0 && !IsFacingRight)
+        if (moveInput.x > 0 && !isFacingRight)
         {
-            IsFacingRight = true;
+            isFacingRight = true;
+            sp.flipX = false;
         }
-        else if (moveInput.x < 0 && IsFacingRight)
+        else if (moveInput.x < 0 && isFacingRight)
         {
-            IsFacingRight = false;
+            isFacingRight = false;
+            sp.flipX = true;
         }
     }
 
@@ -155,12 +146,12 @@ public class PlayerBase : MonoBehaviour
 
     protected virtual void Dash()
     {
-        if (!possibleDashing) return;
+        if (!pDash) return;
 
         AudioManager.Instance.StartSfx($"Dash");
 
-        isDashing = true;
-        possibleDashing = false;
+        isDash = true;
+        pDash = false;
 
         Vector2 dashVelocity = new Vector2(isFacingRight ? dashSpeed : -dashSpeed, rb.velocity.y);
         rb.velocity = dashVelocity;
@@ -170,16 +161,15 @@ public class PlayerBase : MonoBehaviour
 
     protected virtual void Attack()
     {
-        if (!isAttacking)
-        {
-            isAttacking = true;
-            StartCoroutine(AttackDelay());
+        if (!pAttack) return;
 
-            AttackEffeectBase effect = PoolingManager.instance.Pop<AttackEffeectBase>(attackEffect.name, transform.position);
-            effect.PopEffect();
+        pAttack = false;
+        StartCoroutine(AttackDelay());
 
-            CinemachineEffectSystem.Instance.CinemachineShaking();
-        }
+        AttackEffeectBase effect = PoolingManager.instance.Pop<AttackEffeectBase>(attackEffect.name, transform.position);
+        effect.PopEffect();
+
+        CinemachineEffectSystem.Instance.CinemachineShaking();
     }
 
     public virtual void Hit()
@@ -211,22 +201,23 @@ public class PlayerBase : MonoBehaviour
 
     #region Coroutine
 
-    protected IEnumerator DashDelay()
+    protected virtual IEnumerator DashDelay()
     {
         yield return new WaitForSeconds(dashDuration);
 
         rb.velocity = Vector2.zero;
-        isDashing = false;
+        isDash = false;
 
-        yield return new WaitForSeconds(dashCooldown);
+        yield return new WaitForSeconds(dashDelay);
 
-        possibleDashing = true;
+        pDash = true;
     }
 
-    protected IEnumerator AttackDelay()
+    protected virtual IEnumerator AttackDelay()
     {
-        yield return new WaitForSeconds(0.25f);
-        isAttacking = false;
+        yield return new WaitForSeconds(attackDelay);
+
+        pAttack = true;
     }
 
     private IEnumerator DeathEvent()

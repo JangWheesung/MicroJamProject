@@ -7,6 +7,7 @@ using System;
 public class Enemy : MonoBehaviour
 {
     public NormalEffectBase enemyEffect;
+    [HideInInspector] public PlayerBase player;
     [HideInInspector] public Transform playerTrs;
     [HideInInspector] public SpriteRenderer sp;
     [HideInInspector] public Rigidbody2D rb;
@@ -25,7 +26,8 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        playerTrs = GameObject.FindWithTag("Player").transform;
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerBase>();
+        playerTrs = player.transform;
         sp = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();

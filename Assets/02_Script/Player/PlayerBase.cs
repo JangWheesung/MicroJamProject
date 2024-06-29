@@ -12,17 +12,18 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] protected Slice playerSlice;
 
     [Header("Base_Value")]
-    [SerializeField] private float moveSpeed = 1f;
-    [SerializeField] private float jumpPower = 5f;
-    [SerializeField] private float dashSpeed = 5f;
-    [SerializeField] private float dashDuration = 0.2f;
-    [SerializeField] private float dashCooldown = 1f;
+    [SerializeField] protected float moveSpeed = 9f;
+    [SerializeField] protected float jumpPower = 12f;
+    [SerializeField] protected int jumpCount = 2;
+    [SerializeField] protected float dashSpeed = 23f;
+    [SerializeField] protected float dashDuration = 0.2f;
+    [SerializeField] protected float dashCooldown = 1f;
 
     protected Rigidbody2D rb;
     protected SpriteRenderer sp;
 
     private bool isFacingRight = true;
-    private bool IsFacingRight
+    protected bool IsFacingRight
     {
         get { return isFacingRight; }
         set
@@ -40,6 +41,8 @@ public class PlayerBase : MonoBehaviour
     protected bool isDashing = false;
     protected bool isAttacking = false;
     protected bool possibleDashing = true;
+    protected int currentJumpCount = 0;
+    protected bool isInvincibility = false;
 
     private Camera cam;
 
@@ -88,7 +91,7 @@ public class PlayerBase : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
-            doubleJumped = false;
+            currentJumpCount = 0;
         }
     }
 
@@ -136,21 +139,24 @@ public class PlayerBase : MonoBehaviour
 
     protected virtual void Jump()
     {
-        if (isGrounded || (!isGrounded && !doubleJumped))
+        if (currentJumpCount < jumpCount)
         {
-            AudioManager.Instance.StartSfx($"Jump");
+            AudioManager.Instance.StartSfx("Jump");
 
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
-            if (!isGrounded && !doubleJumped)
+            currentJumpCount++;
+
+            if (isGrounded)
             {
-                doubleJumped = true;
+                isGrounded = false;
             }
-            isGrounded = false;
         }
     }
 
     protected virtual void Dash()
     {
+        if (!possibleDashing) return;
+
         AudioManager.Instance.StartSfx($"Dash");
 
         isDashing = true;
@@ -174,6 +180,13 @@ public class PlayerBase : MonoBehaviour
 
             CinemachineEffectSystem.Instance.CinemachineShaking();
         }
+    }
+
+    public virtual void Hit()
+    {
+        if (isInvincibility) return;
+
+        TimeSystem.Instance.MinusTime(2);
     }
 
     #endregion

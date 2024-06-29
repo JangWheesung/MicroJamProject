@@ -4,21 +4,6 @@ using UnityEngine;
 
 public class Alpha : PlayerBase
 {
-    protected override void Move(Vector2 vec)
-    {
-        base.Move(vec);
-    }
-
-    protected override void Jump()
-    {
-        base.Jump();
-    }
-
-    protected override void Dash()
-    {
-        base.Dash();
-    }
-
     protected override void Attack()
     {
         if (!isAttacking)

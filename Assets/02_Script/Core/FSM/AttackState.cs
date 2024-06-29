@@ -45,7 +45,8 @@ public class AttackState : BaseState
             NormalEffectBase effect = PoolingManager.instance.Pop<NormalEffectBase>(enemy.enemyEffect.name, enemy.transform.position);
             effect.PopEffect();
 
-            TimeSystem.Instance.MinusTime(2);
+            enemy.player.Hit();
+
             CinemachineEffectSystem.Instance.CinemachineShaking();
             AudioManager.Instance.StartSfx("Smashing1");
 

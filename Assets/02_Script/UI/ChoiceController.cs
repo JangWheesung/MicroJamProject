@@ -66,16 +66,16 @@ public class ChoiceController : MonoBehaviour
         nameText.text = stat.chatacterName;
         choiceCharacterName = stat.chatacterName;
 
-        speedText.text = "Speed : " + stat.speedStat switch
+        speedText.text = "스피드 : " + stat.speedStat switch
         {
             SpeedStat.Slow => "<color=blue>느림",
             SpeedStat.Normal => "<color=green>보통",
             SpeedStat.Fast => "<color=red>빠름",
             _ => "X"
         };
-        jumpText.text = "Jump : " + (stat.jumpStat <= 0 ? "X" : $"{stat.jumpStat}단");
-        dashText.text = "Dash : " + (stat.dashStat <= 0f ? "X" : $"x {stat.dashStat}");
-        attackText.text = "Attack : " + stat.attackExt;
+        jumpText.text = "점프 : " + (stat.jumpStat <= 0 ? "X" : $"{stat.jumpStat}단");
+        dashText.text = "대시 : " + (stat.dashStat <= 0f ? "X" : $"x {stat.dashStat}");
+        attackText.text = "공격 : " + stat.attackExt;
 
         for (int i = 0; i < abilityPanelContext.childCount; i++)
         {
@@ -92,11 +92,11 @@ public class ChoiceController : MonoBehaviour
             switch (abilityData.abilityStat)
             {
                 case AbilityStat.Jump:
-                    jumpText.text = "Jump : " + $"[{abilityData.name}]";
+                    jumpText.text = "점프 : " + $"[{abilityData.name}]";
                     break;
 
                 case AbilityStat.Dash:
-                    dashText.text = "Dash : " + $"[{abilityData.name}]";
+                    dashText.text = "대시 : " + $"[{abilityData.name}]";
                     break;
 
                 case AbilityStat.Attack:

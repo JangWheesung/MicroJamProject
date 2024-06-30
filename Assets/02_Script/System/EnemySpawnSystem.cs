@@ -37,7 +37,7 @@ public class EnemySpawnSystem : MonoBehaviour
             for (int i = 0; i < enemyCnt; i++)
             {
                 int randomPoint = Random.Range(0, spawnPoint.Length);
-                PoolingManager.instance.Pop<Enemy>(enemy.name, spawnPoint[randomPoint].position);
+                PoolingManager.Instance.Pop<Enemy>(enemy.name, spawnPoint[randomPoint].position);
 
                 yield return new WaitForSeconds(spawnTime);
             }

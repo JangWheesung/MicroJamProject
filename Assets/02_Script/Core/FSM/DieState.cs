@@ -14,7 +14,7 @@ public class DieState : BaseState
 
     public override void OnStateEnter()
     {
-        Slice slices = PoolingManager.instance.Pop<Slice>(sliceObj.name, transform.position);
+        Slice slices = PoolingManager.Instance.Pop<Slice>(sliceObj.name, transform.position);
         slices.BreakEffect(breakPower);
 
         AudioManager.Instance.StartSfx("EnemyDeath");
@@ -24,7 +24,7 @@ public class DieState : BaseState
 
     public override void OnStateExit()
     {
-        PoolingManager.instance.Push(enemy.gameObject);
+        PoolingManager.Instance.Push(enemy.gameObject);
     }
 
     public override void OnStateUpdate()

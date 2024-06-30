@@ -64,8 +64,6 @@ public class GameoverSystem : MonoBehaviour
 
     private void FadeInScene()
     {
-        AudioManager.Instance.StartSfx("Click");
-
         fadeImage.gameObject.SetActive(true);
         fadeImage.DOFade(1, 1f).OnComplete(() => 
         {

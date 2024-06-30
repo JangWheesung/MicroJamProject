@@ -433,10 +433,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackEffect: {fileID: 1705920322639394122, guid: 4c4a1cdcf07ffaa40a07418d01ef1fae, type: 3}
-  playerSlice: {fileID: 4892012691573461814, guid: 7281b3ec2ffe0c2469aa69255c4c9232, type: 3}
+  playerSlice: {fileID: 4892012691573461814, guid: f0652ca8e079dba41a6a5b97282c5145, type: 3}
   moveSpeed: 6
   jumpPower: 12
   jumpCount: 1
   dashSpeed: 23
   dashDuration: 0.3
-  dashCooldown: 1
+  dashDelay: 1
+  attackDelay: 0.25

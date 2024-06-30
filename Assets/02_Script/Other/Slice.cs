@@ -37,6 +37,6 @@ public class Slice : MonoBehaviour
             sliceRb.transform.position = transform.position;
         }
 
-        PoolingManager.instance.Push(gameObject);
+        PoolingManager.Instance.Push(gameObject);
     }
 }

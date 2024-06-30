@@ -49,7 +49,7 @@ public class IntroController : MonoBehaviour
         {
             ground.DOMoveY(-5, 0.5f).OnComplete(() => 
             {
-                SceneManager.LoadScene("Wheesong"); 
+                SceneManager.LoadScene(SceneList.Choice); 
             });
         });
     }

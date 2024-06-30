@@ -26,6 +26,7 @@ public class PlayerBase : MonoBehaviour
     protected bool isFacingRight = true;
     protected bool isGrounded = false;
     protected bool isDash = false;
+    protected bool isDead = false;
 
     protected bool pAttack = true;
     protected bool pDash = true;
@@ -92,11 +93,15 @@ public class PlayerBase : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (isDead) return;
+
         Move(context.ReadValue<Vector2>());
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (isDead) return;
+
         if (context.started)
         {
             Jump();
@@ -105,6 +110,8 @@ public class PlayerBase : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
+        if (isDead) return;
+
         if (context.started)
         {
             Dash();
@@ -113,6 +120,8 @@ public class PlayerBase : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
+        if (isDead) return;
+
         if (context.started)
         {
             Attack();
@@ -166,7 +175,7 @@ public class PlayerBase : MonoBehaviour
         pAttack = false;
         StartCoroutine(AttackDelay());
 
-        AttackEffeectBase effect = PoolingManager.instance.Pop<AttackEffeectBase>(attackEffect.name, transform.position);
+        AttackEffeectBase effect = PoolingManager.Instance.Pop<AttackEffeectBase>(attackEffect.name, transform.position);
         effect.PopEffect();
 
         CinemachineEffectSystem.Instance.CinemachineShaking();
@@ -177,6 +186,15 @@ public class PlayerBase : MonoBehaviour
         if (isInvincibility) return;
 
         TimeSystem.Instance.MinusTime(2);
+    }
+
+    protected virtual void Death()
+    {
+        Slice slice = PoolingManager.Instance.Pop<Slice>(playerSlice.name, transform.position);
+        slice.BreakEffect();
+
+        sp.enabled = false;
+        enabled = false;
     }
 
     #endregion
@@ -222,17 +240,14 @@ public class PlayerBase : MonoBehaviour
 
     private IEnumerator DeathEvent()
     {
+        isDead = true;
+
         Time.timeScale = 0.1f;
         sp.DOColor(Color.red, 0.1f);
         yield return new WaitForSeconds(0.1f);
-
         Time.timeScale = 1f;
 
-        Slice slice = PoolingManager.instance.Pop<Slice>(playerSlice.name, transform.position);
-        slice.BreakEffect();
-
-        sp.enabled = false;
-        enabled = false;
+        Death();
     }
 
     #endregion

@@ -21,7 +21,7 @@ public class EffectBase : MonoBehaviour
         if (lifeCor != null)
             StopCoroutine(lifeCor);
 
-        PoolingManager.instance.Push(gameObject);
+        PoolingManager.Instance.Push(gameObject);
     }
 
     private IEnumerator LifeEffectCor()

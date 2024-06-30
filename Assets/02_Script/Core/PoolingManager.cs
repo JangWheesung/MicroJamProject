@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PoolingManager : MonoBehaviour
 {
-    public static PoolingManager instance;
+    public static PoolingManager Instance;
 
     [SerializeField] private GameObject[] obj;
 
@@ -12,7 +12,11 @@ public class PoolingManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(transform);
+        }
 
         GameObject beenObj = new GameObject("PoolingData");
         Destroy(beenObj);

@@ -202,7 +202,7 @@ Transform:
   m_GameObject: {fileID: 2639120379445787016}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -460,7 +460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackEffect: {fileID: 1507865629357150910, guid: c248e09f3f3e3314e99f8a08e08ca078, type: 3}
-  playerSlice: {fileID: 4892012691573461814, guid: 7281b3ec2ffe0c2469aa69255c4c9232, type: 3}
+  playerSlice: {fileID: 4892012691573461814, guid: cbedc337c099f2844bc733788c865c80, type: 3}
   moveSpeed: 11
   jumpPower: 12
   jumpCount: 1

@@ -34,10 +34,11 @@ public class AudioManager : MonoBehaviour
 
     public void StartSfx(string name)
     {
+        Debug.Log(name);
         AudioData data = sfxClips.Find(x => x.audioName == name);
         if (ReferenceEquals(data, null)) return;
 
-        var source = PoolingManager.instance.Pop<AudioSource>(sfxSource.name, Vector2.zero);
+        var source = PoolingManager.Instance.Pop<AudioSource>(sfxSource.name, Vector2.zero);
 
         source.clip = data.audioClip;
         source.Play();
@@ -52,7 +53,7 @@ public class AudioManager : MonoBehaviour
 
         if (source == null) yield break;
 
-        PoolingManager.instance.Push(source.gameObject);
+        PoolingManager.Instance.Push(source.gameObject);
 
     }
 

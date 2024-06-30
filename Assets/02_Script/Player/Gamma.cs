@@ -24,10 +24,10 @@ public class Gamma : PlayerBase
         currentBullet--;
         BulletCountCheck();
 
-        AttackEffeectBase effect = PoolingManager.instance.Pop<AttackEffeectBase>(attackEffect.name, transform.position);
+        AttackEffeectBase effect = PoolingManager.Instance.Pop<AttackEffeectBase>(attackEffect.name, transform.position);
         effect.PopEffect(MouseVec());
 
-        //AudioManager.Instance.StartSfx($"Smashing{idx}");
+        AudioManager.Instance.StartSfx("Bullet");
         CinemachineEffectSystem.Instance.CinemachineShaking();
     }
 
@@ -44,11 +44,22 @@ public class Gamma : PlayerBase
         bulletText.fontSize = isEmpty ? 1.2f : 1.8f;
     }
 
+    protected override void Death()
+    {
+        bulletText.gameObject.SetActive(false);
+
+        base.Death();
+    }
+
     protected override IEnumerator AttackDelay()
     {
+        AudioManager.Instance.StartSfx("Reload");
+
         yield return new WaitForSeconds(attackDelay);
 
         pAttack = true;
         currentBullet = bulletCount;
+
+        BulletCountCheck();
     }
 }

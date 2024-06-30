@@ -9,9 +9,18 @@ public enum SpeedStat
     Fast
 };
 
-[System.Serializable]
-public struct AbilityStat
+public enum AbilityStat
 {
+    None,
+    Jump,
+    Dash,
+    Attack
+};
+
+[System.Serializable]
+public struct AbilityData
+{
+    public AbilityStat abilityStat;
     public string name;
     public string ext;
 }
@@ -27,5 +36,5 @@ public class CharacterStat : ScriptableObject
     public int jumpStat;
     public float dashStat;
     public string attackExt;
-    public AbilityStat[] abilityStats;
+    public AbilityData[] abilityDatas;
 }

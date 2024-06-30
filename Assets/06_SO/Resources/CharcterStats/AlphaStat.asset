@@ -20,8 +20,7 @@ MonoBehaviour:
   jumpStat: 2
   dashStat: 1
   attackExt: Sword
-  abilityStats:
-  - name: Simple
-    ext: simple is best
-  - name: Glass Body
-    ext: get double damage
+  abilityDatas:
+  - abilityStat: 0
+    name: 
+    ext: 

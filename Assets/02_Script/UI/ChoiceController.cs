@@ -84,10 +84,27 @@ public class ChoiceController : MonoBehaviour
 
         abilityPanelContext.sizeDelta = Vector2.zero;
 
-        foreach (AbilityStat abilityStat in stat.abilityStats)
+        foreach (AbilityData abilityData in stat.abilityDatas)
         {
             AbilitySlot slot = Instantiate(abilitySlotObj, abilityPanelContext);
-            slot.SetSlot(abilityStat.name, abilityStat.ext);
+            slot.SetSlot(abilityData.name, abilityData.ext);
+
+            switch (abilityData.abilityStat)
+            {
+                case AbilityStat.Jump:
+                    jumpText.text = "Jump : " + $"[{abilityData.name}]";
+                    break;
+
+                case AbilityStat.Dash:
+                    dashText.text = "Dash : " + $"[{abilityData.name}]";
+                    break;
+
+                case AbilityStat.Attack:
+                    string extRemake = attackText.text;
+                    extRemake.Replace($"{abilityData.name}", $"<#0080FF>[{abilityData.name}]<color=white>");
+                    attackText.text = extRemake;
+                    break;
+            }
 
             abilityPanelContext.sizeDelta += new Vector2(0, 300f);
         }
@@ -99,6 +116,7 @@ public class ChoiceController : MonoBehaviour
 
         PlayerPrefs.SetString("PlayerName", choiceCharacterName);
 
+        characterSp.transform.DOMoveY(10f, 0.4f);
         timeObj.DOFade(1, 0.4f);
         PanelMove(600, () => 
         {

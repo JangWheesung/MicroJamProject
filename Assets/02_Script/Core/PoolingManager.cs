@@ -12,19 +12,14 @@ public class PoolingManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(transform);
-        }
-
-        GameObject beenObj = new GameObject("PoolingData");
-        Destroy(beenObj);
-
+        Instance = this;
+        
         for (int i = 0; i < obj.Length; i++)
         {
+            GameObject beenObj = new GameObject("PoolingData");
+            beenObj.transform.parent = transform;
+
             pools.Add(obj[i].name, i);
-            Instantiate(beenObj, transform);
         }
     }
 
@@ -47,7 +42,7 @@ public class PoolingManager : MonoBehaviour
         {
             poolObj = poolTransform.GetChild(0).gameObject;
             poolObj.SetActive(true);
-            poolObj.transform.SetParent(null);
+            poolObj.transform.SetParent(trs);
         }
         else
         {

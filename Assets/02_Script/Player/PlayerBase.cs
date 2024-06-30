@@ -34,6 +34,7 @@ public class PlayerBase : MonoBehaviour
     protected int currentJumpCount = 0;
     protected bool isInvincibility = false;
 
+    private TrailRenderer trail;
     private Camera cam;
 
     [HideInInspector] public Vector2 MovementVector { get; private set; }
@@ -45,6 +46,7 @@ public class PlayerBase : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
 
+        trail = GetComponentInChildren<TrailRenderer>();
         cam = Camera.main;
     }
 
@@ -194,6 +196,7 @@ public class PlayerBase : MonoBehaviour
         slice.BreakEffect();
 
         sp.enabled = false;
+        trail.enabled = false;
         enabled = false;
     }
 

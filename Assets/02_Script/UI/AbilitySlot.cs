@@ -10,7 +10,7 @@ public class AbilitySlot : MonoBehaviour
 
     public void SetSlot(string name, string ext)
     {
-        nameText.text = name;
+        nameText.text = $"[{name}]";
         extText.text = ext;
     }
 }

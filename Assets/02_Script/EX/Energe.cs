@@ -26,14 +26,16 @@ public class Energe : MonoBehaviour
 
     private void Update()
     {
-        bool InPlayer = Physics2D.OverlapCircle(transform.position, radius);
+        bool InPlayer = Physics2D.OverlapCircle(transform.position, radius, playerLayer);
         if (InPlayer && !getEnerge)
         {
             getEnerge = true;
 
             PoolingManager.Instance.Pop<EffectBase>(energeParticle.name, transform.position).PopEffect();
 
-            CinemachineEffectSystem.Instance.CinemachineShaking();
+            SpecialEffectSystem.Instance.BackgroundAura(Color.gray);
+            SpecialEffectSystem.Instance.BloomIntensity(BloomType.Light_M);
+            SpecialEffectSystem.Instance.CameraShaking(CameraType.ZoomOut);
 
             StartCoroutine(MoveToGaugeBar());
         }
@@ -41,7 +43,6 @@ public class Energe : MonoBehaviour
 
     private void EndMove()
     {
-        
         gaugeBar.PlusGauge(erengeAmout);
         PoolingManager.Instance.Push(gameObject);
     }
@@ -91,7 +92,7 @@ public class Energe : MonoBehaviour
         float t = 0f;
         DOTween.To(() => t, x => t = x, 1f, moveTime).SetEase(Ease.InBack);
 
-        while (t <= moveTime)
+        while (t < 1f)
         { 
             // 베지어 곡선을 따라 이동
             Vector3 position = CalculateBezierPoint(t, startPosition, controlPoint, endPosition);
@@ -99,8 +100,9 @@ public class Energe : MonoBehaviour
 
             yield return null;
         }
-
+        
         EndMove();
+        yield return null;
     }
 
 #if UNITY_EDITOR

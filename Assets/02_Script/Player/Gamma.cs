@@ -15,6 +15,7 @@ public class Gamma : PlayerBase
         base.Start();
 
         currentBullet = bulletCount;
+        BulletCountCheck();
     }
 
     protected override void Attack()
@@ -28,7 +29,7 @@ public class Gamma : PlayerBase
         effect.PopEffect(MouseVec());
 
         AudioManager.Instance.StartSfx("Bullet");
-        CinemachineEffectSystem.Instance.CinemachineShaking();
+        SpecialEffectSystem.Instance.CameraShaking(CameraType.Rock_S);
     }
 
     private void BulletCountCheck()

@@ -47,7 +47,7 @@ public class AttackState : BaseState
 
             enemy.player.Hit();
 
-            CinemachineEffectSystem.Instance.CinemachineShaking();
+            SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_M);
             AudioManager.Instance.StartSfx("Circle");
 
             currentTime = attackDelay;

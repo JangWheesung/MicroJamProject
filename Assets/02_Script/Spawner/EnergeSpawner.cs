@@ -24,7 +24,7 @@ public class EnergeSpawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(spawnCool + RandomRange(10f));
+            yield return new WaitForSeconds(spawnCool);
 
             Vector2 spawnPos = new Vector2(posX + RandomRange(length / 2), posY + RandomRange(-(height / 2)));
             Energe energe = PoolingManager.Instance.Pop<Energe>(energeObj.name, spawnPos);

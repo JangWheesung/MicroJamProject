@@ -18,6 +18,6 @@ public class Alpha : PlayerBase
 
         int idx = Random.Range(1, 3);
         AudioManager.Instance.StartSfx($"Smashing{idx}"); //1 ~ 2
-        CinemachineEffectSystem.Instance.CinemachineShaking();
+        SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_M);
     }
 }

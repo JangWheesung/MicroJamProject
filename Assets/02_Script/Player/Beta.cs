@@ -41,6 +41,6 @@ public class Beta : PlayerBase
         effect.PopEffect(-MouseVec());
 
         AudioManager.Instance.StartSfx($"Smashing3");
-        CinemachineEffectSystem.Instance.CinemachineShaking();
+        SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_H);
     }
 }

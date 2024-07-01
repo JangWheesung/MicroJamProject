@@ -6,11 +6,13 @@ using DG.Tweening;
 
 public class EXGaugeBar : MonoBehaviour
 {
+    [SerializeField] private Image fillImage;
     [SerializeField] private Image iconImage;
     private Slider slider;
 
     public bool IsCharging { get; private set; }
-    private float currentGauge;
+
+    private float currentGauge = 0f;
     public float CurrentGauge
     {
         get
@@ -24,6 +26,8 @@ public class EXGaugeBar : MonoBehaviour
                 IsCharging = true;
                 currentGauge = 1f;
                 iconImage.color = Color.cyan;
+
+                SettingCharging();
             }
             else
             {
@@ -38,6 +42,16 @@ public class EXGaugeBar : MonoBehaviour
     private void Awake()
     {
         slider = GetComponent<Slider>();
+
+        transform.DOLocalMoveY(480f, 0.5f).SetEase(Ease.OutBack);
+    }
+
+    private void SettingCharging()
+    {
+        fillImage.color = Color.white;
+
+        SpecialEffectSystem.Instance.BackgroundAura(Color.cyan);
+        SpecialEffectSystem.Instance.BloomIntensity(BloomType.Light_H);
     }
 
     public void PlusGauge(float value)
@@ -46,12 +60,13 @@ public class EXGaugeBar : MonoBehaviour
 
         CurrentGauge += value;
 
-        iconImage.transform.DOShakeScale(0.2f).SetEase(Ease.OutBounce);
+        transform.DOShakeScale(0.2f).SetEase(Ease.OutBounce);
     }
 
-    public void OutEnergePower()
+    public void ChargingClear()
     {
-        currentGauge = 0f;
+        fillImage.color = Color.cyan;
+        DOTween.To(() => CurrentGauge, x => CurrentGauge = x, 0f, 0.2f).SetEase(Ease.OutBack);
     }
 
     public Vector2 GetIconPos()

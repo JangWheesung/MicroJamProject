@@ -180,7 +180,7 @@ public class PlayerBase : MonoBehaviour
         AttackEffeectBase effect = PoolingManager.Instance.Pop<AttackEffeectBase>(attackEffect.name, transform.position);
         effect.PopEffect();
 
-        CinemachineEffectSystem.Instance.CinemachineShaking();
+        SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_S);
     }
 
     public virtual void Hit()

@@ -41,7 +41,7 @@ public class Gamma : PlayerBase
             StartCoroutine(AttackDelay());
         }
         bulletText.text = isEmpty ? "Reloading..." : $"{currentBullet}/{bulletCount}";
-        bulletText.fontSize = isEmpty ? 1.6f : 2.4f;
+        bulletText.fontSize = isEmpty ? 1.7f : 2.4f;
     }
 
     public override void Hit()

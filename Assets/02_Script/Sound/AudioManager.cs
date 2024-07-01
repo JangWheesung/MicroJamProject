@@ -22,6 +22,10 @@ public class AudioManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(transform);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     public void StartBgm(string name)
     {

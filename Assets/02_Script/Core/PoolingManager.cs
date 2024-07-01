@@ -13,7 +13,7 @@ public class PoolingManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        
+
         for (int i = 0; i < obj.Length; i++)
         {
             GameObject beenObj = new GameObject("PoolingData");
@@ -42,12 +42,12 @@ public class PoolingManager : MonoBehaviour
         {
             poolObj = poolTransform.GetChild(0).gameObject;
             poolObj.SetActive(true);
-            poolObj.transform.SetParent(trs);
         }
         else
         {
             poolObj = Instantiate(obj[pools[name]]);
         }
+
         poolObj.transform.position = point;
         poolObj.name = name;
 

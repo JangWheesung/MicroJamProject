@@ -74,7 +74,7 @@ public class ChoiceController : MonoBehaviour
             _ => "X"
         };
         jumpText.text = "점프 : " + (stat.jumpStat <= 0 ? "X" : $"{stat.jumpStat}단");
-        dashText.text = "대시 : " + (stat.dashStat <= 0f ? "X" : $"x {stat.dashStat}");
+        dashText.text = "대시 : " + (stat.dashStat <= 0f ? "X" : $"x{stat.dashStat}");
         attackText.text = "공격 : " + stat.attackExt;
 
         for (int i = 0; i < abilityPanelContext.childCount; i++)
@@ -89,19 +89,20 @@ public class ChoiceController : MonoBehaviour
             AbilitySlot slot = Instantiate(abilitySlotObj, abilityPanelContext);
             slot.SetSlot(abilityData.name, abilityData.ext);
 
+            string abilityName = $"<#0080FF>[{abilityData.name}]<color=white>";
             switch (abilityData.abilityStat)
             {
                 case AbilityStat.Jump:
-                    jumpText.text = "점프 : " + $"[{abilityData.name}]";
+                    jumpText.text = "점프 : " + abilityName;
                     break;
 
                 case AbilityStat.Dash:
-                    dashText.text = "대시 : " + $"[{abilityData.name}]";
+                    dashText.text = "대시 : " + abilityName;
                     break;
 
                 case AbilityStat.Attack:
                     string extRemake = attackText.text;
-                    extRemake.Replace($"{abilityData.name}", $"<#0080FF>[{abilityData.name}]<color=white>");
+                    extRemake.Replace($"{abilityData.name}", abilityName);
                     attackText.text = extRemake;
                     break;
             }

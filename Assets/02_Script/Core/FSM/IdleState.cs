@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class IdleState : BaseState
 {
+    protected Rigidbody2D rb;
+    float originGravity = 3f;
+
     protected override void Awake()
     {
         base.Awake();
@@ -11,17 +14,19 @@ public class IdleState : BaseState
 
     public override void OnStateEnter()
     {
-        
+        rb = enemy.rb;
+
+        originGravity = rb.gravityScale;
     }
 
     public override void OnStateExit()
     {
-        
+        rb.gravityScale = originGravity;
     }
 
     public override void OnStateUpdate()
     {
-        if (!GameoverSystem.Instance.isDeath)
+        if (!GameSystem.Instance.IsStopLogic())
         {
             fsm.ChangeState(FSM_State.Move);
         }
@@ -33,6 +38,10 @@ public class IdleState : BaseState
 
     protected override void OnStateAction()
     {
-        
+        if (GameSystem.Instance.isEX)
+        {
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 0f;
+        }
     }
 }

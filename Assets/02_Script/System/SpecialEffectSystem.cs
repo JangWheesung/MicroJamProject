@@ -44,7 +44,7 @@ public class SpecialEffectSystem : MonoBehaviour
 
     public void BackgroundDarkness(float time, bool fadeIn = true)
     {
-        float fadeValue = fadeIn ? 0.3f : 0f;
+        float fadeValue = fadeIn ? 0.5f : 0f;
         exBackgroundSp.DOFade(fadeValue, time).SetEase(Ease.OutBack);
     }
 

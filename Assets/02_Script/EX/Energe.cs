@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Energe : MonoBehaviour
+public class Energe : EffectBase
 {
+    [Header("Energe")]
     [SerializeField] private EffectBase energeParticle;
     [SerializeField] private float moveTime;
     [SerializeField] private float radius;
@@ -14,9 +15,11 @@ public class Energe : MonoBehaviour
     private EXGaugeBar gaugeBar;
     private bool getEnerge;
 
-    private void Awake()
+    protected override void OnEnable()
     {
-        
+        getEnerge = false;
+
+        base.OnEnable();
     }
 
     public void PopEnerge(EXGaugeBar gaugeBar)

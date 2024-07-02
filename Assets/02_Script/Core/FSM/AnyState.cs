@@ -27,7 +27,7 @@ public class AnyState : BaseState
             fsm.ChangeState(FSM_State.Die);
         }
 
-        if (GameoverSystem.Instance.isDeath)
+        if (GameSystem.Instance.IsStopLogic())
         {
             fsm.ChangeState(FSM_State.Idle);
         }

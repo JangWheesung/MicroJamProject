@@ -838,6 +838,7 @@ MonoBehaviour:
   - {fileID: 2536656943247742537, guid: 221f79deee1c13f4ab4610e15d82b21b, type: 3}
   - {fileID: 9020618509035426420, guid: f7543fc9e5aab224ab22707cb70824af, type: 3}
   - {fileID: 195287352145245770, guid: a875c093b7c115e479cc3fc5c1608a9f, type: 3}
+  - {fileID: 7465326557695615502, guid: 9c44acb44c29f864c859bed356675619, type: 3}
   - {fileID: 5000175304459217781, guid: 4c4a1cdcf07ffaa40a07418d01ef1fae, type: 3}
   - {fileID: 4529754908364009150, guid: 0fe3dd44383dbac4da707d978e1879ce, type: 3}
   - {fileID: 7741005294558699823, guid: c248e09f3f3e3314e99f8a08e08ca078, type: 3}
@@ -1173,7 +1174,7 @@ GameObject:
   - component: {fileID: 744588441}
   - component: {fileID: 744588440}
   m_Layer: 0
-  m_Name: GameoverSystem
+  m_Name: GameSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7429,7 +7430,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 14
+  m_SortingOrder: 17
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_FlipX: 0

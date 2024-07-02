@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +7,13 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class GameoverSystem : MonoBehaviour
+public class GameSystem : MonoBehaviour
 {
-    public static GameoverSystem Instance;
+    public static GameSystem Instance;
 
+    public event Action<bool> OnEXTriggerEvt;
+
+    public bool isEX { get; private set; }
     public bool isDeath { get; private set; }
 
     [SerializeField] private RectTransform gameoverPanel;
@@ -30,9 +34,10 @@ public class GameoverSystem : MonoBehaviour
     {
         TimeSystem.Instance.OnGameoverEvt += GetDeath;
         TimeSystem.Instance.OnGameoverEvt += GameoverPanel;
-        mainBtn.onClick.AddListener(FadeInScene);
 
         AudioManager.Instance.StartBgm("InGame");
+
+        mainBtn.onClick.AddListener(FadeInScene);
 
         fadeImage.gameObject.SetActive(false);
     }
@@ -40,6 +45,12 @@ public class GameoverSystem : MonoBehaviour
     private void Update()
     {
         highSocre_time += Time.deltaTime;
+    }
+
+    public void SetEX(bool value)
+    {
+        isEX = value;
+        OnEXTriggerEvt?.Invoke(value);
     }
 
     public void GetKillCount()
@@ -69,5 +80,10 @@ public class GameoverSystem : MonoBehaviour
         {
             SceneManager.LoadScene("Intro");
         });
+    }
+
+    public bool IsStopLogic()
+    {
+        return isDeath || isEX;
     }
 }

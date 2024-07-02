@@ -4,21 +4,34 @@ using UnityEngine;
 
 public class EXEffectBase : EffectBase
 {
+    [SerializeField] protected EffectBase normalEffect;
+
     protected override void OnEnable()
     {
-
-
         base.OnEnable();
     }
 
     public override void PopEffect() { }
     public virtual void PopEffect(Vector2 vec) { }
     public virtual void PopEffect(object value) { }
+    public virtual void PopEffect(PlayerBase player) { }
+
+    public virtual void UnityAnimEvent() { }
 
     protected override void DisableEffect()
     {
-        //모든 적들 죽이기
+        foreach (Enemy enemy in FindObjectsOfType<Enemy>())
+        {
+            enemy.Death();
+            PoolingManager.Instance.Pop<EffectBase>(normalEffect.name, enemy.transform.position).PopEffect();
+
+            GameSystem.Instance.GetKillCount();
+            TimeSystem.Instance.PlusTime(1f);
+        }
+        GameSystem.Instance.SetEX(false);
+
         SpecialEffectSystem.Instance.BackgroundDarkness(0.1f, false);
+        SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_H);
 
         base.DisableEffect();
     }

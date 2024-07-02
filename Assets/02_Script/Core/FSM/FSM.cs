@@ -18,7 +18,7 @@ public class FSM : MonoBehaviour
     protected BaseState anyState;
     protected FSM_State nowState;
 
-    private void Awake()
+    private void Start()
     {
         anyState = GetComponent<BaseState>();
 

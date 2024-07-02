@@ -50,7 +50,7 @@ public class TimeSystem : MonoBehaviour
 
     private void Update()
     {
-        if (!GameoverSystem.Instance.isDeath)
+        if (!GameSystem.Instance.IsStopLogic())
         {
             NowTime -= Time.deltaTime;
             if (NowTime <= 0f)

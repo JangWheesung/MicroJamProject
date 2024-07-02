@@ -32,6 +32,6 @@ public class AttackEffeectBase : EffectBase
         EffectBase effect = PoolingManager.Instance.Pop<EffectBase>(normalEffect.name, enemy.transform.position);
         effect.PopEffect();
 
-        GameoverSystem.Instance.GetKillCount();
+        GameSystem.Instance.GetKillCount();
     }
 }

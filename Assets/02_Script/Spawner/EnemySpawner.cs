@@ -19,9 +19,9 @@ public class EnemySpawner : MonoBehaviour
         int enemyCnt = 2;
         float spawnTime = 0.5f;
 
-        while (!GameoverSystem.Instance.isDeath)
+        while (!GameSystem.Instance.IsStopLogic())
         {
-            enemyCnt += Random.Range(2, 5);
+            enemyCnt += Random.Range(2, 4);
             spawnTime = waveCnt switch
             {
                 < 8 => 0.5f,

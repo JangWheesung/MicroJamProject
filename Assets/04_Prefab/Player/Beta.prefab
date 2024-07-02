@@ -416,7 +416,19 @@ MonoBehaviour:
     m_ActionId: 519e695f-3dca-4385-870a-b720f95bcea6
     m_ActionName: Player/New action
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6954611818269018653}
+        m_TargetAssemblyTypeName: PlayerBase, Assembly-CSharp
+        m_MethodName: OnEX
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 53364b67-6cb0-4f7d-86b8-18d6108b29cf
     m_ActionName: Player/EX[/Mouse/middleButton]
   m_NeverAutoSwitchControlSchemes: 0
@@ -437,6 +449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackEffect: {fileID: 1705920322639394122, guid: 4c4a1cdcf07ffaa40a07418d01ef1fae, type: 3}
+  exEffect: {fileID: 8420573670963062814, guid: 9c44acb44c29f864c859bed356675619, type: 3}
   playerSlice: {fileID: 4892012691573461814, guid: f0652ca8e079dba41a6a5b97282c5145, type: 3}
   moveSpeed: 6
   jumpPower: 12

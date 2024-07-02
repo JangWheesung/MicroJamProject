@@ -9,6 +9,7 @@ public class PlayerBase : MonoBehaviour
 {
     [Header("Base_Prefab")]
     [SerializeField] protected AttackEffeectBase attackEffect;
+    [SerializeField] protected EXEffectBase exEffect;
     [SerializeField] protected Slice playerSlice;
 
     [Header("Base_Value")]
@@ -26,6 +27,7 @@ public class PlayerBase : MonoBehaviour
     protected bool isFacingRight = true;
     protected bool isGrounded = false;
     protected bool isDash = false;
+    protected bool isEX;
     protected bool isDead = false;
 
     protected bool pAttack = true;
@@ -52,31 +54,16 @@ public class PlayerBase : MonoBehaviour
 
     protected virtual void Start() //죽는 이벤트 구독
     {
-        TimeSystem.Instance.OnGameoverEvt += () => { StartCoroutine(DeathEvent()); };
+        GameSystem.Instance.OnEXTriggerEvt += HandleEX;
+        TimeSystem.Instance.OnGameoverEvt += HandleDeath;
     }
 
-    protected virtual void Update() //앙옆 전환
-    {
-        SetFacingDirection(MovementVector);
-    }
-
-    protected virtual void FixedUpdate() //움직임(물리연산)
+    protected virtual void FixedUpdate() //리지드바디 연산
     {
         if (!isDash)
-            rb.velocity = new Vector2(MovementVector.x * moveSpeed, rb.velocity.y);
-    }
-
-    private void SetFacingDirection(Vector2 moveInput)
-    {
-        if (moveInput.x > 0 && !isFacingRight)
         {
-            isFacingRight = true;
-            sp.flipX = false;
-        }
-        else if (moveInput.x < 0 && isFacingRight)
-        {
-            isFacingRight = false;
-            sp.flipX = true;
+            Vector2 moveVec = new Vector2(MovementVector.x * moveSpeed, rb.velocity.y);
+            SetRigidbody(moveVec);
         }
     }
 
@@ -122,7 +109,7 @@ public class PlayerBase : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (isDead) return;
+        if (isDead || isEX) return;
 
         if (context.started)
         {
@@ -136,17 +123,18 @@ public class PlayerBase : MonoBehaviour
 
         if (context.started)
         {
-            StartCoroutine(EXEvent());
+            EX();
         }
     }
 
     #endregion
 
-    #region Virtual
+    #region Virtual_Input
 
     protected virtual void Move(Vector2 vec)
     {
         MovementVector = vec;
+        SetFacingDirection(MovementVector);
     }
 
     protected virtual void Jump()
@@ -155,7 +143,7 @@ public class PlayerBase : MonoBehaviour
         {
             AudioManager.Instance.StartSfx("Jump");
 
-            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            SetRigidbody(new Vector2(rb.velocity.x, jumpPower));
             currentJumpCount++;
 
             if (isGrounded)
@@ -175,7 +163,7 @@ public class PlayerBase : MonoBehaviour
         pDash = false;
 
         Vector2 dashVelocity = new Vector2(isFacingRight ? dashSpeed : -dashSpeed, rb.velocity.y);
-        rb.velocity = dashVelocity;
+        SetRigidbody(dashVelocity);
 
         StartCoroutine(DashDelay());
     }
@@ -193,10 +181,17 @@ public class PlayerBase : MonoBehaviour
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_S);
     }
 
-    protected virtual void EX()
+    protected void EX()
     {
-        
+        EXGaugeBar gaugeBar = FindObjectOfType<EXGaugeBar>();
+        if (!gaugeBar.IsCharging) return;
+
+        StartCoroutine(EXEvent());
     }
+
+    #endregion
+
+    #region Virtual_Event
 
     public virtual void Hit()
     {
@@ -213,6 +208,60 @@ public class PlayerBase : MonoBehaviour
         sp.enabled = false;
         trail.enabled = false;
         enabled = false;
+    }
+
+    #endregion
+
+    #region Handle
+
+    private void HandleEX(bool value)
+    {
+        isEX = value;
+
+        if (value)
+        {
+            rb.velocity = Vector2.zero;
+
+            EXEffectBase effect = PoolingManager.Instance.Pop<EXEffectBase>(exEffect.name, transform.position);
+            effect.PopEffect();
+        }
+    }
+
+    private void HandleDeath()
+    {
+        StartCoroutine(DeathEvent());
+    }
+
+    #endregion
+
+    #region Set
+
+    private void SetFacingDirection(Vector2 moveInput)
+    {
+        if (isEX) return;
+
+        if (moveInput.x > 0 && !isFacingRight)
+        {
+            isFacingRight = true;
+            sp.flipX = false;
+        }
+        else if (moveInput.x < 0 && isFacingRight)
+        {
+            isFacingRight = false;
+            sp.flipX = true;
+        }
+    }
+
+    private void SetRigidbody(Vector2 newRb)
+    {
+        if (isEX)
+        {
+            rb.gravityScale = 0f;
+            return;
+        }
+
+        rb.velocity = newRb;
+        rb.gravityScale = 3f;
     }
 
     #endregion
@@ -260,7 +309,7 @@ public class PlayerBase : MonoBehaviour
     {
         isInvincibility = true;
 
-        float setTime = 0.1f;
+        float setTime = 0.2f;
         float loopTime = 1.5f;
 
         yield return SlowTimeCor(setTime, loopTime, () => 
@@ -268,7 +317,9 @@ public class PlayerBase : MonoBehaviour
             SpecialEffectSystem.Instance.BackgroundDarkness(loopTime * setTime);
         });
 
-        EX();
+        isInvincibility = false;
+
+        GameSystem.Instance.SetEX(true);
     }
 
     private IEnumerator DeathEvent()
@@ -297,4 +348,4 @@ public class PlayerBase : MonoBehaviour
 
         #endregion
 
-    }
+}

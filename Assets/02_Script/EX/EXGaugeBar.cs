@@ -40,8 +40,12 @@ public class EXGaugeBar : MonoBehaviour
     private void Awake()
     {
         slider = GetComponent<Slider>();
-
         transform.DOLocalMoveY(480f, 0.5f).SetEase(Ease.OutBack);
+    }
+
+    private void Start()
+    {
+        GameSystem.Instance.OnEXTriggerEvt += ChargingClear;
     }
 
     private void SettingCharging()
@@ -61,10 +65,17 @@ public class EXGaugeBar : MonoBehaviour
         transform.DOShakeScale(0.2f).SetEase(Ease.OutBounce);
     }
 
-    public void ChargingClear()
+    public void ChargingClear(bool value)
     {
-        fillImage.color = Color.cyan;
-        DOTween.To(() => CurrentGauge, x => CurrentGauge = x, 0f, 0.2f).SetEase(Ease.OutBack);
+        if (!value)
+        {
+            fillImage.color = Color.cyan;
+            DOTween.To(() => CurrentGauge, x => CurrentGauge = x, 0f, 0.2f).SetEase(Ease.OutBack);
+        }
+        else
+        {
+            transform.DOShakeScale(0.1f);
+        }
     }
 
     public Vector2 GetIconPos()

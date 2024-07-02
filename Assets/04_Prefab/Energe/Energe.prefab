@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ce859f7b0641d849b41af498bf7fe39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  liveTime: 5
   energeParticle: {fileID: 2995867814679522010, guid: caf6374d4fa9ab5428f2070c5285891e, type: 3}
   moveTime: 1
   radius: 0.2

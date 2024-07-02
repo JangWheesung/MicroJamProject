@@ -159,7 +159,6 @@ GameObject:
   - component: {fileID: 914632896332760767}
   - component: {fileID: 5076219082982952240}
   - component: {fileID: 7825737559073329418}
-  - component: {fileID: 2705420736228177887}
   - component: {fileID: 7363150674736283784}
   m_Layer: 7
   m_Name: Alpha
@@ -224,7 +223,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingOrder: 26
   m_Sprite: {fileID: 21300000, guid: 8119f612288b37f42be4a5b91cc6360a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -416,32 +415,15 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 519e695f-3dca-4385-870a-b720f95bcea6
     m_ActionName: Player/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 53364b67-6cb0-4f7d-86b8-18d6108b29cf
+    m_ActionName: Player/EX[/Mouse/middleButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!95 &2705420736228177887
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4544136939824233915}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f0f6be771f180b3429151a481f2fe675, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &7363150674736283784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,4 +443,5 @@ MonoBehaviour:
   jumpCount: 2
   dashSpeed: 23
   dashDuration: 0.2
-  dashCooldown: 1
+  dashDelay: 1
+  attackDelay: 0.25

@@ -28,6 +28,7 @@ public class SpecialEffectSystem : MonoBehaviour
 {
     public static SpecialEffectSystem Instance;
 
+    [SerializeField] private SpriteRenderer exBackgroundSp;
     [SerializeField] private Volume volume;
     [SerializeField] private CinemachineVirtualCamera vcam;
     private CinemachineBasicMultiChannelPerlin noiseCam;
@@ -41,6 +42,18 @@ public class SpecialEffectSystem : MonoBehaviour
         cam = Camera.main;
     }
 
+    public void BackgroundDarkness(float time, bool fadeIn = true)
+    {
+        float fadeValue = fadeIn ? 0.3f : 0f;
+        exBackgroundSp.DOFade(fadeValue, time).SetEase(Ease.OutBack);
+    }
+
+    public void BackgroundAura(Color color)
+    {
+        cam.backgroundColor = color;
+        cam.DOColor(Color.black, 0.4f).SetEase(Ease.OutExpo);
+    }
+
     public void BloomIntensity(BloomType bloomType)
     {
         if (volume.profile.TryGet(out Bloom bloom))
@@ -50,14 +63,13 @@ public class SpecialEffectSystem : MonoBehaviour
             DOTween.To(() => bloom.intensity.value, x => bloom.intensity.value = x, originValue, 0.5f).SetEase(Ease.OutExpo);
         }
     }
-
-    public void BackgroundAura(Color color)
-    {
-        cam.backgroundColor = color;
-        cam.DOColor(Color.black, 0.25f).SetEase(Ease.OutExpo);
-    }
-
-    public void CameraShaking(CameraType cameraType)
+    
+    /// <summary>
+    /// 두 번째 인자 time은 RockType일 때만
+    /// </summary>
+    /// <param name="cameraType"></param>
+    /// <param name="rockTime"></param>
+    public void CameraShaking(CameraType cameraType ,float rockTime = 0.4f)
     {
         switch (cameraType)
         {
@@ -69,7 +81,7 @@ public class SpecialEffectSystem : MonoBehaviour
 
             case CameraType.Rock_S:
             case CameraType.Rock_H:
-                StartCoroutine(RockCor(cameraType));
+                StartCoroutine(RockCor(cameraType, rockTime));
                 break;
 
             case CameraType.ZoomIn:
@@ -98,12 +110,12 @@ public class SpecialEffectSystem : MonoBehaviour
         noiseCam.m_AmplitudeGain = 0;
     }
 
-    private IEnumerator RockCor(CameraType cameraType)
+    private IEnumerator RockCor(CameraType cameraType, float time)
     {
         float rockValue = cameraType == CameraType.Rock_S ? 3 : 6;
         
         noiseCam.m_AmplitudeGain = rockValue;
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(time);
         noiseCam.m_AmplitudeGain = 0;
     }
 
@@ -112,7 +124,7 @@ public class SpecialEffectSystem : MonoBehaviour
         float sizeValue = cameraType == CameraType.ZoomIn ? 3f : 7f;
 
         DOTween.Sequence()
-            .Append(DOTween.To(() => vcam.m_Lens.OrthographicSize, x => vcam.m_Lens.OrthographicSize = x, sizeValue, 0.5f))
+            .Append(DOTween.To(() => vcam.m_Lens.OrthographicSize, x => vcam.m_Lens.OrthographicSize = x, sizeValue, 0.3f).SetEase(Ease.OutCubic))
             .Append(DOTween.To(() => vcam.m_Lens.OrthographicSize, x => vcam.m_Lens.OrthographicSize = x, 5f, 0.5f));
     }
 }

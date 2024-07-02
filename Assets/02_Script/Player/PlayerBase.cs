@@ -130,6 +130,16 @@ public class PlayerBase : MonoBehaviour
         }
     }
 
+    public void OnEX(InputAction.CallbackContext context)
+    {
+        if (isDead) return;
+
+        if (context.started)
+        {
+            StartCoroutine(EXEvent());
+        }
+    }
+
     #endregion
 
     #region Virtual
@@ -181,6 +191,11 @@ public class PlayerBase : MonoBehaviour
         effect.PopEffect();
 
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_S);
+    }
+
+    protected virtual void EX()
+    {
+        
     }
 
     public virtual void Hit()
@@ -241,18 +256,45 @@ public class PlayerBase : MonoBehaviour
         pAttack = true;
     }
 
+    protected IEnumerator EXEvent()
+    {
+        isInvincibility = true;
+
+        float setTime = 0.1f;
+        float loopTime = 1.5f;
+
+        yield return SlowTimeCor(setTime, loopTime, () => 
+        {
+            SpecialEffectSystem.Instance.BackgroundDarkness(loopTime * setTime);
+        });
+
+        EX();
+    }
+
     private IEnumerator DeathEvent()
     {
         isDead = true;
 
-        Time.timeScale = 0.1f;
-        sp.DOColor(Color.red, 0.1f);
-        yield return new WaitForSeconds(0.1f);
-        Time.timeScale = 1f;
+        float setTime = 0.1f;
+
+        yield return SlowTimeCor(setTime, 1f, () => 
+        {
+            sp.DOColor(Color.red, 1f * setTime);
+        });
 
         Death();
     }
 
-    #endregion
+    private IEnumerator SlowTimeCor(float slowTime, float loopTime, Action slowEvent)
+    {
+        Time.timeScale = slowTime;
+        slowEvent?.Invoke();
 
-}
+        yield return new WaitForSeconds(slowTime * loopTime);
+
+        Time.timeScale = 1f;
+    }
+
+        #endregion
+
+    }

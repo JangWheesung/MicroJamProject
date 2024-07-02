@@ -25,7 +25,6 @@ public class EXGaugeBar : MonoBehaviour
             {
                 IsCharging = true;
                 currentGauge = 1f;
-                iconImage.color = Color.cyan;
 
                 SettingCharging();
             }
@@ -33,7 +32,6 @@ public class EXGaugeBar : MonoBehaviour
             {
                 IsCharging = false;
                 currentGauge = value;
-                iconImage.color = Color.white;
             }
             slider.value = currentGauge;
         }

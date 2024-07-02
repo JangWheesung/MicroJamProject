@@ -223,7 +223,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingOrder: 26
   m_Sprite: {fileID: 21300000, guid: 0c96c43467c7f2b42bf939cc9fca1f96, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -415,6 +415,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 519e695f-3dca-4385-870a-b720f95bcea6
     m_ActionName: Player/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 53364b67-6cb0-4f7d-86b8-18d6108b29cf
+    m_ActionName: Player/EX[/Mouse/middleButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

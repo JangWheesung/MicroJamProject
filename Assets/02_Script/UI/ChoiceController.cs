@@ -87,7 +87,7 @@ public class ChoiceController : MonoBehaviour
         foreach (AbilityData abilityData in stat.abilityDatas)
         {
             AbilitySlot slot = Instantiate(abilitySlotObj, abilityPanelContext);
-            slot.SetSlot(abilityData.name, abilityData.ext);
+            slot.SetSlot(abilityData.abilityStat, abilityData.name, abilityData.ext);
 
             string abilityName = $"<#0080FF>[{abilityData.name}]<color=white>";
             switch (abilityData.abilityStat)
@@ -117,7 +117,7 @@ public class ChoiceController : MonoBehaviour
 
         PlayerPrefs.SetString("PlayerName", choiceCharacterName);
 
-        characterSp.transform.DOMoveY(10f, 0.4f);
+        characterSp.transform.DOMoveY(10f, 0.5f).SetEase(Ease.InBack);
         timeObj.DOFade(1, 0.4f);
         PanelMove(600, () => 
         {

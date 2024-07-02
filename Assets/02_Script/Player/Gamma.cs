@@ -48,7 +48,7 @@ public class Gamma : PlayerBase
     public override void Hit()
     {
         base.Hit();
-        TimeSystem.Instance.MinusTime(2);
+        TimeSystem.Instance.MinusTime(5);
     }
 
     protected override void Death()

@@ -201,7 +201,7 @@ public class PlayerBase : MonoBehaviour
     {
         if (isInvincibility) return;
 
-        TimeSystem.Instance.MinusTime(2);
+        TimeSystem.Instance.MinusTime(5);
     }
 
     protected virtual void Death()
@@ -320,6 +320,7 @@ public class PlayerBase : MonoBehaviour
         {
             profle.PopProfle(delayTime);
             SpecialEffectSystem.Instance.BackgroundDarkness(delayTime);
+            AudioManager.Instance.StartSfx("TimeSlow");
         });
 
         isInvincibility = false;

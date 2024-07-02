@@ -14,7 +14,8 @@ public enum AbilityStat
     None,
     Jump,
     Dash,
-    Attack
+    Attack,
+    EX
 };
 
 [System.Serializable]

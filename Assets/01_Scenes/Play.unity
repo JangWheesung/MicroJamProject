@@ -7507,7 +7507,7 @@ MonoBehaviour:
   posY: -2.5
   length: 16
   height: 3
-  spawnCool: 5
+  spawnCool: 12
 --- !u!1 &1692818711
 GameObject:
   m_ObjectHideFlags: 0

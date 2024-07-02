@@ -25,6 +25,8 @@ public class Energe : EffectBase
     public void PopEnerge(EXGaugeBar gaugeBar)
     {
         this.gaugeBar = gaugeBar;
+
+        AudioManager.Instance.StartSfx("EnergeUp");
     }
 
     private void Update()
@@ -39,6 +41,8 @@ public class Energe : EffectBase
             SpecialEffectSystem.Instance.BackgroundAura(Color.gray);
             SpecialEffectSystem.Instance.BloomIntensity(BloomType.Light_M);
             SpecialEffectSystem.Instance.CameraShaking(CameraType.ZoomOut);
+
+            AudioManager.Instance.StartSfx("EnergeDown");
 
             StartCoroutine(MoveToGaugeBar());
         }

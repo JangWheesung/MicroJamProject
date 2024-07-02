@@ -9,8 +9,6 @@ public class TimeSystem : MonoBehaviour
 {
     public static TimeSystem Instance;
 
-    public event Action OnGameoverEvt;
-
     [SerializeField] private TextMeshPro timeText;
     [SerializeField] private float timeSettingValue;
 
@@ -30,7 +28,6 @@ public class TimeSystem : MonoBehaviour
             if (nowTime <= 0f)
             {
                 nowTime = 0f;
-                OnGameoverEvt?.Invoke();
             }
             else if (nowTime >= 120f)
             {
@@ -50,12 +47,12 @@ public class TimeSystem : MonoBehaviour
 
     private void Update()
     {
-        if (!GameSystem.Instance.IsStopLogic())
+        if (!ControlSystem.Instance.IsStopLogic())
         {
             NowTime -= Time.deltaTime;
             if (NowTime <= 0f)
             {
-                OnGameoverEvt?.Invoke();
+                ControlSystem.Instance.SetDeath();
             }
         }
     }

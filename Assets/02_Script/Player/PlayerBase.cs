@@ -13,6 +13,7 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] protected Slice playerSlice;
 
     [Header("Base_Value")]
+    [SerializeField] protected Color playerColor;
     [SerializeField] protected float moveSpeed = 9f;
     [SerializeField] protected float jumpPower = 12f;
     [SerializeField] protected int jumpCount = 2;
@@ -20,9 +21,6 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] protected float dashDuration = 0.2f;
     [SerializeField] protected float dashDelay = 1f;
     [SerializeField] protected float attackDelay = 0.25f;
-
-    protected Rigidbody2D rb;
-    protected SpriteRenderer sp;
 
     protected bool isFacingRight = true;
     protected bool isGrounded = false;
@@ -36,7 +34,11 @@ public class PlayerBase : MonoBehaviour
     protected int currentJumpCount = 0;
     protected bool isInvincibility = false;
 
+    protected Rigidbody2D rb;
+    protected SpriteRenderer sp;
     private TrailRenderer trail;
+    private EXGaugeBar eXGaugeBar;
+    private Profle profle;
     private Camera cam;
 
     [HideInInspector] public Vector2 MovementVector { get; private set; }
@@ -47,15 +49,18 @@ public class PlayerBase : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
-
         trail = GetComponentInChildren<TrailRenderer>();
+        eXGaugeBar = FindObjectOfType<EXGaugeBar>();
+        profle = FindObjectOfType<Profle>();
+
+        profle.ProfleSetting(playerColor, sp.sprite);
         cam = Camera.main;
     }
 
     protected virtual void Start() //죽는 이벤트 구독
     {
-        GameSystem.Instance.OnEXTriggerEvt += HandleEX;
-        TimeSystem.Instance.OnGameoverEvt += HandleDeath;
+        ControlSystem.Instance.OnEXTriggerEvt += HandleEX;
+        ControlSystem.Instance.OnDeathEvt += HandleDeath;
     }
 
     protected virtual void FixedUpdate() //리지드바디 연산
@@ -183,8 +188,7 @@ public class PlayerBase : MonoBehaviour
 
     protected void EX()
     {
-        EXGaugeBar gaugeBar = FindObjectOfType<EXGaugeBar>();
-        if (!gaugeBar.IsCharging) return;
+        if (!eXGaugeBar.IsCharging) return;
 
         StartCoroutine(EXEvent());
     }
@@ -312,14 +316,15 @@ public class PlayerBase : MonoBehaviour
         float setTime = 0.2f;
         float loopTime = 1.5f;
 
-        yield return SlowTimeCor(setTime, loopTime, () => 
+        yield return SlowTimeCor(setTime, loopTime, (delayTime) => 
         {
-            SpecialEffectSystem.Instance.BackgroundDarkness(loopTime * setTime);
+            profle.PopProfle(delayTime);
+            SpecialEffectSystem.Instance.BackgroundDarkness(delayTime);
         });
 
         isInvincibility = false;
 
-        GameSystem.Instance.SetEX(true);
+        ControlSystem.Instance.SetEX(true);
     }
 
     private IEnumerator DeathEvent()
@@ -328,20 +333,21 @@ public class PlayerBase : MonoBehaviour
 
         float setTime = 0.1f;
 
-        yield return SlowTimeCor(setTime, 1f, () => 
+        yield return SlowTimeCor(setTime, 1f, (delayTime) => 
         {
-            sp.DOColor(Color.red, 1f * setTime);
+            sp.DOColor(Color.red, delayTime);
         });
 
         Death();
     }
 
-    private IEnumerator SlowTimeCor(float slowTime, float loopTime, Action slowEvent)
+    private IEnumerator SlowTimeCor(float slowTime, float loopTime, Action<float> slowEvent)
     {
         Time.timeScale = slowTime;
-        slowEvent?.Invoke();
 
-        yield return new WaitForSeconds(slowTime * loopTime);
+        float delayTime = slowTime * loopTime;
+        slowEvent?.Invoke(delayTime);
+        yield return new WaitForSeconds(delayTime);
 
         Time.timeScale = 1f;
     }

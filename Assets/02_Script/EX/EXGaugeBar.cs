@@ -45,7 +45,7 @@ public class EXGaugeBar : MonoBehaviour
 
     private void Start()
     {
-        GameSystem.Instance.OnEXTriggerEvt += ChargingClear;
+        ControlSystem.Instance.OnEXTriggerEvt += ChargingClear;
     }
 
     private void SettingCharging()

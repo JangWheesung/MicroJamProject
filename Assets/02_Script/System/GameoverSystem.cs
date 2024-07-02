@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,15 +6,11 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class GameSystem : MonoBehaviour
+public class GameoverSystem : MonoBehaviour
 {
-    public static GameSystem Instance;
+    public static GameoverSystem Instance;
 
-    public event Action<bool> OnEXTriggerEvt;
-
-    public bool isEX { get; private set; }
-    public bool isDeath { get; private set; }
-
+    [Header("UI")]
     [SerializeField] private RectTransform gameoverPanel;
     [SerializeField] private TextMeshProUGUI highSocre_timeText;
     [SerializeField] private TextMeshProUGUI highSocre_killText;
@@ -32,13 +27,9 @@ public class GameSystem : MonoBehaviour
 
     private void Start()
     {
-        TimeSystem.Instance.OnGameoverEvt += GetDeath;
-        TimeSystem.Instance.OnGameoverEvt += GameoverPanel;
-
-        AudioManager.Instance.StartBgm("InGame");
+        ControlSystem.Instance.OnDeathEvt += GameoverPanel;
 
         mainBtn.onClick.AddListener(FadeInScene);
-
         fadeImage.gameObject.SetActive(false);
     }
 
@@ -47,20 +38,9 @@ public class GameSystem : MonoBehaviour
         highSocre_time += Time.deltaTime;
     }
 
-    public void SetEX(bool value)
-    {
-        isEX = value;
-        OnEXTriggerEvt?.Invoke(value);
-    }
-
     public void GetKillCount()
     {
         highSocre_kill++;
-    }
-
-    private void GetDeath()
-    {
-        isDeath = true;
     }
 
     private void GameoverPanel()
@@ -76,14 +56,9 @@ public class GameSystem : MonoBehaviour
     private void FadeInScene()
     {
         fadeImage.gameObject.SetActive(true);
-        fadeImage.DOFade(1, 1f).OnComplete(() => 
+        fadeImage.DOFade(1, 1f).OnComplete(() =>
         {
             SceneManager.LoadScene("Intro");
         });
-    }
-
-    public bool IsStopLogic()
-    {
-        return isDeath || isEX;
     }
 }

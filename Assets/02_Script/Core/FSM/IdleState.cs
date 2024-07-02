@@ -26,7 +26,7 @@ public class IdleState : BaseState
 
     public override void OnStateUpdate()
     {
-        if (!GameSystem.Instance.IsStopLogic())
+        if (!ControlSystem.Instance.IsStopLogic())
         {
             fsm.ChangeState(FSM_State.Move);
         }
@@ -38,7 +38,7 @@ public class IdleState : BaseState
 
     protected override void OnStateAction()
     {
-        if (GameSystem.Instance.isEX)
+        if (ControlSystem.Instance.isEX)
         {
             rb.velocity = Vector2.zero;
             rb.gravityScale = 0f;

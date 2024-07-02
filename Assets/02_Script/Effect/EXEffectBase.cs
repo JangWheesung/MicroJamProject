@@ -25,10 +25,10 @@ public class EXEffectBase : EffectBase
             enemy.Death();
             PoolingManager.Instance.Pop<EffectBase>(normalEffect.name, enemy.transform.position).PopEffect();
 
-            GameSystem.Instance.GetKillCount();
+            GameoverSystem.Instance.GetKillCount();
             TimeSystem.Instance.PlusTime(1f);
         }
-        GameSystem.Instance.SetEX(false);
+        ControlSystem.Instance.SetEX(false);
 
         SpecialEffectSystem.Instance.BackgroundDarkness(0.1f, false);
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_H);

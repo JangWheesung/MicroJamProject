@@ -449,7 +449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackEffect: {fileID: 1705920322639394122, guid: 4c4a1cdcf07ffaa40a07418d01ef1fae, type: 3}
-  exEffect: {fileID: 8420573670963062814, guid: 9c44acb44c29f864c859bed356675619, type: 3}
+  exEffect: {fileID: 4113080319566569493, guid: 501d3d3e24b49fb429c42479790b547e, type: 3}
   playerSlice: {fileID: 4892012691573461814, guid: f0652ca8e079dba41a6a5b97282c5145, type: 3}
   playerColor: {r: 0.3962264, g: 0.3062565, b: 0, a: 1}
   moveSpeed: 6

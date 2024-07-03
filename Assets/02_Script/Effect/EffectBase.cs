@@ -7,7 +7,7 @@ public class EffectBase : MonoBehaviour
     [Header("Base")]
     [SerializeField] private float liveTime;
 
-    private Coroutine lifeCor;
+    protected Coroutine lifeCor;
 
     protected virtual void OnEnable()
     {

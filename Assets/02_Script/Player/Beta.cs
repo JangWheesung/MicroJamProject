@@ -43,4 +43,12 @@ public class Beta : PlayerBase
         AudioManager.Instance.StartSfx($"Smashing3");
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_H);
     }
+
+    protected override void EX()
+    {
+        rb.velocity = Vector2.zero;
+
+        EXEffectBase effect = PoolingManager.Instance.Pop<EXEffectBase>(exEffect.name, Vector2.zero);
+        effect.PopEffect(this);
+    }
 }

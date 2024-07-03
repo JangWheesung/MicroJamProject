@@ -19,19 +19,18 @@ public class EnemySpawner : MonoBehaviour
         int enemyCnt = 2;
         float spawnTime = 0.5f;
 
-        while (!ControlSystem.Instance.IsStopLogic())
+        while (!ControlSystem.Instance.isDeath)
         {
             enemyCnt += Random.Range(2, 4);
             spawnTime = waveCnt switch
             {
-                < 8 => 0.5f,
-                < 16 => 0.4f,
-                < 24 => 0.3f,
-                < 30 => 0.2f
+                < 10 => 0.5f,
+                < 20 => 0.4f,
+                < 30 => 0.3f,
             };
 
             float delayTime = Random.Range(4f, 5f);
-            if (waveCnt == 0) delayTime = 1f;
+            
             yield return new WaitForSeconds(delayTime);
 
             for (int i = 0; i < enemyCnt; i++)

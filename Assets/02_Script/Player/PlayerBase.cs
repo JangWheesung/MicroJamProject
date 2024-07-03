@@ -128,7 +128,7 @@ public class PlayerBase : MonoBehaviour
 
         if (context.started)
         {
-            EX();
+            StartCoroutine(EXEvent());
         }
     }
 
@@ -186,11 +186,12 @@ public class PlayerBase : MonoBehaviour
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_S);
     }
 
-    protected void EX()
+    protected virtual void EX()
     {
-        if (!eXGaugeBar.IsCharging) return;
+        rb.velocity = Vector2.zero;
 
-        StartCoroutine(EXEvent());
+        EXEffectBase effect = PoolingManager.Instance.Pop<EXEffectBase>(exEffect.name, transform.position);
+        effect.PopEffect();
     }
 
     #endregion
@@ -224,10 +225,7 @@ public class PlayerBase : MonoBehaviour
 
         if (value)
         {
-            rb.velocity = Vector2.zero;
-
-            EXEffectBase effect = PoolingManager.Instance.Pop<EXEffectBase>(exEffect.name, transform.position);
-            effect.PopEffect();
+            EX();
         }
     }
 
@@ -311,6 +309,8 @@ public class PlayerBase : MonoBehaviour
 
     protected IEnumerator EXEvent()
     {
+        if (!eXGaugeBar.IsCharging) yield break;
+
         isInvincibility = true;
 
         float setTime = 0.2f;

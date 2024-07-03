@@ -36,6 +36,9 @@ public class Energe : EffectBase
         {
             getEnerge = true;
 
+            if (lifeCor != null)
+                StopCoroutine(lifeCor);
+
             AudioManager.Instance.StartSfx("EnergeDown");
 
             PoolingManager.Instance.Pop<EffectBase>(energeParticle.name, transform.position).PopEffect();

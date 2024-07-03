@@ -428,6 +428,12 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 7adb7b95decf60941a91f2b0e1479597, type: 3}
   - audioName: ClickUp
     audioClip: {fileID: 8300000, guid: 36bd567431dc929449075168e5ae6d43, type: 3}
+  - audioName: EnergeUp
+    audioClip: {fileID: 8300000, guid: 75108a2c5ac202f4db894d8f64b26e70, type: 3}
+  - audioName: EnergeDown
+    audioClip: {fileID: 8300000, guid: 728c5b82b6c606744bd5f741af6c682f, type: 3}
+  - audioName: TimeSlow
+    audioClip: {fileID: 8300000, guid: 01bf4294d1642874bb4bd67d39379359, type: 3}
   - audioName: Circle
     audioClip: {fileID: 8300000, guid: 339bd9763fc8bc1479426f8ef9ed40cb, type: 3}
   - audioName: Smashing1
@@ -440,12 +446,8 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 3614eb9f10b225447ae25141ef9c3c4f, type: 3}
   - audioName: Reload
     audioClip: {fileID: 8300000, guid: e2b4e2fd24e12614089890fcc924b9f5, type: 3}
-  - audioName: EnergeUp
-    audioClip: {fileID: 8300000, guid: 67f341f458199434784c9decfec53098, type: 3}
-  - audioName: EnergeDown
-    audioClip: {fileID: 8300000, guid: 792da63f756770b42a397f46172562de, type: 3}
-  - audioName: TimeSlow
-    audioClip: {fileID: 8300000, guid: 8da856fc057850c4a985dd7f55a91490, type: 3}
+  - audioName: AlphaEX
+    audioClip: {fileID: 8300000, guid: 905fca95368ea4340ab088a08ba7a01d, type: 3}
 --- !u!4 &447195095
 Transform:
   m_ObjectHideFlags: 0

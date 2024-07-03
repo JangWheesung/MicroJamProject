@@ -20,6 +20,7 @@ public class AlphaEXEffect : EXEffectBase
 
     public override void PopEffect()
     {
+        AudioManager.Instance.StartSfx("AlphaEX");
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Rock_H, effectTime);
 
         DOTween.Sequence()

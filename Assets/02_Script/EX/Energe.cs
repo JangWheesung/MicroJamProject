@@ -36,13 +36,13 @@ public class Energe : EffectBase
         {
             getEnerge = true;
 
+            AudioManager.Instance.StartSfx("EnergeDown");
+
             PoolingManager.Instance.Pop<EffectBase>(energeParticle.name, transform.position).PopEffect();
 
             SpecialEffectSystem.Instance.BackgroundAura(Color.gray);
             SpecialEffectSystem.Instance.BloomIntensity(BloomType.Light_M);
             SpecialEffectSystem.Instance.CameraShaking(CameraType.ZoomOut);
-
-            AudioManager.Instance.StartSfx("EnergeDown");
 
             StartCoroutine(MoveToGaugeBar());
         }

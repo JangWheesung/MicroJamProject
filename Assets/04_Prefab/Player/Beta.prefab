@@ -458,4 +458,4 @@ MonoBehaviour:
   dashSpeed: 23
   dashDuration: 0.3
   dashDelay: 1
-  attackDelay: 0.7
+  attackDelay: 0.6

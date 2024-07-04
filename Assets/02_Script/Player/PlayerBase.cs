@@ -37,8 +37,6 @@ public class PlayerBase : MonoBehaviour
     protected Rigidbody2D rb;
     protected SpriteRenderer sp;
     private TrailRenderer trail;
-    private EXGaugeBar eXGaugeBar;
-    private Profle profle;
     private Camera cam;
 
     [HideInInspector] public Vector2 MovementVector { get; private set; }
@@ -50,10 +48,7 @@ public class PlayerBase : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         trail = GetComponentInChildren<TrailRenderer>();
-        eXGaugeBar = FindObjectOfType<EXGaugeBar>();
-        profle = FindObjectOfType<Profle>();
 
-        profle.ProfleSetting(playerColor, sp.sprite);
         cam = Camera.main;
     }
 
@@ -61,6 +56,8 @@ public class PlayerBase : MonoBehaviour
     {
         ControlSystem.Instance.OnEXTriggerEvt += HandleEX;
         ControlSystem.Instance.OnDeathEvt += HandleDeath;
+
+        UISystem.Instance.Profle.ProfleSetting(playerColor, sp.sprite);
     }
 
     protected virtual void FixedUpdate() //리지드바디 연산
@@ -309,7 +306,7 @@ public class PlayerBase : MonoBehaviour
 
     protected IEnumerator EXEvent()
     {
-        if (!eXGaugeBar.IsCharging) yield break;
+        if (!UISystem.Instance.EXGaugeBar.IsCharging) yield break;
 
         isInvincibility = true;
 
@@ -318,7 +315,7 @@ public class PlayerBase : MonoBehaviour
 
         yield return SlowTimeCor(setTime, loopTime, (delayTime) => 
         {
-            profle.PopProfle(delayTime);
+            UISystem.Instance.Profle.PopProfle(delayTime);
             SpecialEffectSystem.Instance.BackgroundDarkness(delayTime);
             AudioManager.Instance.StartSfx("TimeSlow");
         });

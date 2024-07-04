@@ -8,7 +8,7 @@ public class UX : MonoBehaviour
 {
     [SerializeField] private Image[] panels;
 
-    private void Start()
+    public void PopUXUI()
     {
         foreach (Image image in panels)
         {

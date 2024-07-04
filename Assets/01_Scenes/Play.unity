@@ -2190,7 +2190,7 @@ GameObject:
   - component: {fileID: 1238530841}
   - component: {fileID: 1238530842}
   m_Layer: 0
-  m_Name: GameoverSystem
+  m_Name: UISystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2223,11 +2223,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c351cd28d716774e98a4cda6d2f154b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameoverPanel: {fileID: 1783337681}
-  highSocre_timeText: {fileID: 160676578}
-  highSocre_killText: {fileID: 1195597872}
-  mainBtn: {fileID: 247941926}
-  fadeImage: {fileID: 359094527}
+  gameoverUI: {fileID: 1783337684}
+  gaugeBar: {fileID: 165623835}
+  profle: {fileID: 1692818713}
+  ux: {fileID: 337716274}
 --- !u!1 &1277162752
 GameObject:
   m_ObjectHideFlags: 0
@@ -8028,6 +8027,7 @@ GameObject:
   - component: {fileID: 1783337681}
   - component: {fileID: 1783337683}
   - component: {fileID: 1783337682}
+  - component: {fileID: 1783337684}
   m_Layer: 5
   m_Name: GameoverPanel
   m_TagString: Untagged
@@ -8096,6 +8096,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783337680}
   m_CullTransparentMesh: 1
+--- !u!114 &1783337684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783337680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1407014787edca74d8fcbde72ba65da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameoverPanel: {fileID: 1783337681}
+  highSocre_timeText: {fileID: 160676578}
+  highSocre_killText: {fileID: 1195597872}
+  mainBtn: {fileID: 247941926}
+  fadeImage: {fileID: 359094527}
 --- !u!1 &1804386952
 GameObject:
   m_ObjectHideFlags: 0

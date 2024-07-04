@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackEffect: {fileID: 1507865629357150910, guid: c248e09f3f3e3314e99f8a08e08ca078, type: 3}
-  exEffect: {fileID: 8420573670963062814, guid: 9c44acb44c29f864c859bed356675619, type: 3}
+  exEffect: {fileID: 5654514082283686205, guid: 3924725e55e41784dbb65443dced633e, type: 3}
   playerSlice: {fileID: 4892012691573461814, guid: cbedc337c099f2844bc733788c865c80, type: 3}
   playerColor: {r: 0.30948183, g: 0, b: 0.4792453, a: 1}
   moveSpeed: 11

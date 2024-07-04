@@ -21,16 +21,27 @@ public class EnemySpawner : MonoBehaviour
 
         while (!ControlSystem.Instance.isDeath)
         {
+            Debug.Log(waveCnt);
             enemyCnt += Random.Range(2, 4);
             spawnTime = waveCnt switch
             {
-                < 10 => 0.5f,
-                < 20 => 0.4f,
-                < 30 => 0.3f,
+                < 5 => 0.5f,
+                < 10 => 0.4f,
+                < 15 => 0.3f,
+                _ => 0.2f
             };
 
-            float delayTime = Random.Range(4f, 5f);
-            
+            float delayTime = waveCnt switch
+            {
+                < 5 => 5f,
+                < 10 => 4f,
+                < 15 => 3f,
+                < 20 => 2f,
+                < 25 => 1f,
+                < 30 => 0.5f,
+                _ => 0.4f
+            };
+
             yield return new WaitForSeconds(delayTime);
 
             for (int i = 0; i < enemyCnt; i++)

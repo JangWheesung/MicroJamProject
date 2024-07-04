@@ -24,3 +24,7 @@ MonoBehaviour:
   - abilityStat: 0
     name: Simple
     ext: "\uD2B9\uBCC4\uD55C \uB2A5\uB825 \uC5C6\uC74C. Simple is best."
+  - abilityStat: 4
+    name: "\uCDA9\uACA9\uD30C"
+    ext: "\uBAA8\uC544\uB454 \uC5D0\uB108\uC9C0\uC758 \uD798\uC744 \uCD95\uC801\uD558\uC5EC
+      \uAD11\uBC94\uC704\uD558\uAC8C \uBC1C\uC0B0\uD55C\uB2E4."

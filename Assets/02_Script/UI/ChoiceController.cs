@@ -74,7 +74,7 @@ public class ChoiceController : MonoBehaviour
             _ => "X"
         };
         jumpText.text = "점프 : " + (stat.jumpStat <= 0 ? "X" : $"{stat.jumpStat}단");
-        dashText.text = "대시 : " + (stat.dashStat <= 0f ? "X" : $"x{stat.dashStat}");
+        dashText.text = "대시 : " + (stat.dashStat <= 0f ? "X" : $"x{stat.dashStat.ToString("F1")}");
         attackText.text = "공격 : " + stat.attackExt;
 
         for (int i = 0; i < abilityPanelContext.childCount; i++)

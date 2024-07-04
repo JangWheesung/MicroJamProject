@@ -45,6 +45,14 @@ public class Gamma : PlayerBase
         bulletText.fontSize = isEmpty ? 1.7f : 2.4f;
     }
 
+    protected override void EX()
+    {
+        rb.velocity = Vector2.zero;
+
+        EXEffectBase effect = PoolingManager.Instance.Pop<EXEffectBase>(exEffect.name, Vector2.zero);
+        effect.PopEffect(this);
+    }
+
     public override void Hit()
     {
         base.Hit();

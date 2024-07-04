@@ -9,12 +9,6 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource bgmSource;
     [SerializeField] private AudioSource sfxSource;
 
-    public AudioSource BgmSource => bgmSource;
-    public AudioSource SfxSource => sfxSource;
-
-    [SerializeField] private List<AudioData> bgmClips;
-    [SerializeField] private List<AudioData> sfxClips;
-
     private void Awake()
     {
         if (Instance == null)
@@ -29,22 +23,21 @@ public class AudioManager : MonoBehaviour
     }
     public void StartBgm(string name)
     {
-        AudioData data = bgmClips.Find(x => x.audioName == name);
-        if (ReferenceEquals(data, null)) return;
+        AudioClip bgmClip = Resources.Load<AudioClip>($"BGM/{name}");
+        if (bgmClip == null) return;
 
-        bgmSource.clip = data.audioClip;
+        bgmSource.clip = bgmClip;
         bgmSource.Play();
     }
 
     public void StartSfx(string name)
     {
-        Debug.Log(name);
-        AudioData data = sfxClips.Find(x => x.audioName == name);
-        if (ReferenceEquals(data, null)) return;
+        AudioClip sfxClip = Resources.Load<AudioClip>($"SFX/{name}");
+        if (sfxClip == null) return;
 
         var source = PoolingManager.Instance.Pop<AudioSource>(sfxSource.name, Vector2.zero);
 
-        source.clip = data.audioClip;
+        source.clip = sfxClip;
         source.Play();
 
         StartCoroutine(SourceDeleteCo(source));

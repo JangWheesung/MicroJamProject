@@ -17,7 +17,7 @@ public class Alpha : PlayerBase
         effect.PopEffect(-MouseVec());
 
         int idx = Random.Range(1, 3);
-        AudioManager.Instance.StartSfx($"Smashing{idx}"); //1 ~ 2
+        AudioManager.Instance.StartSfx($"Smashing_{idx}"); //1 ~ 2
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_M);
     }
 }

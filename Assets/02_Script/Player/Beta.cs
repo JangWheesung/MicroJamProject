@@ -40,7 +40,7 @@ public class Beta : PlayerBase
         AttackEffeectBase effect = PoolingManager.Instance.Pop<AttackEffeectBase>(attackEffect.name, effectPos);
         effect.PopEffect(-MouseVec());
 
-        AudioManager.Instance.StartSfx($"Smashing3");
+        AudioManager.Instance.StartSfx($"Smashing_3");
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_H);
     }
 

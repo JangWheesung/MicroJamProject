@@ -30,7 +30,7 @@ public class BulletAttackEffect : AttackEffeectBase
         EnemyRader(transform.position, bulletRadius);
     }
 
-    protected override void EnemyHit(Enemy enemy)
+    protected override void EnemyHit(EnemyBase enemy)
     {
         base.EnemyHit(enemy);
 

@@ -7320,7 +7320,7 @@ MonoBehaviour:
   spawnPoint:
   - {fileID: 1776117806}
   - {fileID: 282162548}
-  enemy: {fileID: 614977996633932789, guid: 468ae4925348a0c4e9e06ff93cf80e5d, type: 3}
+  pageDatas: []
 --- !u!1 &1425552493
 GameObject:
   m_ObjectHideFlags: 0

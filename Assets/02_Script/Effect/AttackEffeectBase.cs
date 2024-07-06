@@ -18,14 +18,14 @@ public class AttackEffeectBase : EffectBase
 
         foreach (Collider2D collider in colliders)
         {
-            if (collider.TryGetComponent<Enemy>(out Enemy enemy))
+            if (collider.TryGetComponent<EnemyBase>(out EnemyBase enemy))
             {
                 EnemyHit(enemy);
             }
         }
     }
 
-    protected virtual void EnemyHit(Enemy enemy)
+    protected virtual void EnemyHit(EnemyBase enemy)
     {
         enemy.Death();
 

@@ -20,7 +20,7 @@ public class EXEffectBase : EffectBase
 
     protected override void DisableEffect()
     {
-        foreach (Enemy enemy in FindObjectsOfType<Enemy>())
+        foreach (EnemyBase enemy in FindObjectsOfType<EnemyBase>())
         {
             enemy.Death();
             PoolingManager.Instance.Pop<EffectBase>(normalEffect.name, enemy.transform.position).PopEffect();

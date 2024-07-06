@@ -2,57 +2,99 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class PageData
+{
+    public int waveCnt;
+    public float spawnTime;
+    public float delayTime;
+    private EnemyWaveData[] waveDatas;
+
+    public void SetDatas(EnemyWaveData[] newData)
+    {
+        waveDatas = newData;
+    }
+
+    public EnemyWaveData[] GetDatas()
+    {
+        return waveDatas;
+    }
+}
+
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnPoint;
 
-    [SerializeField] private Enemy enemy;
+    [SerializeField] private List<PageData> pageDatas;
 
     private void Start()
     {
-        StartCoroutine(WaveLoop());
+        StartCoroutine(SpawnLoop());
     }
 
-    private IEnumerator WaveLoop()
+    private IEnumerator SpawnLoop()
     {
-        int waveCnt = 0;
-        int enemyCnt = 2;
-        float spawnTime = 0.5f;
-
-        while (!ControlSystem.Instance.isDeath)
+        //페이지모드
+        int idx = 0;
+        foreach (PageData data in pageDatas)
         {
-            Debug.Log(waveCnt);
-            enemyCnt += Random.Range(2, 4);
-            spawnTime = waveCnt switch
+            data.SetDatas(Resources.LoadAll<EnemyWaveData>($"WaveData/Page_{idx + 1}"));
+            idx++;
+
+            yield return PageLoop(data);
+        }
+
+        //무한모드
+        PageData endless = pageDatas[pageDatas.Count - 1];
+        endless.SetDatas(Resources.LoadAll<EnemyWaveData>("WaveData/Endless"));
+
+        int extraCnt = 0;
+        while (true)
+        {
+            extraCnt += Random.Range(1, 2);
+            yield return PageLoop(endless, extraCnt);
+        }
+    }
+
+    private IEnumerator PageLoop(PageData data, int extraCnt = 0)
+    {
+        for (int i = 0; i < data.waveCnt; i++)
+        {
+            int waveIdx = Random.Range(0, data.GetDatas().Length - 1);
+            yield return WaveLoop(data.GetDatas()[waveIdx], data.spawnTime, extraCnt);
+            yield return new WaitForSeconds(data.delayTime);
+        }
+
+        yield return null;
+    }
+
+    private IEnumerator WaveLoop(EnemyWaveData data, float spawnTime, int extraCnt = 0)
+    {
+        List<int> amountCnt = new List<int>();
+
+        foreach (AmountData amountData in data.amoutDatas)
+        {
+            amountCnt.Add(amountData.cnt + extraCnt);
+        }
+
+        while (amountCnt.Count > 0)
+        {
+            int amountIdx = Random.Range(0, data.amoutDatas.Count - 1);
+            AmountData amountData = data.amoutDatas[amountIdx];
+
+            if (amountCnt[amountIdx] <= 0)
             {
-                < 5 => 0.5f,
-                < 10 => 0.4f,
-                < 15 => 0.3f,
-                _ => 0.2f
-            };
-
-            float delayTime = waveCnt switch
-            {
-                < 5 => 5f,
-                < 10 => 4f,
-                < 15 => 3f,
-                < 20 => 2f,
-                < 25 => 1f,
-                < 30 => 0.5f,
-                _ => 0.4f
-            };
-
-            yield return new WaitForSeconds(delayTime);
-
-            for (int i = 0; i < enemyCnt; i++)
-            {
-                int randomPoint = Random.Range(0, spawnPoint.Length);
-                PoolingManager.Instance.Pop<Enemy>(enemy.name, spawnPoint[randomPoint].position);
-
-                yield return new WaitForSeconds(spawnTime);
+                amountCnt.Remove(amountIdx);
+                continue;
             }
 
-            waveCnt++;
+            int randomPoint = Random.Range(0, spawnPoint.Length);
+            PoolingManager.Instance.Pop<EnemyBase>(amountData.enemy.name, spawnPoint[randomPoint].position);
+            yield return new WaitForSeconds(spawnTime);
+
+            amountCnt[amountIdx]--;
         }
+
+        yield return null;
     }
 }

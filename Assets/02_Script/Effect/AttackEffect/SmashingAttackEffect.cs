@@ -13,7 +13,7 @@ public class SmashingAttackEffect : AttackEffeectBase
         EnemyRader(transform.position, attackRadius);
     }
 
-    protected override void EnemyHit(Enemy enemy)
+    protected override void EnemyHit(EnemyBase enemy)
     {
         base.EnemyHit(enemy);
 

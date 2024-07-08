@@ -16,7 +16,7 @@ public class EffectBase : MonoBehaviour
 
     public virtual void PopEffect() { }
 
-    protected virtual void DisableEffect()
+    public virtual void DisableEffect()
     {
         if (lifeCor != null)
             StopCoroutine(lifeCor);

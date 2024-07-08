@@ -11,16 +11,7 @@ public class FSM<T> : MonoBehaviour where T : Enum
 
     private void Update()
     {
-        stateDictionary[nowState].OnStateUpdate();
-
-        foreach (var transition in transitionDictionary[nowState])
-        {
-            if (transition.CheckTransition())
-            {
-                ChangeState(transition.changeStateType);
-                break;
-            }
-        }
+        stateDictionary[nowState].Update();
     }
 
     public void AddState(State<T> state, T type)
@@ -32,15 +23,10 @@ public class FSM<T> : MonoBehaviour where T : Enum
 
     public void ChangeState(T state)
     {
+        if (!stateDictionary.ContainsKey(state)) return;
         if ((Enum)nowState == (Enum)state) return;
 
-        stateDictionary[nowState].OnStateExit();
-        stateDictionary[nowState = state].OnStateEnter();
-    }
-
-    public void AddTransition(Transition<T> transition, T state, T changeState)
-    {
-        transition.SetChangeState(changeState);
-        transitionDictionary[state].Add(transition);
+        stateDictionary[nowState].Exit();
+        stateDictionary[nowState = state].Enter();
     }
 }

@@ -183,9 +183,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a92d3999fe152044085de7b7d111b19e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalEffect: {fileID: 2874610256297708771, guid: a875c093b7c115e479cc3fc5c1608a9f, type: 3}
   liveTime: 0.3
-  enemyLayer:
+  normalEffect: {fileID: 2874610256297708771, guid: a875c093b7c115e479cc3fc5c1608a9f, type: 3}
+  hitLayer:
     serializedVersion: 2
     m_Bits: 64
   attackRadius: 1.5

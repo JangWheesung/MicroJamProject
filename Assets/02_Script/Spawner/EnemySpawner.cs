@@ -89,7 +89,7 @@ public class EnemySpawner : MonoBehaviour
             }
 
             int randomPoint = Random.Range(0, spawnPoint.Length);
-            PoolingManager.Instance.Pop<EnemyBase>(amountData.enemy.name, spawnPoint[randomPoint].position);
+            PoolingManager.Instance.Pop<IEnemy>(amountData.enemy.name, spawnPoint[randomPoint].position);
             yield return new WaitForSeconds(spawnTime);
 
             amountCnt[amountIdx]--;

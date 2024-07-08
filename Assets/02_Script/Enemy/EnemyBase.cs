@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using System;
 
-public class EnemyBase : MonoBehaviour
+public abstract class EnemyBase<T> : FSM<T>, IEnemy where T : Enum
 {
-    public EffectBase enemyEffect;
+    public Slice enemySlice;
 
     [HideInInspector] public PlayerBase player;
     [HideInInspector] public Transform playerTrs;
@@ -16,18 +13,10 @@ public class EnemyBase : MonoBehaviour
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Collider2D col;
 
-    public float jumpPower;
-    public float moveSpeed;
-    public float attackDelay;
+    public bool isDie { get; set; }
+    public bool isStop { get; set; }
 
-    public bool isDie { get; private set; }
-
-    private void OnEnable()
-    {
-        isDie = false;
-    }
-
-    private void Start()
+    protected virtual void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerBase>();
         playerTrs = player.transform;
@@ -36,8 +25,12 @@ public class EnemyBase : MonoBehaviour
         sp = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+
+        InitializeState();
     }
 
+    protected abstract void InitializeState();
+    
     public void Death()
     {
         isDie = true;

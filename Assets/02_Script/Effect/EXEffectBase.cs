@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EXEffectBase : EffectBase
@@ -18,15 +19,18 @@ public class EXEffectBase : EffectBase
 
     public virtual void UnityAnimEvent() { }
 
-    protected override void DisableEffect()
+    public override void DisableEffect()
     {
-        foreach (EnemyBase enemy in FindObjectsOfType<EnemyBase>())
+        foreach (GameObject enemyObj in GameObject.FindGameObjectsWithTag("Enemy"))
         {
-            enemy.Death();
-            PoolingManager.Instance.Pop<EffectBase>(normalEffect.name, enemy.transform.position).PopEffect();
+            if (enemyObj.TryGetComponent(out IEnemy enemy))
+            {
+                enemy.Death();
+                PoolingManager.Instance.Pop<EffectBase>(normalEffect.name, enemyObj.transform.position).PopEffect();
 
-            UISystem.Instance.GetKillCount();
-            TimeSystem.Instance.PlusTime(1f);
+                UISystem.Instance.GetKillCount();
+                TimeSystem.Instance.PlusTime(1f);
+            }
         }
         ControlSystem.Instance.SetEX(false);
 

@@ -27,18 +27,18 @@ public class BulletAttackEffect : AttackEffeectBase
 
     private void Update()
     {
-        EnemyRader(transform.position, bulletRadius);
+        HitRader(transform.position, bulletRadius);
     }
 
-    protected override void EnemyHit(EnemyBase enemy)
+    protected override void EnemyHit(IEnemy enemy, Transform enemyTrs)
     {
-        base.EnemyHit(enemy);
+        base.EnemyHit(enemy, enemyTrs);
 
         int score = Random.Range(1, 3); //1 ~ 2
         TimeSystem.Instance.PlusTime(score);
     }
 
-    protected override void DisableEffect()
+    public override void DisableEffect()
     {
         rb.velocity = Vector2.zero;
         //Time.timeScale = 0;

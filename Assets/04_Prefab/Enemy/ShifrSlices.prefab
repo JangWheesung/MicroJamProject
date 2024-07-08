@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 7761267448587464988}
   - component: {fileID: 78745678201682923}
   m_Layer: 0
-  m_Name: EnemySlices
+  m_Name: ShifrSlices
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

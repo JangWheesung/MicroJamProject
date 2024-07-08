@@ -7,7 +7,8 @@ public class ControlSystem : MonoBehaviour
 {
     public static ControlSystem Instance;
 
-    public event Action<bool> OnEXTriggerEvt;
+    public event Action OnExStartEvt;
+    public event Action OnExEndEvt;
     public event Action OnDeathEvt;
 
     public bool isEX { get; private set; }
@@ -26,7 +27,11 @@ public class ControlSystem : MonoBehaviour
     public void SetEX(bool value)
     {
         isEX = value;
-        OnEXTriggerEvt?.Invoke(value);
+
+        if (value)
+            OnExStartEvt?.Invoke();
+        else
+            OnExEndEvt?.Invoke();
     }
 
     public void SetDeath()

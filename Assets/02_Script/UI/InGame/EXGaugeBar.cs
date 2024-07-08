@@ -45,7 +45,7 @@ public class EXGaugeBar : MonoBehaviour
 
     private void Start()
     {
-        ControlSystem.Instance.OnEXTriggerEvt += ChargingClear;
+        ControlSystem.Instance.OnExEndEvt += ChargingClear;
     }
 
     private void SettingCharging()
@@ -65,17 +65,10 @@ public class EXGaugeBar : MonoBehaviour
         transform.DOShakeScale(0.2f).SetEase(Ease.OutBounce);
     }
 
-    public void ChargingClear(bool value)
+    public void ChargingClear()
     {
-        if (!value)
-        {
-            fillImage.color = Color.cyan;
-            DOTween.To(() => CurrentGauge, x => CurrentGauge = x, 0f, 0.2f).SetEase(Ease.OutBack);
-        }
-        else
-        {
-            transform.DOShakeScale(0.1f);
-        }
+        fillImage.color = Color.cyan;
+        DOTween.To(() => CurrentGauge, x => CurrentGauge = x, 0f, 0.2f).SetEase(Ease.OutBack);
     }
 
     public Vector2 GetIconPos()

@@ -54,7 +54,8 @@ public class PlayerBase : MonoBehaviour
 
     protected virtual void Start() //죽는 이벤트 구독
     {
-        ControlSystem.Instance.OnEXTriggerEvt += HandleEX;
+        ControlSystem.Instance.OnExStartEvt += HandleStartEX;
+        ControlSystem.Instance.OnExEndEvt += HandleEndEX;
         ControlSystem.Instance.OnDeathEvt += HandleDeath;
 
         UISystem.Instance.Profle.ProfleSetting(playerColor, sp.sprite);
@@ -199,7 +200,7 @@ public class PlayerBase : MonoBehaviour
     {
         if (isInvincibility) return;
 
-        TimeSystem.Instance.MinusTime(5);
+
     }
 
     protected virtual void Death()
@@ -216,14 +217,15 @@ public class PlayerBase : MonoBehaviour
 
     #region Handle
 
-    private void HandleEX(bool value)
+    private void HandleStartEX()
     {
-        isEX = value;
+        isEX = true;
+        EX();
+    }
 
-        if (value)
-        {
-            EX();
-        }
+    private void HandleEndEX()
+    {
+        isEX = false;
     }
 
     private void HandleDeath()

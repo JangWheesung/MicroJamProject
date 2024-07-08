@@ -13,6 +13,10 @@ public class Transition<T> where T : Enum
         controller = fsm;
     }
 
+    public virtual void Enter() { }
+
+    public virtual void Exit() { }
+
     public virtual bool CheckTransition()
     {
         return false;

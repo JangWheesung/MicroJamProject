@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2536656943247742536}
   - component: {fileID: 600244033636821116}
   m_Layer: 0
-  m_Name: CircleEffect
+  m_Name: ShifrCircleEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,3 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   liveTime: 0.3
+  normalEffect: {fileID: 0}
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  scaleSize: 3

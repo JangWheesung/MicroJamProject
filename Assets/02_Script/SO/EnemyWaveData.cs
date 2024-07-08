@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public struct AmountData
 {
-    public EnemyBase enemy;
+    public GameObject enemy;
     public int cnt;
 }
 

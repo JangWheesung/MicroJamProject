@@ -13,10 +13,13 @@ public class StopState<T> : BaseState<T> where T : Enum
     {
         enemyBase.isStop = true;
 
+        enemyBase.rb.velocity = Vector2.zero;
         originGravity = enemyBase.rb.gravityScale;
 
-        enemyBase.rb.velocity = Vector2.zero;
-        enemyBase.rb.gravityScale = 0f;
+        if (ControlSystem.Instance.isEX)
+        {
+            enemyBase.rb.gravityScale = 0f;
+        }
     }
 
     protected override void OnStateUpdate()

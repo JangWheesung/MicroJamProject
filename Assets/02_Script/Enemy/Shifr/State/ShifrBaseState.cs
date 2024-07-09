@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ShifrBaseState : BaseState<ShifrState>
 {
-    protected ShifrFSM wowFSM;
+    protected ShifrFSM shifrFSM;
 
-    protected AttackEffeectBase circleEffect;
+    protected AttackEffectBase circleEffect;
 
     protected float jumpPower;
     protected float moveSpeed;
@@ -14,9 +14,9 @@ public class ShifrBaseState : BaseState<ShifrState>
 
     public ShifrBaseState(ShifrFSM fsm) : base(fsm)
     {
-        wowFSM = fsm;
+        shifrFSM = fsm;
 
-        this.circleEffect = fsm.circleEffect;
+        circleEffect = fsm.circleEffect;
 
         jumpPower = fsm.jumpPower;
         moveSpeed = fsm.moveSpeed;

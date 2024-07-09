@@ -25,10 +25,10 @@ public class Gamma : PlayerBase
         currentBullet--;
         BulletCountCheck();
 
-        AttackEffeectBase effect = PoolingManager.Instance.Pop<AttackEffeectBase>(attackEffect.name, transform.position);
+        AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(attackEffect.name, transform.position);
         effect.PopEffect(MouseVec());
 
-        AudioManager.Instance.StartSfx("Bullet");
+        AudioManager.Instance.StartSfx("Bullet", 0.8f);
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Rock_S);
     }
 

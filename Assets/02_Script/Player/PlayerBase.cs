@@ -8,7 +8,7 @@ using DG.Tweening;
 public class PlayerBase : MonoBehaviour
 {
     [Header("Base_Prefab")]
-    [SerializeField] protected AttackEffeectBase attackEffect;
+    [SerializeField] protected AttackEffectBase attackEffect;
     [SerializeField] protected EXEffectBase exEffect;
     [SerializeField] protected Slice playerSlice;
 
@@ -178,7 +178,7 @@ public class PlayerBase : MonoBehaviour
         pAttack = false;
         StartCoroutine(AttackDelay());
 
-        AttackEffeectBase effect = PoolingManager.Instance.Pop<AttackEffeectBase>(attackEffect.name, transform.position);
+        AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(attackEffect.name, transform.position);
         effect.PopEffect();
 
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_S);

@@ -12,13 +12,6 @@ public class EXEffectBase : EffectBase
         base.OnEnable();
     }
 
-    public override void PopEffect() { }
-    public virtual void PopEffect(Vector2 vec) { }
-    public virtual void PopEffect(object value) { }
-    public virtual void PopEffect(PlayerBase player) { }
-
-    public virtual void UnityAnimEvent() { }
-
     public override void DisableEffect()
     {
         foreach (GameObject enemyObj in GameObject.FindGameObjectsWithTag("Enemy"))

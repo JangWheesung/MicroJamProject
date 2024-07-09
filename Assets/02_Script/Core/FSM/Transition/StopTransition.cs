@@ -14,6 +14,6 @@ public class StopTransition<T> : Transition<T> where T : Enum
 
     public override bool CheckTransition()
     {
-        return ControlSystem.Instance.isEX;
+        return ControlSystem.Instance.IsStopLogic();
     }
 }

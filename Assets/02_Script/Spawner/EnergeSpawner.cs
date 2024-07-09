@@ -22,7 +22,7 @@ public class EnergeSpawner : MonoBehaviour
 
     private IEnumerator EnergeSpawnerCor()
     {
-        while (true)
+        while (!ControlSystem.Instance.isDeath)
         {
             yield return new WaitForSeconds(spawnCool + RandomRange(5));
 

@@ -14,7 +14,7 @@ public enum ShifrState
 public class ShifrFSM : EnemyBase<ShifrState>
 {
     [Header("Shifr")]
-    public AttackEffeectBase circleEffect;
+    public AttackEffectBase circleEffect;
 
     public float jumpPower;
     public float moveSpeed;

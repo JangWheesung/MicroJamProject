@@ -15,7 +15,7 @@ public class ShifrIdleState : ShifrBaseState
     {
         if (!ControlSystem.Instance.IsStopLogic())
         {
-            wowFSM.ChangeState(ShifrState.Move);
+            shifrFSM.ChangeState(ShifrState.Move);
         }
     }
 

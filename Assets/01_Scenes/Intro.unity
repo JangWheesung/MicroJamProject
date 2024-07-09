@@ -408,48 +408,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmSource: {fileID: 1962511255}
   sfxSource: {fileID: 322849906729900677, guid: 93535340c248b1f43a95172ac2deba9e, type: 3}
-  bgmClips:
-  - audioName: Intro
-    audioClip: {fileID: 8300000, guid: 4e1327280d8189b4899e1217bab67466, type: 3}
-  - audioName: InGame
-    audioClip: {fileID: 8300000, guid: a6e5f75d546a9914bb0a21b2bbdf1993, type: 3}
-  sfxClips:
-  - audioName: Jump
-    audioClip: {fileID: 8300000, guid: 5971ef6347a4d724085313b7b3aeb357, type: 3}
-  - audioName: Dash
-    audioClip: {fileID: 8300000, guid: 25e9d3d5ffd559840ae55780c3be7e13, type: 3}
-  - audioName: TimeValue
-    audioClip: {fileID: 8300000, guid: 8da856fc057850c4a985dd7f55a91490, type: 3}
-  - audioName: EnemyDeath
-    audioClip: {fileID: 8300000, guid: bc2e8ac5c200d954d901ea7e13628e3c, type: 3}
-  - audioName: GameEnd
-    audioClip: {fileID: 8300000, guid: 9784633fbc9b53c4cb7737ee33239b6b, type: 3}
-  - audioName: Click
-    audioClip: {fileID: 8300000, guid: 39110411364ba734e96a0c9ca6f2dfb4, type: 3}
-  - audioName: ClickUp
-    audioClip: {fileID: 8300000, guid: 36bd567431dc929449075168e5ae6d43, type: 3}
-  - audioName: EnergeUp
-    audioClip: {fileID: 8300000, guid: 75108a2c5ac202f4db894d8f64b26e70, type: 3}
-  - audioName: EnergeDown
-    audioClip: {fileID: 8300000, guid: 728c5b82b6c606744bd5f741af6c682f, type: 3}
-  - audioName: TimeSlow
-    audioClip: {fileID: 8300000, guid: 01bf4294d1642874bb4bd67d39379359, type: 3}
-  - audioName: Circle
-    audioClip: {fileID: 8300000, guid: 339bd9763fc8bc1479426f8ef9ed40cb, type: 3}
-  - audioName: Smashing1
-    audioClip: {fileID: 8300000, guid: d3c50b8d216e00644973a93497055cab, type: 3}
-  - audioName: Smashing2
-    audioClip: {fileID: 8300000, guid: df5a7d5637602b84bbc93b6907fb6202, type: 3}
-  - audioName: Smashing3
-    audioClip: {fileID: 8300000, guid: 35fbcd7d788d312489a9eb97b20d258d, type: 3}
-  - audioName: Bullet
-    audioClip: {fileID: 8300000, guid: 3614eb9f10b225447ae25141ef9c3c4f, type: 3}
-  - audioName: Reload
-    audioClip: {fileID: 8300000, guid: e2b4e2fd24e12614089890fcc924b9f5, type: 3}
-  - audioName: AlphaEX
-    audioClip: {fileID: 8300000, guid: 905fca95368ea4340ab088a08ba7a01d, type: 3}
-  - audioName: BetaEX
-    audioClip: {fileID: 8300000, guid: f100d6de7097b8b48baf4c8d94d88382, type: 3}
 --- !u!4 &447195095
 Transform:
   m_ObjectHideFlags: 0

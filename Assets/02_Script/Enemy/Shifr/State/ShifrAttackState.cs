@@ -17,12 +17,12 @@ public class ShifrAttackState : ShifrBaseState
     {
         if (currentTime <= 0)
         {
-            AttackEffeectBase effect = PoolingManager.Instance.Pop<AttackEffeectBase>(circleEffect.name, wowFSM.transform.position);
+            AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(circleEffect.name, shifrFSM.transform.position);
             effect.PopEffect();
 
             player.Hit();
 
-            SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_M);
+            SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_S);
             AudioManager.Instance.StartSfx("Circle");
 
             currentTime = attackDelay;

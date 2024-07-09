@@ -21,16 +21,17 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void StartBgm(string name)
+    public void StartBgm(string name, float volume = 1f)
     {
         AudioClip bgmClip = Resources.Load<AudioClip>($"BGM/{name}");
         if (bgmClip == null) return;
 
         bgmSource.clip = bgmClip;
+        bgmSource.volume = volume;
         bgmSource.Play();
     }
 
-    public void StartSfx(string name)
+    public void StartSfx(string name, float volume = 1f)
     {
         AudioClip sfxClip = Resources.Load<AudioClip>($"SFX/{name}");
         if (sfxClip == null) return;
@@ -38,6 +39,7 @@ public class AudioManager : MonoBehaviour
         var source = PoolingManager.Instance.Pop<AudioSource>(sfxSource.name, Vector2.zero);
 
         source.clip = sfxClip;
+        source.volume = volume;
         source.Play();
 
         StartCoroutine(SourceDeleteCo(source));

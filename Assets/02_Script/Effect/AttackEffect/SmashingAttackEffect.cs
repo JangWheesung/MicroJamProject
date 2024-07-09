@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmashingAttackEffect : AttackEffeectBase
+public class SmashingAttackEffect : AttackEffectBase
 {
     [SerializeField] private float attackRadius;
 

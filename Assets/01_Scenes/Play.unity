@@ -7327,7 +7327,7 @@ MonoBehaviour:
   pageDatas:
   - waveCnt: 9999
     spawnTime: 0.5
-    delayTime: 99
+    delayTime: 50
 --- !u!1 &1425552493
 GameObject:
   m_ObjectHideFlags: 0

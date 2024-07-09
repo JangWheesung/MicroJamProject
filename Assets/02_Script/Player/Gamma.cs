@@ -28,7 +28,7 @@ public class Gamma : PlayerBase
         AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(attackEffect.name, transform.position);
         effect.PopEffect(MouseVec());
 
-        AudioManager.Instance.StartSfx("Bullet", 0.8f);
+        AudioManager.Instance.StartSfx("Bullet", 0.7f);
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Rock_S);
     }
 

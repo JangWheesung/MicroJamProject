@@ -13,11 +13,11 @@ public class StopState<T> : BaseState<T> where T : Enum
     {
         enemyBase.isStop = true;
 
-        enemyBase.rb.velocity = Vector2.zero;
         originGravity = enemyBase.rb.gravityScale;
 
         if (ControlSystem.Instance.isEX)
         {
+            enemyBase.rb.velocity = Vector2.zero;
             enemyBase.rb.gravityScale = 0f;
         }
     }

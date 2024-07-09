@@ -9,9 +9,6 @@ public class HetaAttackEffect : AttackEffectBase
     public override void PopEffect()
     {
         HitRader(transform.position, colBox.localScale, 0f);
-
-        AudioManager.Instance.StartSfx("Lazer_2");
-        SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_H);
     }
 
     protected override void PlayerHit(PlayerBase player)

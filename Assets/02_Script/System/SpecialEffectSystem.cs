@@ -96,9 +96,10 @@ public class SpecialEffectSystem : MonoBehaviour
         float shakeAmount = (int)cameraType;
 
         float rotateZ = 0;
-        while (Mathf.Abs(rotateZ) < 2f)
+        while (Mathf.Abs(rotateZ) < (shakeAmount / 2f))
         {
             rotateZ = Random.Range(-shakeAmount, shakeAmount);
+            yield return null;
         }
 
         DOTween.Sequence()

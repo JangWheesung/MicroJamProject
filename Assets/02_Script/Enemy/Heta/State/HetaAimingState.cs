@@ -5,6 +5,7 @@ using UnityEngine;
 public class HetaAimingState : HetaBaseState
 {
     private EffectBase effectObj;
+    private Coroutine lineCor;
 
     public HetaAimingState(HetaFSM fsm) : base(fsm) { }
 
@@ -13,7 +14,7 @@ public class HetaAimingState : HetaBaseState
         effectObj = PoolingManager.Instance.Pop<EffectBase>(crosshairEffect.name, playerTrs.position);
         effectObj.PopEffect(player);
 
-        StartCoroutine(LineCor());
+        lineCor = StartCoroutine(LineBright());
     }
 
     protected override void OnStateUpdate()
@@ -27,10 +28,16 @@ public class HetaAimingState : HetaBaseState
 
     protected override void OnStateExit()
     {
-        
+        if (lineCor != null)
+        {
+            StopCoroutine(lineCor);
+
+            hetaFSM.aimingLine.enabled = false;
+            effectObj.DisableEffect();
+        }
     }
 
-    private IEnumerator LineCor()
+    private IEnumerator LineBright()
     {
         float currentTime = 0.3f;
         float initialTime = 0.7f;
@@ -56,7 +63,5 @@ public class HetaAimingState : HetaBaseState
 
             AudioManager.Instance.StartSfx("Alarm", 0.3f);
         }
-
-        effectObj.DisableEffect();
     }
 }

@@ -13,7 +13,7 @@ public class HetaAttackEffect : AttackEffectBase
 
     protected override void PlayerHit(PlayerBase player)
     {
-        player.Hit();
+        base.PlayerHit(player);
 
         TimeSystem.Instance.MinusTime(10);
     }

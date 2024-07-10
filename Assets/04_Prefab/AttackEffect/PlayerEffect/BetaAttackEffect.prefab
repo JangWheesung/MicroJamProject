@@ -185,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   liveTime: 0.3
   normalEffect: {fileID: 1212970989171553845, guid: 0fe3dd44383dbac4da707d978e1879ce, type: 3}
+  isPopNormalEffect: 1
   hitLayer:
     serializedVersion: 2
     m_Bits: 64

@@ -29,18 +29,13 @@ public class ShifrFSM : EnemyBase<ShifrState>
         ShifrStopState stopState = new ShifrStopState(this);
         ShifrDieState dieState = new ShifrDieState(this);
 
-        ShifrInPlayerTransition inPlayerTransition = new ShifrInPlayerTransition(this);
-        ShifrOutPlayerTransition outPlayerTransition = new ShifrOutPlayerTransition(this);
-        ShifrStopTransition stopTransition = new ShifrStopTransition(this);
-        ShifrDieTransition dieTransition = new ShifrDieTransition(this);
-
         StateStorage<ShifrState> liveState = new StateStorage<ShifrState>(idleState, moveState, attackState);
 
-        moveState.AddTransition(inPlayerTransition, ShifrState.Attack);
-        attackState.AddTransition(outPlayerTransition, ShifrState.Move);
-        liveState.AddTransition(stopTransition, ShifrState.Stop);
-        liveState.AddTransition(dieTransition, ShifrState.Die);
-        stopState.AddTransition(dieTransition, ShifrState.Die);
+        moveState.AddTransition(new ShifrPlayerTransition(this, RangeType.In), ShifrState.Attack);
+        attackState.AddTransition(new ShifrPlayerTransition(this, RangeType.Out), ShifrState.Move);
+        liveState.AddTransition(new ShifrStopTransition(this), ShifrState.Stop);
+        liveState.AddTransition(new ShifrDieTransition(this), ShifrState.Die);
+        stopState.AddTransition(new ShifrDieTransition(this), ShifrState.Die);
 
         AddState(idleState, ShifrState.Idle);
         AddState(moveState, ShifrState.Move);

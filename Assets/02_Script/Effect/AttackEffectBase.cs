@@ -6,6 +6,7 @@ public class AttackEffectBase : EffectBase
 {
     [Header("AttackBase")]
     [SerializeField] protected EffectBase normalEffect;
+    [SerializeField] protected bool isPopNormalEffect;
     [SerializeField] private LayerMask hitLayer;
 
     protected void HitRader(Vector3 pos, Vector3 size, float angle)
@@ -40,16 +41,22 @@ public class AttackEffectBase : EffectBase
     {
         player.Hit();
 
-        //EffectBase effect = PoolingManager.Instance.Pop<EffectBase>(normalEffect.name, player.transform.position);
-        //effect.PopEffect();
+        if (isPopNormalEffect)
+        {
+            EffectBase effect = PoolingManager.Instance.Pop<EffectBase>(normalEffect.name, player.transform.position);
+            effect.PopEffect();
+        }
     }
 
     protected virtual void EnemyHit(IEnemy enemy, Transform enemyTrs)
     {
         enemy.Death();
 
-        EffectBase effect = PoolingManager.Instance.Pop<EffectBase>(normalEffect.name, enemyTrs.position);
-        effect.PopEffect();
+        if (isPopNormalEffect)
+        {
+            EffectBase effect = PoolingManager.Instance.Pop<EffectBase>(normalEffect.name, enemyTrs.position);
+            effect.PopEffect();
+        }
 
         UISystem.Instance.GetKillCount();
     }

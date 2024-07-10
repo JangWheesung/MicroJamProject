@@ -15,6 +15,7 @@ public class BaseState<T> : State<T> where T : Enum
     protected SpriteRenderer sp;
     protected Rigidbody2D rb;
     protected Collider2D col;
+    protected TrailRenderer trail;
 
     public BaseState(EnemyBase<T> fsm) : base(fsm)
     {
@@ -28,5 +29,6 @@ public class BaseState<T> : State<T> where T : Enum
         sp = fsm.sp;
         rb = fsm.rb;
         col = fsm.col;
+        trail = fsm.trail;
     }
 }

@@ -35,20 +35,14 @@ public class HetaFSM : EnemyBase<HetaState>
         HetaStopState stopState = new HetaStopState(this);
         HetaDieState dieState = new HetaDieState(this);
 
-        HetaInPlayerTransition playerTransition = new HetaInPlayerTransition(this);
-        HetaTimeTransition attackTimeTransition = new HetaTimeTransition(this, aimingDelay);
-        HetaTimeTransition delayTimeTransition = new HetaTimeTransition(this, attackDelay);
-        HetaStopTransition stopTransition = new HetaStopTransition(this);
-        HetaDieTransition dieTransition = new HetaDieTransition(this);
-
         StateStorage<HetaState> liveState = new StateStorage<HetaState>(idleState, moveState, aimingState, attackState);
 
-        moveState.AddTransition(playerTransition, HetaState.Aiming);
-        aimingState.AddTransition(attackTimeTransition, HetaState.Attack);
-        attackState.AddTransition(delayTimeTransition, HetaState.Idle);
-        liveState.AddTransition(stopTransition, HetaState.Stop);
-        liveState.AddTransition(dieTransition, HetaState.Die);
-        stopState.AddTransition(dieTransition, HetaState.Die);
+        moveState.AddTransition(new HetaInPlayerTransition(this, RangeType.In), HetaState.Aiming);
+        aimingState.AddTransition(new HetaTimeTransition(this, aimingDelay), HetaState.Attack);
+        attackState.AddTransition(new HetaTimeTransition(this, attackDelay), HetaState.Idle);
+        liveState.AddTransition(new HetaStopTransition(this), HetaState.Stop);
+        liveState.AddTransition(new HetaDieTransition(this), HetaState.Die);
+        stopState.AddTransition(new HetaDieTransition(this), HetaState.Die);
 
         AddState(idleState, HetaState.Idle);
         AddState(moveState, HetaState.Move);

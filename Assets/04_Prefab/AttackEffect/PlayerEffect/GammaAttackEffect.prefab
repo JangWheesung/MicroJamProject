@@ -4958,6 +4958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   liveTime: 0.7
   normalEffect: {fileID: 4639906296781526867, guid: 80633eb0902cfda45bb88b255384d017, type: 3}
+  isPopNormalEffect: 1
   hitLayer:
     serializedVersion: 2
     m_Bits: 64

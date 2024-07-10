@@ -13,6 +13,13 @@ public class SmashingAttackEffect : AttackEffectBase
         HitRader(transform.position, attackRadius);
     }
 
+    protected override void PlayerHit(PlayerBase player)
+    {
+        base.PlayerHit(player);
+
+        TimeSystem.Instance.MinusTime(5);
+    }
+
     protected override void EnemyHit(IEnemy enemy, Transform enemyTrs)
     {
         base.EnemyHit(enemy, enemyTrs);

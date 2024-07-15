@@ -8,11 +8,6 @@ public class StigmaMoveState : StigmaBaseState
     {
     }
 
-    protected override void OnStateEnter()
-    {
-
-    }
-
     protected override void OnStateUpdate()
     {
         float distance = Mathf.Clamp(playerTrs.position.x - stigmaFSM.transform.position.x, -1f, 1f);
@@ -23,10 +18,5 @@ public class StigmaMoveState : StigmaBaseState
         {
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         }
-    }
-
-    protected override void OnStateExit()
-    {
-
     }
 }

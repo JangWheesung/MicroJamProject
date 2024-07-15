@@ -19,12 +19,7 @@ public class StigmaFadeState : StigmaBaseState
 
         anim.SetBool("Fade", false);
 
-        //AudioManager.Instance.StartSfx("Lazer_2");
-    }
-
-    protected override void OnStateUpdate()
-    {
-        
+        AudioManager.Instance.StartSfx($"FadeIn");
     }
 
     protected override void OnStateExit()
@@ -39,7 +34,7 @@ public class StigmaFadeState : StigmaBaseState
 
         anim.SetBool("Fade", true);
 
-        //AudioManager.Instance.StartSfx("Lazer_2"); ³ªÅ¸³²
+        AudioManager.Instance.StartSfx($"FadeOut");
     }
 
     private Vector3 RandomPlayerAroundVec()

@@ -121,3 +121,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   liveTime: 1.4
   normalEffect: {fileID: 4639906296781526867, guid: 80633eb0902cfda45bb88b255384d017, type: 3}
+  attackAmount: 5

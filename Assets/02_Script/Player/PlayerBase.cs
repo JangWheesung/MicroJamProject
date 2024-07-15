@@ -25,6 +25,7 @@ public class PlayerBase : MonoBehaviour
     protected bool isFacingRight = true;
     protected bool isGrounded = false;
     protected bool isDash = false;
+    protected bool isSlow = false;
     protected bool isEX;
     protected bool isDead = false;
 
@@ -122,7 +123,7 @@ public class PlayerBase : MonoBehaviour
 
     public void OnEX(InputAction.CallbackContext context)
     {
-        if (isDead) return;
+        if (isDead || isEX) return;
 
         if (context.started)
         {
@@ -196,11 +197,11 @@ public class PlayerBase : MonoBehaviour
 
     #region Virtual_Event
 
-    public virtual void Hit()
+    public virtual void Hit(float minusTime)
     {
         if (isInvincibility) return;
 
-
+        TimeSystem.Instance.MinusTime(minusTime);
     }
 
     protected virtual void Death()
@@ -219,7 +220,6 @@ public class PlayerBase : MonoBehaviour
 
     private void HandleStartEX()
     {
-        isEX = true;
         EX();
     }
 
@@ -311,6 +311,7 @@ public class PlayerBase : MonoBehaviour
         if (!UISystem.Instance.EXGaugeBar.IsCharging) yield break;
 
         isInvincibility = true;
+        isEX = true;
 
         float setTime = 0.2f;
         float loopTime = 1.5f;
@@ -323,7 +324,6 @@ public class PlayerBase : MonoBehaviour
         });
 
         isInvincibility = false;
-
         ControlSystem.Instance.SetEX(true);
     }
 

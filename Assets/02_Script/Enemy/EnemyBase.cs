@@ -14,8 +14,17 @@ public abstract class EnemyBase<T> : FSM<T>, IEnemy where T : Enum
     [HideInInspector] public Collider2D col;
     [HideInInspector] public TrailRenderer trail;
 
+    public float minusTime { get; set; }
     public bool isDie { get; set; }
     public bool isStop { get; set; }
+
+    protected virtual void Awake()
+    {
+        sp = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
+        trail = GetComponentInChildren<TrailRenderer>();
+    }
 
     protected virtual void Start()
     {
@@ -23,18 +32,14 @@ public abstract class EnemyBase<T> : FSM<T>, IEnemy where T : Enum
         playerTrs = player.transform;
         playerPos = player.transform.position;
 
-        sp = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<Collider2D>();
-        trail = GetComponentInChildren<TrailRenderer>();
-
         InitializeState();
     }
 
     protected abstract void InitializeState();
     
-    public virtual void Death()
+    public virtual void Death(float minusTime)
     {
+        this.minusTime = minusTime;
         isDie = true;
     }
 }

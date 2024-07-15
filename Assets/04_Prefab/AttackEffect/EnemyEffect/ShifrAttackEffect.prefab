@@ -99,7 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   liveTime: 0.3
   normalEffect: {fileID: 0}
-  isPopNormalEffect: 1
+  isPopNormalEffect: 0
+  attackAmount: 4
   hitLayer:
     serializedVersion: 2
     m_Bits: 128

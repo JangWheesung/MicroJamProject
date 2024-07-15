@@ -6,6 +6,7 @@ using UnityEngine;
 public class EXEffectBase : EffectBase
 {
     [SerializeField] protected EffectBase normalEffect;
+    [SerializeField] protected float attackAmount;
 
     protected override void OnEnable()
     {
@@ -18,11 +19,10 @@ public class EXEffectBase : EffectBase
         {
             if (enemyObj.TryGetComponent(out IEnemy enemy))
             {
-                enemy.Death();
+                enemy.Death(attackAmount);
                 PoolingManager.Instance.Pop<EffectBase>(normalEffect.name, enemyObj.transform.position).PopEffect();
 
                 UISystem.Instance.GetKillCount();
-                TimeSystem.Instance.PlusTime(1f);
             }
         }
         ControlSystem.Instance.SetEX(false);

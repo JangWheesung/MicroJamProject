@@ -461,6 +461,7 @@ MonoBehaviour:
   sp: {fileID: 0}
   rb: {fileID: 0}
   col: {fileID: 0}
+  trail: {fileID: 0}
   lazerEffect: {fileID: 3333237261236241340, guid: 275091baec5e0f74f81e8da9bdc418b3, type: 3}
   crosshairEffect: {fileID: 2050820614903943112, guid: 8c9b30c547538884ab960736a8de4c66, type: 3}
   aimingLine: {fileID: 129160053320598660}

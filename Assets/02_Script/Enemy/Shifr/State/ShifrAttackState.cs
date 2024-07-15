@@ -8,19 +8,12 @@ public class ShifrAttackState : ShifrBaseState
 
     public ShifrAttackState(ShifrFSM fsm) : base(fsm) { }
 
-    protected override void OnStateEnter()
-    {
-        
-    }
-
     protected override void OnStateUpdate()
     {
         if (currentTime <= 0)
         {
             AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(circleEffect.name, shifrFSM.transform.position);
             effect.PopEffect();
-
-            player.Hit();
 
             SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_S);
             AudioManager.Instance.StartSfx("Circle");

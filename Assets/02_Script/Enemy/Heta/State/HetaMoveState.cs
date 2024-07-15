@@ -6,11 +6,6 @@ public class HetaMoveState : HetaBaseState
 {
     public HetaMoveState(HetaFSM fsm) : base(fsm) { }
 
-    protected override void OnStateEnter()
-    {
-
-    }
-
     protected override void OnStateUpdate()
     {
         float distance = Mathf.Clamp(playerTrs.position.x - hetaFSM.transform.position.x, -1f, 1f);
@@ -21,10 +16,5 @@ public class HetaMoveState : HetaBaseState
         {
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         }
-    }
-
-    protected override void OnStateExit()
-    {
-
     }
 }

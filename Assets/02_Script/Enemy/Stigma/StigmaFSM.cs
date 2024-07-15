@@ -35,9 +35,9 @@ public class StigmaFSM : EnemyBase<StigmaState>
 
     public bool isInvincibility { get; set; }
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 
         gravityScale = rb.gravityScale;
     }
@@ -54,8 +54,8 @@ public class StigmaFSM : EnemyBase<StigmaState>
         StateStorage<StigmaState> liveState = new StateStorage<StigmaState>(idleState, moveState, fadeState, attackState);
 
         moveState.AddTransition(new StigmaInPlayerTransition(this, RangeType.In), StigmaState.Fade);
-        fadeState.AddTransition(new StigmaTimeTransition(this, attackDelay), StigmaState.Attack);
-        attackState.AddTransition(new StigmaTimeTransition(this, fadeDelay), StigmaState.Idle);
+        fadeState.AddTransition(new StigmaTimeTransition(this, fadeDelay), StigmaState.Attack);
+        attackState.AddTransition(new StigmaTimeTransition(this, attackDelay), StigmaState.Idle);
         liveState.AddTransition(new StigmaStopTransition(this), StigmaState.Stop);
         liveState.AddTransition(new StigmaDieTransition(this), StigmaState.Die);
         stopState.AddTransition(new StigmaDieTransition(this), StigmaState.Die);
@@ -75,10 +75,10 @@ public class StigmaFSM : EnemyBase<StigmaState>
         ChangeState(StigmaState.Idle);
     }
 
-    public override void Death()
+    public override void Death(float minusTime)
     {
         if (isInvincibility && nowState != StigmaState.Stop) return;
 
-        base.Death();
+        base.Death(minusTime);
     }
 }

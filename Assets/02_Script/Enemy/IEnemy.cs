@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IEnemy
 {
-    public abstract void Death();
+    public abstract void Death(float minusTime);
 }

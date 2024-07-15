@@ -4953,15 +4953,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 7741005294558699823}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 924f4424a27fb0e4ba968df2b9b96e1f, type: 3}
+  m_Script: {fileID: 11500000, guid: bbb55eb6940943743a3f19c5d9b8f69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liveTime: 0.7
+  liveTime: 0.4
   normalEffect: {fileID: 4639906296781526867, guid: 80633eb0902cfda45bb88b255384d017, type: 3}
   isPopNormalEffect: 1
+  attackAmount: 1.5
   hitLayer:
     serializedVersion: 2
     m_Bits: 64
   bulletParticle: {fileID: 3452407655067665941}
   bulletRadius: 0.4
-  bulletSpeed: 35
+  bulletSpeed: 40
+  bulletPenetrate: 0

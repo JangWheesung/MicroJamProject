@@ -8,21 +8,11 @@ public class HetaIdleState : HetaBaseState
     {
     }
 
-    protected override void OnStateEnter()
-    {
-
-    }
-
     protected override void OnStateUpdate()
     {
         if (!ControlSystem.Instance.IsStopLogic())
         {
             hetaFSM.ChangeState(HetaState.Move);
         }
-    }
-
-    protected override void OnStateExit()
-    {
-
     }
 }

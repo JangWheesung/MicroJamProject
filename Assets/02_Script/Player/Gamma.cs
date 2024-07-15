@@ -28,7 +28,7 @@ public class Gamma : PlayerBase
         AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(attackEffect.name, transform.position);
         effect.PopEffect(MouseVec());
 
-        AudioManager.Instance.StartSfx("Bullet", 0.7f);
+        AudioManager.Instance.StartSfx("Bullet_1", 0.6f);
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Rock_S);
     }
 
@@ -53,10 +53,9 @@ public class Gamma : PlayerBase
         effect.PopEffect(this);
     }
 
-    public override void Hit()
+    public override void Hit(float minusTime)
     {
-        base.Hit();
-        TimeSystem.Instance.MinusTime(5);
+        base.Hit(minusTime + 5);
     }
 
     protected override void Death()

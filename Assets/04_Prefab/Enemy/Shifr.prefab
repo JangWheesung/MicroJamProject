@@ -324,8 +324,9 @@ MonoBehaviour:
   sp: {fileID: 0}
   rb: {fileID: 0}
   col: {fileID: 0}
+  trail: {fileID: 0}
   circleEffect: {fileID: 600244033636821116, guid: 221f79deee1c13f4ab4610e15d82b21b, type: 3}
-  jumpPower: 14
+  jumpPower: 12
   moveSpeed: 4
   attackDelay: 1
   attackRange: 1.8

@@ -20,14 +20,9 @@ public class StigmaAttackState : StigmaBaseState
         StartCoroutine(AttackCor());
     }
 
-    private Vector3 LookPlayerVec()
-    {
-        return (playerTrs.position - stigmaFSM.transform.position).normalized;
-    }
-
     private IEnumerator AttackCor()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.4f);
 
         rb.gravityScale = stigmaFSM.gravityScale;
 
@@ -35,6 +30,6 @@ public class StigmaAttackState : StigmaBaseState
         effect.PopEffect(-LookPlayerVec());
 
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_M);
-        AudioManager.Instance.StartSfx($"Smashing_2");
+        AudioManager.Instance.StartSfx($"Smashing_4");
     }
 }

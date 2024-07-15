@@ -14,14 +14,4 @@ public class HetaAttackState : HetaBaseState
         AudioManager.Instance.StartSfx("Lazer_2");
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_H);
     }
-
-    protected override void OnStateUpdate()
-    {
-
-    }
-
-    protected override void OnStateExit()
-    {
-
-    }
 }

@@ -8,21 +8,11 @@ public class StigmaIdleState : StigmaBaseState
     {
     }
 
-    protected override void OnStateEnter()
-    {
-
-    }
-
     protected override void OnStateUpdate()
     {
         if (!ControlSystem.Instance.IsStopLogic())
         {
             stigmaFSM.ChangeState(StigmaState.Move);
         }
-    }
-
-    protected override void OnStateExit()
-    {
-
     }
 }

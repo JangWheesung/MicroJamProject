@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WahidStopState : WahidBaseState
+public class WahidStopState : StopState<WahidState>
 {
-    public WahidStopState(WahidFSM fsm) : base(fsm)
+    public WahidStopState(EnemyBase<WahidState> fsm) : base(fsm)
     {
     }
 }

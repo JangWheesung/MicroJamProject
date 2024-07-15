@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class HetaNormalEffect : EffectBase
+public class CrosshairNormalEffect : EffectBase
 {
     private PlayerBase targetPlayer;
     private bool isPopEffect;

@@ -31,4 +31,9 @@ public class BaseState<T> : State<T> where T : Enum
         col = fsm.col;
         trail = fsm.trail;
     }
+
+    protected Vector3 LookPlayerVec()
+    {
+        return (playerTrs.position - enemyBase.transform.position).normalized;
+    }
 }

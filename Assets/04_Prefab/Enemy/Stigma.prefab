@@ -327,11 +327,11 @@ MonoBehaviour:
   col: {fileID: 0}
   trail: {fileID: 0}
   anim: {fileID: 1437234908662441047}
-  smashinEffect: {fileID: 1155287962215354333, guid: 856c558c9a078954fb230e54e8b1e485, type: 3}
+  smashinEffect: {fileID: 3198309175846133016, guid: 856c558c9a078954fb230e54e8b1e485, type: 3}
   jumpPower: 7
   moveSpeed: 7
   fadeDelay: 2.5
-  attackDelay: 0.3
+  attackDelay: 0.6
   attackRange: 4
   gravityScale: 0
 --- !u!95 &1437234908662441047

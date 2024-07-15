@@ -5,8 +5,8 @@ using DG.Tweening;
 
 public class CircleAttackEffect : AttackEffectBase
 {
-    [SerializeField] private float scaleSize;
-    private SpriteRenderer sp;
+    [SerializeField] protected float scaleSize;
+    protected SpriteRenderer sp;
 
     private void Start()
     {
@@ -16,7 +16,17 @@ public class CircleAttackEffect : AttackEffectBase
     public override void PopEffect()
     {
         HitRader(transform.position, scaleSize);
+        CircleEffect();
+    }
 
+    public override void PopEffect(PlayerBase player)
+    {
+        HitRader(player.transform.position, scaleSize);
+        CircleEffect();
+    }
+
+    private void CircleEffect()
+    {
         transform.DOScale(new Vector3(scaleSize, scaleSize, 1), 0.5f).SetEase(Ease.OutElastic).OnComplete(() =>
         {
             sp.DOFade(0.2f, 0.2f).OnComplete(() =>
@@ -24,20 +34,6 @@ public class CircleAttackEffect : AttackEffectBase
                 DisableEffect();
             });
         });
-    }
-
-    protected override void PlayerHit(PlayerBase player)
-    {
-        base.PlayerHit(player);
-
-        TimeSystem.Instance.MinusTime(5);
-    }
-
-    protected override void EnemyHit(IEnemy enemy, Transform enemyTrs)
-    {
-        base.EnemyHit(enemy, enemyTrs);
-
-        TimeSystem.Instance.PlusTime(2f);
     }
 
     public override void DisableEffect()

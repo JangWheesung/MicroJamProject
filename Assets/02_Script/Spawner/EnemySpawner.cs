@@ -79,12 +79,12 @@ public class EnemySpawner : MonoBehaviour
 
         while (amountCnt.Count > 0)
         {
-            int amountIdx = Random.Range(0, data.amoutDatas.Count - 1);
+            int amountIdx = Random.Range(0, amountCnt.Count);
             AmountData amountData = data.amoutDatas[amountIdx];
 
             if (amountCnt[amountIdx] <= 0)
             {
-                amountCnt.Remove(amountIdx);
+                amountCnt.RemoveAt(amountIdx);
                 continue;
             }
 

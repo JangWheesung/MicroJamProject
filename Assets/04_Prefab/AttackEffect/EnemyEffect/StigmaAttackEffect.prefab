@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6966477039957218167}
   - component: {fileID: 7835936584956627243}
   - component: {fileID: 4277874327055443774}
-  - component: {fileID: 1155287962215354333}
+  - component: {fileID: 3198309175846133016}
   m_Layer: 0
   m_Name: StigmaAttackEffect
   m_TagString: Untagged
@@ -107,7 +107,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1155287962215354333
+--- !u!114 &3198309175846133016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,12 +116,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 597386503534878533}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a92d3999fe152044085de7b7d111b19e, type: 3}
+  m_Script: {fileID: 11500000, guid: 80087893341645143abcdf44b9430c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   liveTime: 0.3
   normalEffect: {fileID: 8323365728695244004, guid: 318b38726a913ab4e82ece1c9693012e, type: 3}
   isPopNormalEffect: 1
+  attackAmount: 2
   hitLayer:
     serializedVersion: 2
     m_Bits: 128

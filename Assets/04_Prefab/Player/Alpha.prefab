@@ -448,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00bed45d67bf809419b7db496691eace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackEffect: {fileID: 3010579622971715045, guid: f7543fc9e5aab224ab22707cb70824af, type: 3}
+  attackEffect: {fileID: -4128409966219642419, guid: f7543fc9e5aab224ab22707cb70824af, type: 3}
   exEffect: {fileID: 8420573670963062814, guid: 9c44acb44c29f864c859bed356675619, type: 3}
   playerSlice: {fileID: 4892012691573461814, guid: 7281b3ec2ffe0c2469aa69255c4c9232, type: 3}
   playerColor: {r: 1, g: 1, b: 1, a: 1}

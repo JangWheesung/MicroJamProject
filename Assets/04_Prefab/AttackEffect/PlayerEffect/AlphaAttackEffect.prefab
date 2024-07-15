@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9020618509035426423}
   - component: {fileID: -7653453474390468924}
   - component: {fileID: 2362161503504755264}
-  - component: {fileID: 3010579622971715045}
+  - component: {fileID: -4128409966219642419}
   m_Layer: 0
   m_Name: AlphaAttackEffect
   m_TagString: Untagged
@@ -171,7 +171,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3010579622971715045
+--- !u!114 &-4128409966219642419
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,12 +180,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 9020618509035426420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a92d3999fe152044085de7b7d111b19e, type: 3}
+  m_Script: {fileID: 11500000, guid: ea52b1c1d722b204084ccbf4fc1ca4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   liveTime: 0.3
   normalEffect: {fileID: 2874610256297708771, guid: a875c093b7c115e479cc3fc5c1608a9f, type: 3}
   isPopNormalEffect: 1
+  attackAmount: 2
   hitLayer:
     serializedVersion: 2
     m_Bits: 64

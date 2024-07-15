@@ -18,6 +18,7 @@ public class WahidFSM : EnemyBase<WahidState>
     public AttackEffectBase rangeAttackEffect;
 
     public float waveAmount;
+    public float waveInterval;
     public float moveSpeed;
     public float meleeDelay;
     public float rangeDelay;
@@ -37,9 +38,12 @@ public class WahidFSM : EnemyBase<WahidState>
         StateStorage<WahidState> liveState = new StateStorage<WahidState>(idleState, moveState, meleeAttackState, rangeAttackState);
 
         moveState.AddTransition(new WahidPlayerTransition(this, tweenRange, rangeRange), WahidState.RangeAttack);
-        moveState.AddTransition(new WahidPlayerTransition(this,  meleeRange), WahidState.MeleeAttack);
+        moveState.AddTransition(new WahidPlayerTransition(this,  meleeRange, RangeType.In), WahidState.MeleeAttack);
+
         rangeAttackState.AddTransition(new WahidPlayerTransition(this, tweenRange, RangeType.In), WahidState.Move);
+        rangeAttackState.AddTransition(new WahidPlayerTransition(this, rangeRange, RangeType.Out), WahidState.Move);
         meleeAttackState.AddTransition(new WahidPlayerTransition(this, meleeRange, RangeType.Out), WahidState.Move);
+        
         liveState.AddTransition(new WahidStopTransition(this), WahidState.Stop);
         liveState.AddTransition(new WahidDieTransition(this), WahidState.Die);
         stopState.AddTransition(new WahidDieTransition(this), WahidState.Die);

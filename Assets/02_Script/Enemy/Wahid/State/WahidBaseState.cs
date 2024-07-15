@@ -10,6 +10,7 @@ public class WahidBaseState : BaseState<WahidState>
     protected AttackEffectBase rangeAttackEffect;
 
     protected float waveAmount;
+    protected float waveInterval;
     protected float moveSpeed;
     protected float meleeDelay;
     protected float rangeDelay;
@@ -25,6 +26,7 @@ public class WahidBaseState : BaseState<WahidState>
         rangeAttackEffect = fsm.rangeAttackEffect;
 
         waveAmount = fsm.waveAmount;
+        waveInterval = fsm.waveInterval;
         moveSpeed = fsm.moveSpeed;
         meleeDelay = fsm.meleeDelay;
         rangeDelay = fsm.rangeDelay;

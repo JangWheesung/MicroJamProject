@@ -18,6 +18,6 @@ public class CharacterSlot : MonoBehaviour
 
     public void OnSlotClick()
     {
-        characterController.SeEntryPanel(characterStat);
+        characterController.SeEntryPanel(characterStat, transform.position);
     }
 }

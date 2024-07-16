@@ -14,19 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 5994666291176445565, guid: 0adedfe4e33e5094091ab59cc9ec8a87, type: 3}
   characterSprite: {fileID: 21300000, guid: 0c96c43467c7f2b42bf939cc9fca1f96, type: 3}
-  speedStat: 0
   characterColor: {r: 1, g: 0.8, b: 0, a: 1}
   chatacterName: Beta
+  speedStat: 0
   jumpStat: 1
   dashStat: 0
   attackExt: "\uB113\uC740 \uBC94\uC704\uC758 \uCC38\uACA9"
+  exName: "\uD5E4\uBE44 \uC2AC\uB798\uC2DC"
+  exExt: "\uC5D0\uB108\uC9C0\uC758 \uD798\uC73C\uB85C \uB300\uAC80\uC744 \uC18C\uD658\uD558\uC5EC
+    \uC801\uB4E4\uC744 \uB2E8\uC228\uC5D0 \uBCA0\uC5B4\uB0B8\uB2E4."
   abilityDatas:
   - abilityStat: 2
     name: "\uAD6C\uB974\uAE30"
     ext: "\uC9E7\uC740 \uAC70\uB9AC\uB97C \uAD74\uB7EC\uC11C \uC774\uB3D9\uD55C\uB2E4.
       \uAD6C\uB974\uB294 \uB3D9\uC548\uC5D0\uB294 \uD53C\uD574\uB97C \uBC1B\uC9C0
       \uC54A\uB294\uB2E4."
-  - abilityStat: 4
-    name: "\uD5E4\uBE44 \uC2AC\uB798\uC2DC"
-    ext: "\uC5D0\uB108\uC9C0\uC758 \uD798\uC73C\uB85C \uB300\uAC80\uC744 \uC18C\uD658\uD558\uC5EC
-      \uC801\uB4E4\uC744 \uB2E8\uC228\uC5D0 \uBCA0\uC5B4\uB0B8\uB2E4."

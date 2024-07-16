@@ -31,11 +31,16 @@ public class CharacterStat : ScriptableObject
 {
     public GameObject player;
     public Sprite characterSprite;
-    public SpeedStat speedStat;
     public Color characterColor;
     public string chatacterName;
+
+    public SpeedStat speedStat;
     public int jumpStat;
     public float dashStat;
+
     public string attackExt;
+    public string exName;
+    public string exExt;
+
     public AbilityData[] abilityDatas;
 }

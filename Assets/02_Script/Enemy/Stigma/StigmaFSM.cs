@@ -33,8 +33,6 @@ public class StigmaFSM : EnemyBase<StigmaState>
     public float attackRange;
     [HideInInspector] public float gravityScale;
 
-    public bool isInvincibility { get; set; }
-
     protected override void Awake()
     {
         base.Awake();
@@ -73,12 +71,5 @@ public class StigmaFSM : EnemyBase<StigmaState>
     private void OnEnable()
     {
         ChangeState(StigmaState.Idle);
-    }
-
-    public override void Death(float minusTime)
-    {
-        if (isInvincibility && nowState != StigmaState.Stop) return;
-
-        base.Death(minusTime);
     }
 }

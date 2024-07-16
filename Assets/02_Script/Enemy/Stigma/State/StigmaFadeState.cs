@@ -11,7 +11,7 @@ public class StigmaFadeState : StigmaBaseState
 
     protected override void OnStateEnter()
     {
-        stigmaFSM.isInvincibility = true;
+        stigmaFSM.col.enabled = false;
 
         rb.velocity = Vector2.zero;
         rb.gravityScale = 0f;
@@ -24,7 +24,7 @@ public class StigmaFadeState : StigmaBaseState
 
     protected override void OnStateExit()
     {
-        stigmaFSM.isInvincibility = false;
+        stigmaFSM.col.enabled = true;
 
         rb.gravityScale = stigmaFSM.gravityScale;
         trail.enabled = true;

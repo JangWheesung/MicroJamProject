@@ -31,6 +31,7 @@ public class CopeMoveState : CopeBaseState
         copeFSM.transform.DORotate(spinVec, 0.1f).OnComplete(() =>
         {
             spinTween.Kill();
+            copeFSM.transform.rotation = Quaternion.identity;
         });
     }
 }

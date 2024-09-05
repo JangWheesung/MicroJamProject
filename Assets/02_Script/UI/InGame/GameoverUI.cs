@@ -26,7 +26,7 @@ public class GameoverUI : MonoBehaviour
         highSocre_timeText.text = $"Time : {time}";
         highSocre_killText.text = $"Kill : {kill}";
 
-        gameoverPanel.DOMoveY(540f, 0.5f).SetEase(Ease.OutBounce);
+        gameoverPanel.DOMoveY(0f, 0.5f).SetEase(Ease.OutBounce);
     }
 
     private void FadeInScene()

@@ -85,18 +85,12 @@ public class Energe : EffectBase
         return p;
     }
 
-    private Vector3 GetWorldPosition(Vector2 screenPoint)
-    {
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(screenPoint);
-        return worldPosition;
-    }
-
     #endregion
 
     private IEnumerator MoveToGaugeBar()
     {
         Vector3 startPosition = transform.position; //시작 위치
-        Vector3 endPosition = GetWorldPosition(gaugeBar.GetIconPos()); //끝 위치
+        Vector3 endPosition = gaugeBar.GetIconPos(); //끝 위치
         Vector3 controlPoint = GetControlPoint(startPosition, endPosition); // 중간 위치
 
         float t = 0f;

@@ -40,7 +40,7 @@ public class EXGaugeBar : MonoBehaviour
     private void Awake()
     {
         slider = GetComponent<Slider>();
-        transform.DOLocalMoveY(480f, 0.5f).SetEase(Ease.OutBack);
+        transform.DOLocalMoveY(510f, 0.5f).SetEase(Ease.OutBack);
     }
 
     private void Start()

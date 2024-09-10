@@ -24,7 +24,11 @@ public class AudioManager : MonoBehaviour
     public void StartBgm(string name, float volume = 1f)
     {
         AudioClip bgmClip = Resources.Load<AudioClip>($"BGM/{name}");
-        if (bgmClip == null) return;
+        if (bgmClip == null)
+        {
+            Debug.LogError("BGM is not found");
+            return;
+        }
 
         bgmSource.clip = bgmClip;
         bgmSource.volume = volume;
@@ -34,7 +38,11 @@ public class AudioManager : MonoBehaviour
     public void StartSfx(string name, float volume = 1f)
     {
         AudioClip sfxClip = Resources.Load<AudioClip>($"SFX/{name}");
-        if (sfxClip == null) return;
+        if (sfxClip == null)
+        {
+            Debug.LogError("SFX is not found");
+            return;
+        }
 
         var source = PoolingManager.Instance.Pop<AudioSource>(sfxSource.name, Vector2.zero);
 

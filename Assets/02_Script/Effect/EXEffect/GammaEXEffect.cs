@@ -12,7 +12,7 @@ public class GammaEXEffect : EXEffectBase
 
     public override void UnityAnimEvent()
     {
-        AudioManager.Instance.StartSfx("Bullet");
+        AudioManager.Instance.StartSfx("Bullet_1");
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_M);
     }
 }

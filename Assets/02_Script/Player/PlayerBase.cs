@@ -94,7 +94,7 @@ public class PlayerBase : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         if (isDead) return;
-
+        
         if (context.started)
         {
             Jump();
@@ -104,7 +104,7 @@ public class PlayerBase : MonoBehaviour
     public void OnDash(InputAction.CallbackContext context)
     {
         if (isDead) return;
-
+        
         if (context.started)
         {
             Dash();
@@ -226,6 +226,7 @@ public class PlayerBase : MonoBehaviour
     private void HandleEndEX()
     {
         isEX = false;
+        SetRigidbody(new Vector2(0f, 3f));
     }
 
     private void HandleDeath()

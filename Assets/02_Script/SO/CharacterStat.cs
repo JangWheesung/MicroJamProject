@@ -2,13 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SpeedStat
-{
-    Slow,
-    Normal,
-    Fast
-};
-
 public enum AbilityStat
 {
     None,
@@ -21,7 +14,6 @@ public enum AbilityStat
 [System.Serializable]
 public struct AbilityData
 {
-    public AbilityStat abilityStat;
     public string name;
     public string ext;
 }
@@ -34,7 +26,7 @@ public class CharacterStat : ScriptableObject
     public Color characterColor;
     public string chatacterName;
 
-    public SpeedStat speedStat;
+    public float speedStat;
     public int jumpStat;
     public float dashStat;
 

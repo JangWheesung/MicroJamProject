@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: WaveData_3
   m_EditorClassIdentifier: 
   amoutDatas:
-  - enemy: {fileID: 3978688813994532251, guid: 6bab23a3da3e7c3448e6451f28aff0c3, type: 3}
+  - enemy: {fileID: 614977996633932779, guid: 468ae4925348a0c4e9e06ff93cf80e5d, type: 3}
     cnt: 8

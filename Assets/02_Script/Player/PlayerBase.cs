@@ -7,30 +7,30 @@ using DG.Tweening;
 
 public class PlayerBase : MonoBehaviour
 {
-    [Header("Base_Prefab")]
+    [Header("Prefab")]
     [SerializeField] protected AttackEffectBase attackEffect;
     [SerializeField] protected EXEffectBase exEffect;
     [SerializeField] protected Slice playerSlice;
 
-    [Header("Base_Value")]
-    [SerializeField] protected Color playerColor;
-    [SerializeField] protected float moveSpeed = 9f;
-    [SerializeField] protected float jumpPower = 12f;
-    [SerializeField] protected int jumpCount = 2;
-    [SerializeField] protected float dashSpeed = 23f;
-    [SerializeField] protected float dashDuration = 0.2f;
-    [SerializeField] protected float dashDelay = 1f;
-    [SerializeField] protected float attackDelay = 0.25f;
+    [Header("Data_Base")]
+    [HideInInspector] public Color playerColor;
+    [HideInInspector] public float moveSpeed;
+    [HideInInspector] public float jumpPower;
+    [HideInInspector] public float skillDelay;
+    [HideInInspector] public float attackDelay;
+
+    [Header("Data_EX")]
+    [HideInInspector] public int jumpCount;
+    [HideInInspector] public float originGravity;
 
     protected bool isFacingRight = true;
     protected bool isGrounded = false;
-    protected bool isDash = false;
     protected bool isSlow = false;
     protected bool isEX;
     protected bool isDead = false;
 
+    protected bool pSkill = true;
     protected bool pAttack = true;
-    protected bool pDash = true;
 
     protected int currentJumpCount = 0;
     protected bool isInvincibility = false;
@@ -64,11 +64,8 @@ public class PlayerBase : MonoBehaviour
 
     protected virtual void FixedUpdate() //리지드바디 연산
     {
-        if (!isDash)
-        {
-            Vector2 moveVec = new Vector2(MovementVector.x * moveSpeed, rb.velocity.y);
-            SetRigidbody(moveVec);
-        }
+        Vector2 moveVec = new Vector2(MovementVector.x * moveSpeed, rb.velocity.y);
+        SetRigidbody(moveVec);
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
@@ -101,13 +98,13 @@ public class PlayerBase : MonoBehaviour
         }
     }
 
-    public void OnDash(InputAction.CallbackContext context)
+    public void OnSkill(InputAction.CallbackContext context)
     {
         if (isDead) return;
         
         if (context.started)
         {
-            Dash();
+            Skill();
         }
     }
 
@@ -157,19 +154,12 @@ public class PlayerBase : MonoBehaviour
         }
     }
 
-    protected virtual void Dash()
+    protected virtual void Skill()
     {
-        if (!pDash) return;
+        if (!pSkill) return;
 
-        AudioManager.Instance.StartSfx($"Dash");
-
-        isDash = true;
-        pDash = false;
-
-        Vector2 dashVelocity = new Vector2(isFacingRight ? dashSpeed : -dashSpeed, rb.velocity.y);
-        SetRigidbody(dashVelocity);
-
-        StartCoroutine(DashDelay());
+        pSkill = false;
+        StartCoroutine(SkillDelay());
     }
 
     protected virtual void Attack()
@@ -238,7 +228,16 @@ public class PlayerBase : MonoBehaviour
 
     #region Set
 
-    private void SetFacingDirection(Vector2 moveInput)
+    public void SetDataBase(Color color, float speed, float jump, float skill, float attack)
+    {
+        playerColor = color;
+        moveSpeed = speed;
+        jumpPower = jump;
+        skillDelay = skill;
+        attackDelay = attack;
+    }
+
+    protected void SetFacingDirection(Vector2 moveInput)
     {
         if (isEX) return;
 
@@ -254,7 +253,7 @@ public class PlayerBase : MonoBehaviour
         }
     }
 
-    private void SetRigidbody(Vector2 newRb)
+    protected void SetRigidbody(Vector2 newRb)
     {
         if (isEX)
         {
@@ -263,7 +262,7 @@ public class PlayerBase : MonoBehaviour
         }
 
         rb.velocity = newRb;
-        rb.gravityScale = 3f;
+        rb.gravityScale = originGravity;
     }
 
     #endregion
@@ -288,16 +287,11 @@ public class PlayerBase : MonoBehaviour
 
     #region Coroutine
 
-    protected virtual IEnumerator DashDelay()
+    protected virtual IEnumerator SkillDelay()
     {
-        yield return new WaitForSeconds(dashDuration);
+        yield return new WaitForSeconds(skillDelay);
 
-        rb.velocity = Vector2.zero;
-        isDash = false;
-
-        yield return new WaitForSeconds(dashDelay);
-
-        pDash = true;
+        pSkill = true;
     }
 
     protected virtual IEnumerator AttackDelay()

@@ -91,11 +91,11 @@ public class ChoiceController : MonoBehaviour
 
         speedSlider.value = stat.speedStat;
         jumpSlider.value = stat.jumpStat;
-        dashSlider.value = stat.dashStat;
+        dashSlider.value = stat.skillDelayStat;
 
         speedText.text = stat.speedStat.ToString();
         jumpText.text = stat.jumpStat.ToString();
-        dashText.text = "x" + stat.dashStat.ToString("F1");
+        dashText.text = stat.skillDelayStat.ToString();
 
         attackText.text = $"\"{stat.attackExt}\"";
         

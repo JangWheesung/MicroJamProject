@@ -15,7 +15,9 @@ public class PlayerSpawner : MonoBehaviour
         {
             if (stat.chatacterName == playerName)
             {
-                Instantiate(stat.player, spawnTrs.position, Quaternion.identity);
+                var player = Instantiate(stat.player, spawnTrs.position, Quaternion.identity).GetComponent<PlayerBase>();
+                player.SetDataBase(stat.characterColor, stat.speedStat, stat.jumpStat, stat.skillDelayStat, stat.attackDelayStat);
+
                 break;
             }
         }

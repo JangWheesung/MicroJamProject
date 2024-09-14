@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Dash",
+                    "name": "Skill",
                     "type": "Button",
                     "id": "af6fc079-20a4-4030-8454-4a8fe804796c",
                     "expectedControlType": "Button",
@@ -103,7 +103,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Dash",
+                    "action": "Skill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -17,8 +17,9 @@ MonoBehaviour:
   characterColor: {r: 1, g: 1, b: 1, a: 1}
   chatacterName: Alpha
   speedStat: 9
-  jumpStat: 2
-  dashStat: 1
+  jumpStat: 12
+  skillDelayStat: 1
+  attackDelayStat: 0.25
   attackExt: "\uADFC\uAC70\uB9AC \uCC38\uACA9"
   exName: "\uCDA9\uACA9\uD30C"
   exExt: "\uBAA8\uC544\uB454 \uC5D0\uB108\uC9C0\uC758 \uD798\uC744 \uCD95\uC801\uD558\uC5EC

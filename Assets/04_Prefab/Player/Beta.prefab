@@ -387,7 +387,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6954611818269018653}
         m_TargetAssemblyTypeName: PlayerBase, Assembly-CSharp
-        m_MethodName: OnDash
+        m_MethodName: OnSkill
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -454,8 +454,9 @@ MonoBehaviour:
   playerColor: {r: 0.3962264, g: 0.3062565, b: 0, a: 1}
   moveSpeed: 6
   jumpPower: 12
-  jumpCount: 1
-  dashSpeed: 23
-  dashDuration: 0.3
-  dashDelay: 1
+  skillDelay: 1
   attackDelay: 0.6
+  jumpCount: 1
+  originGravity: 3
+  dashSpeed: 15
+  dashDuration: 0.3

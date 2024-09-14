@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class UISystem : MonoBehaviour
 {
     public static UISystem Instance;
+
+    public event Action OnEnemyKillEvt;
 
     [SerializeField] private GameoverUI gameoverUI;
     [SerializeField] private EXGaugeBar gaugeBar;
@@ -39,6 +42,8 @@ public class UISystem : MonoBehaviour
     public void GetKillCount()
     {
         highSocre_kill++;
+
+        OnEnemyKillEvt?.Invoke();
     }
 
     private void HandleGameover()

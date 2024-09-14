@@ -18,6 +18,11 @@ public class Gamma : PlayerBase
         BulletCountCheck();
     }
 
+    protected override void Skill() //¾ÆÁ÷ Ã¶°©Åº º¸·ù
+    {
+        base.Skill();
+    }
+
     protected override void Attack()
     {
         if (!pAttack) return;
@@ -51,11 +56,6 @@ public class Gamma : PlayerBase
 
         EXEffectBase effect = PoolingManager.Instance.Pop<EXEffectBase>(exEffect.name, Vector2.zero);
         effect.PopEffect(this);
-    }
-
-    public override void Hit(float minusTime)
-    {
-        base.Hit(minusTime + 5);
     }
 
     protected override void Death()

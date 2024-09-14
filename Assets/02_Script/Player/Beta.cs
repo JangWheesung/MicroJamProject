@@ -5,11 +5,31 @@ using DG.Tweening;
 
 public class Beta : PlayerBase
 {
-    protected override void Dash()
-    {
-        if (!pDash) return;
+    [Header("BetaBase")]
+    [SerializeField] protected float dashSpeed = 15f;
+    [SerializeField] protected float dashDuration = 0.2f;
 
-        base.Dash();
+    private bool isDash;
+
+    protected override void FixedUpdate()
+    {
+        if (isDash) return;
+
+        base.FixedUpdate();
+    }
+
+    protected override void Skill()
+    {
+        if (!pSkill) return;
+
+        isDash = true;
+
+        AudioManager.Instance.StartSfx($"Dash");
+
+        Vector2 dashVelocity = new Vector2(isFacingRight ? dashSpeed : -dashSpeed, rb.velocity.y);
+        SetRigidbody(dashVelocity);
+
+        StartCoroutine(DashDelay());
 
         int spinDown = isFacingRight ? -180 : 180;
         int spinUp = isFacingRight ? -360 : 360;
@@ -26,6 +46,8 @@ public class Beta : PlayerBase
                 sp.color = Color.white;
                 transform.rotation = new Quaternion(0, 0, 0, 0);
             });
+
+        base.Skill();
     }
 
     protected override void Attack()
@@ -50,5 +72,13 @@ public class Beta : PlayerBase
 
         EXEffectBase effect = PoolingManager.Instance.Pop<EXEffectBase>(exEffect.name, Vector2.zero);
         effect.PopEffect(this);
+    }
+
+    private IEnumerator DashDelay()
+    {
+        yield return new WaitForSeconds(dashDuration);
+
+        isDash = false;
+        SetRigidbody(Vector2.zero);
     }
 }

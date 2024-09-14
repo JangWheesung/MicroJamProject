@@ -21,18 +21,23 @@ public struct AbilityData
 [CreateAssetMenu(fileName = "???Stat", menuName = "SO/Character/Stat")]
 public class CharacterStat : ScriptableObject
 {
+    [Header("Base")]
     public GameObject player;
     public Sprite characterSprite;
     public Color characterColor;
     public string chatacterName;
 
+    [Header("Value")]
     public float speedStat;
-    public int jumpStat;
-    public float dashStat;
+    public float jumpStat;
+    public float skillDelayStat;
+    public float attackDelayStat;
 
+    [Header("Attack")]
     public string attackExt;
     public string exName;
     public string exExt;
 
+    [Header("Passive")]
     public AbilityData[] abilityDatas;
 }

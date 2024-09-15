@@ -60,6 +60,7 @@ public class Beta : PlayerBase
         Vector2 effectPos = transform.position + (MouseVec() * 3.5f);
 
         AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(attackEffect.name, effectPos);
+        effect.SetTimeAmount(attackValue);
         effect.PopEffect(-MouseVec());
 
         AudioManager.Instance.StartSfx($"Smashing_3");
@@ -71,6 +72,7 @@ public class Beta : PlayerBase
         rb.velocity = Vector2.zero;
 
         EXEffectBase effect = PoolingManager.Instance.Pop<EXEffectBase>(exEffect.name, Vector2.zero);
+        effect.SetTimeAmount(exValue);
         effect.PopEffect(this);
     }
 

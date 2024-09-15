@@ -7,8 +7,14 @@ public class AttackEffectBase : EffectBase
     [Header("AttackBase")]
     [SerializeField] protected EffectBase normalEffect;
     [SerializeField] protected bool isPopNormalEffect;
-    [SerializeField] protected float attackAmount;
     [SerializeField] private LayerMask hitLayer;
+
+    protected float timeAmount;
+
+    public void SetTimeAmount(float timeAmount)
+    {
+        this.timeAmount = timeAmount;
+    }
 
     protected void HitRader(Vector3 pos, Vector3 size, float angle)
     {
@@ -40,7 +46,7 @@ public class AttackEffectBase : EffectBase
 
     protected virtual void PlayerHit(PlayerBase player)
     {
-        player.Hit(attackAmount);
+        player.Hit(timeAmount);
 
         if (isPopNormalEffect)
         {
@@ -51,7 +57,7 @@ public class AttackEffectBase : EffectBase
 
     protected virtual void EnemyHit(IEnemy enemy, Transform enemyTrs)
     {
-        enemy.Death(attackAmount);
+        enemy.Death(timeAmount);
 
         if (isPopNormalEffect)
         {

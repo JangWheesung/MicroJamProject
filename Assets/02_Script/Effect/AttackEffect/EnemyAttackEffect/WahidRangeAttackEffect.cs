@@ -6,7 +6,7 @@ public class WahidRangeAttackEffect : BulletAttackEffect
 {
     protected override void PlayerHit(PlayerBase player)
     {
-        player.Hit(attackAmount);
+        player.Hit(timeAmount);
 
         if (isPopNormalEffect)
         {

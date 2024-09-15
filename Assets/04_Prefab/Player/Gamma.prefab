@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 3484327087269018090}
   - component: {fileID: 5913448979338319025}
   - component: {fileID: 8390035739986558403}
+  - component: {fileID: -6206093290429848081}
   m_Layer: 7
   m_Name: Gamma
   m_TagString: Player
@@ -478,15 +479,26 @@ MonoBehaviour:
   attackEffect: {fileID: 1507865629357150910, guid: c248e09f3f3e3314e99f8a08e08ca078, type: 3}
   exEffect: {fileID: 5654514082283686205, guid: 3924725e55e41784dbb65443dced633e, type: 3}
   playerSlice: {fileID: 4892012691573461814, guid: cbedc337c099f2844bc733788c865c80, type: 3}
-  playerColor: {r: 0.30948183, g: 0, b: 0.4792453, a: 1}
-  moveSpeed: 11
-  jumpPower: 12
-  skillDelay: 1
-  attackDelay: 0.7
+  passiveDatas: 
   jumpCount: 1
   originGravity: 3
+  exAttackProduct: 0
+  attackProduct: 0
+  hitProduct: 0
   bulletText: {fileID: 2828783510538581642}
   bulletCount: 12
+--- !u!114 &-6206093290429848081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2639120379445787016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d6e7932da8d3d4ba1f7fff9e0cb7e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5344154802750024530
 GameObject:
   m_ObjectHideFlags: 0

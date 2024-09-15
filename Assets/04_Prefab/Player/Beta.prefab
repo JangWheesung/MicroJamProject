@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 9123816727799808486}
   - component: {fileID: 285661695469608041}
   - component: {fileID: 6954611818269018653}
+  - component: {fileID: -430708052355588243}
   m_Layer: 7
   m_Name: Beta
   m_TagString: Player
@@ -451,12 +452,23 @@ MonoBehaviour:
   attackEffect: {fileID: 6998994221616932456, guid: 4c4a1cdcf07ffaa40a07418d01ef1fae, type: 3}
   exEffect: {fileID: 4113080319566569493, guid: 501d3d3e24b49fb429c42479790b547e, type: 3}
   playerSlice: {fileID: 4892012691573461814, guid: f0652ca8e079dba41a6a5b97282c5145, type: 3}
-  playerColor: {r: 0.3962264, g: 0.3062565, b: 0, a: 1}
-  moveSpeed: 6
-  jumpPower: 12
-  skillDelay: 1
-  attackDelay: 0.6
+  passiveDatas: 
   jumpCount: 1
   originGravity: 3
+  exAttackProduct: 0
+  attackProduct: 0
+  hitProduct: 0
   dashSpeed: 15
   dashDuration: 0.3
+--- !u!114 &-430708052355588243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5994666291176445565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d6e7932da8d3d4ba1f7fff9e0cb7e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

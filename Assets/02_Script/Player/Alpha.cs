@@ -43,6 +43,7 @@ public class Alpha : PlayerBase
         Vector2 effectPos = transform.position + (MouseVec() * 2f);
 
         AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(attackEffect.name, effectPos);
+        effect.SetTimeAmount(attackValue);
         effect.PopEffect(-MouseVec());
 
         int idx = Random.Range(1, 3);

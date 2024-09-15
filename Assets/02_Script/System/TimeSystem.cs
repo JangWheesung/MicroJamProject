@@ -14,6 +14,9 @@ public class TimeSystem : MonoBehaviour
 
     private Sequence effectSequence;
 
+    public float TimeProduct { get; private set; }
+    public float MaxTime { get; private set; }
+
     private float nowTime;
     public float NowTime 
     { 
@@ -29,9 +32,9 @@ public class TimeSystem : MonoBehaviour
             {
                 nowTime = 0f;
             }
-            else if (nowTime >= 120f)
+            else if (nowTime >= MaxTime)
             {
-                nowTime = 120f;
+                nowTime = MaxTime;
             }
 
             string outTime = nowTime.ToString("F1");
@@ -42,14 +45,16 @@ public class TimeSystem : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        NowTime = timeSettingValue;
+        MaxTime = timeSettingValue;
+        NowTime = MaxTime;
+        TimeProduct = 1f;
     }
 
     private void Update()
     {
         if (!ControlSystem.Instance.IsStopLogic())
         {
-            NowTime -= Time.deltaTime;
+            NowTime -= Time.deltaTime * TimeProduct;
             if (NowTime <= 0f)
             {
                 ControlSystem.Instance.SetDeath();
@@ -79,6 +84,17 @@ public class TimeSystem : MonoBehaviour
         TimeEffect(Color.red);
     }
 
+    public void CustemTime(float value, Color color)
+    {
+        if (value == 0) return;
+
+        AudioManager.Instance.StartSfx("TimeValue");
+
+        NowTime = value;
+
+        TimeEffect(color);
+    }
+
     private void TimeEffect(Color effectColor)
     {
         timeText.color = effectColor;
@@ -90,5 +106,15 @@ public class TimeSystem : MonoBehaviour
             .Prepend(timeText.transform.DOScale(new Vector3(1.5f, 1.5f, 1), 0.1f))
             .Append(timeText.DOColor(Color.white, 0.3f))
             .Join(timeText.transform.DOScale(Vector3.one, 0.3f));
+    }
+
+    public void SettingMaxTime(float value)
+    {
+        MaxTime = value;
+    }
+
+    public void SettingTimeProduct(float value)
+    {
+        TimeProduct = value;
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerSpawner : MonoBehaviour
 {
     [SerializeField] private Transform spawnTrs;
+    [SerializeField] private PassiveInitializer passiveInitializer;
 
     private void Awake()
     {
@@ -16,10 +17,20 @@ public class PlayerSpawner : MonoBehaviour
             if (stat.chatacterName == playerName)
             {
                 var player = Instantiate(stat.player, spawnTrs.position, Quaternion.identity).GetComponent<PlayerBase>();
-                player.SetDataBase(stat.characterColor, stat.speedStat, stat.jumpStat, stat.skillDelayStat, stat.attackDelayStat);
+
+                passiveInitializer.SetPassiveInitializer();
+
+                player.SetDataBase(stat.characterColor, stat.speedStat, stat.jumpStat,
+                    stat.attackStat, stat.skillDelayStat, stat.attackDelayStat,
+                    stat.GetPassiveTypes());
 
                 break;
             }
         }
+    }
+
+    private void Start()
+    {
+        
     }
 }

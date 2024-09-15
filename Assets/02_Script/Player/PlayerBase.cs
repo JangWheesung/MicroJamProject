@@ -7,21 +7,37 @@ using DG.Tweening;
 
 public class PlayerBase : MonoBehaviour
 {
+    //[Header("PassiveEvent")]
+    public event Action OnSettingPlayerEvt; //시작할때 세팅
+    public event Action OnHitPlayerEvt; //피격당할때 세팅
+    public event Action OnAttackPlayerEvt; //피격할때 세팅
+    public event Action OnStartExPlayerEvt; //필살기 시작할 때 세팅
+    public event Action OnEndExPlayerEvt; //필살기 끝날때 세팅
+    public event Action OnDeathPlayerEvt; //죽을 타이밍에 세팅
+
     [Header("Prefab")]
     [SerializeField] protected AttackEffectBase attackEffect;
     [SerializeField] protected EXEffectBase exEffect;
     [SerializeField] protected Slice playerSlice;
 
     [Header("Data_Base")]
-    [HideInInspector] public Color playerColor;
-    [HideInInspector] public float moveSpeed;
-    [HideInInspector] public float jumpPower;
-    [HideInInspector] public float skillDelay;
-    [HideInInspector] public float attackDelay;
+    protected Color playerColor;
+    protected float moveSpeed;
+    protected float jumpPower;
+    protected float attackAmount;
+    protected float skillDelay;
+    protected float attackDelay;
 
-    [Header("Data_EX")]
+    [Header("Data_Passive")]
+    [HideInInspector] public PassiveType[] passiveDatas;
     [HideInInspector] public int jumpCount;
     [HideInInspector] public float originGravity;
+    [HideInInspector] public float exAttackProduct; //곱연산
+    [HideInInspector] public float attackProduct; //합연산
+    [HideInInspector] public float hitProduct; //합연산
+
+    protected float attackValue => attackAmount + attackProduct;
+    protected float exValue => attackAmount * exAttackProduct;
 
     protected bool isFacingRight = true;
     protected bool isGrounded = false;
@@ -39,6 +55,7 @@ public class PlayerBase : MonoBehaviour
     protected SpriteRenderer sp;
     private TrailRenderer trail;
     private Camera cam;
+    private PlayerPassive playerPassive;
 
     [HideInInspector] public Vector2 MovementVector { get; private set; }
 
@@ -46,15 +63,23 @@ public class PlayerBase : MonoBehaviour
 
     protected virtual void Awake()
     {
+        playerPassive = GetComponent<PlayerPassive>();
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         trail = GetComponentInChildren<TrailRenderer>();
 
         cam = Camera.main;
+
+        jumpCount = 1;
+        originGravity = 3f;
+        exAttackProduct = 3f;
+        hitProduct = 0f;
+        attackProduct = 0f;
     }
 
     protected virtual void Start() //죽는 이벤트 구독
     {
+        UISystem.Instance.OnEnemyKillEvt += HandleEnemyKill;
         ControlSystem.Instance.OnExStartEvt += HandleStartEX;
         ControlSystem.Instance.OnExEndEvt += HandleEndEX;
         ControlSystem.Instance.OnDeathEvt += HandleDeath;
@@ -75,6 +100,16 @@ public class PlayerBase : MonoBehaviour
             isGrounded = true;
             currentJumpCount = 0;
         }
+    }
+
+    protected void OnDestroy()
+    {
+        OnSettingPlayerEvt = null;
+        OnHitPlayerEvt = null;
+        OnAttackPlayerEvt = null;
+        OnStartExPlayerEvt = null;
+        OnEndExPlayerEvt = null;
+        OnDeathPlayerEvt = null;
     }
 
     #endregion
@@ -168,8 +203,9 @@ public class PlayerBase : MonoBehaviour
 
         pAttack = false;
         StartCoroutine(AttackDelay());
-
+        
         AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(attackEffect.name, transform.position);
+        effect.SetTimeAmount(attackValue);
         effect.PopEffect();
 
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_S);
@@ -180,6 +216,7 @@ public class PlayerBase : MonoBehaviour
         rb.velocity = Vector2.zero;
 
         EXEffectBase effect = PoolingManager.Instance.Pop<EXEffectBase>(exEffect.name, transform.position);
+        effect.SetTimeAmount(exValue);
         effect.PopEffect();
     }
 
@@ -191,7 +228,9 @@ public class PlayerBase : MonoBehaviour
     {
         if (isInvincibility) return;
 
-        TimeSystem.Instance.MinusTime(minusTime);
+        OnHitPlayerEvt?.Invoke();
+
+        TimeSystem.Instance.MinusTime(minusTime + hitProduct);
     }
 
     protected virtual void Death()
@@ -208,19 +247,30 @@ public class PlayerBase : MonoBehaviour
 
     #region Handle
 
+    private void HandleEnemyKill()
+    {
+        OnAttackPlayerEvt?.Invoke();
+    }
+
     private void HandleStartEX()
     {
+        OnStartExPlayerEvt?.Invoke();
+
         EX();
     }
 
     private void HandleEndEX()
     {
+        OnEndExPlayerEvt?.Invoke();
+
         isEX = false;
         SetRigidbody(new Vector2(0f, 3f));
     }
 
     private void HandleDeath()
     {
+        OnDeathPlayerEvt?.Invoke();
+
         StartCoroutine(DeathEvent());
     }
 
@@ -228,13 +278,19 @@ public class PlayerBase : MonoBehaviour
 
     #region Set
 
-    public void SetDataBase(Color color, float speed, float jump, float skill, float attack)
+    public void SetDataBase(Color color, float speed, float jump, float attack, float skill_Delay, float attack_Delay, PassiveType[] passive)
     {
         playerColor = color;
         moveSpeed = speed;
         jumpPower = jump;
-        skillDelay = skill;
-        attackDelay = attack;
+        attackAmount =  attack;
+        skillDelay = skill_Delay;
+        attackDelay = attack_Delay;
+        passiveDatas = passive;
+
+        playerPassive.SetPassive();
+
+        OnSettingPlayerEvt?.Invoke();
     }
 
     protected void SetFacingDirection(Vector2 moveInput)

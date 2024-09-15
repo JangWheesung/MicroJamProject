@@ -76,7 +76,7 @@ public class ChoiceController : MonoBehaviour
     public void SeEntryPanel(CharacterStat stat, Vector2 slotPos)
     {
         TextSetting(stat); //텍스트 세팅
-        AbilityPanelSetting(stat.abilityDatas); //특성 UI 세팅
+        AbilityPanelSetting(stat.passiveDatas); //특성 UI 세팅
         PanelColorSetting(stat.characterColor); //UI 색깔 조정
 
         FocusMove(slotPos); //카메라 무빙
@@ -105,7 +105,7 @@ public class ChoiceController : MonoBehaviour
         exExtText.text = stat.exExt;
     }
 
-    private void AbilityPanelSetting(AbilityData[] datas)
+    private void AbilityPanelSetting(PassiveData[] datas)
     {
         for (int i = 0; i < abilityPanelContext.childCount; i++)
         {
@@ -113,7 +113,7 @@ public class ChoiceController : MonoBehaviour
         }
         abilityPanelContext.sizeDelta = Vector2.zero;
 
-        foreach (AbilityData abilityData in datas)
+        foreach (PassiveData abilityData in datas)
         {
             AbilitySlot slot = Instantiate(abilitySlotObj, abilityPanelContext);
             slot.SetSlot(abilityData.name, abilityData.ext);

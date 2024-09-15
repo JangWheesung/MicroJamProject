@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public enum AbilityStat
 {
@@ -12,8 +13,9 @@ public enum AbilityStat
 };
 
 [System.Serializable]
-public struct AbilityData
+public struct PassiveData
 {
+    public PassiveType type;
     public string name;
     public string ext;
 }
@@ -30,6 +32,7 @@ public class CharacterStat : ScriptableObject
     [Header("Value")]
     public float speedStat;
     public float jumpStat;
+    public float attackStat;
     public float skillDelayStat;
     public float attackDelayStat;
 
@@ -39,5 +42,9 @@ public class CharacterStat : ScriptableObject
     public string exExt;
 
     [Header("Passive")]
-    public AbilityData[] abilityDatas;
+    public PassiveData[] passiveDatas;
+    public PassiveType[] GetPassiveTypes()
+    {
+        return passiveDatas.Select(p => p.type).ToArray();
+    }
 }

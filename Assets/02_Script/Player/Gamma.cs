@@ -31,6 +31,7 @@ public class Gamma : PlayerBase
         BulletCountCheck();
 
         AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(attackEffect.name, transform.position);
+        effect.SetTimeAmount(attackValue);
         effect.PopEffect(MouseVec());
 
         AudioManager.Instance.StartSfx("Bullet_1", 0.6f);
@@ -55,6 +56,7 @@ public class Gamma : PlayerBase
         rb.velocity = Vector2.zero;
 
         EXEffectBase effect = PoolingManager.Instance.Pop<EXEffectBase>(exEffect.name, Vector2.zero);
+        effect.SetTimeAmount(exValue);
         effect.PopEffect(this);
     }
 

@@ -19,34 +19,16 @@ MonoBehaviour:
   speedStat: 9
   jumpStat: 12
   attackStat: 2
-  skillDelayStat: 1
-  attackDelayStat: 0.25
   attackExt: "\uADFC\uAC70\uB9AC \uCC38\uACA9"
   exName: "\uCDA9\uACA9\uD30C"
   exExt: "\uBAA8\uC544\uB454 \uC5D0\uB108\uC9C0\uC758 \uD798\uC744 \uCD95\uC801\uD558\uC5EC
     \uAD11\uBC94\uC704\uD558\uAC8C \uBC1C\uC0B0\uD55C\uB2E4."
+  attackDelayStat: 0.25
+  skillName: "\uB300\uC2DC"
+  skillExt: "\uC804\uBC29\uC73C\uB85C \uBE60\uB974\uAC8C \uC774\uB3D9\uD55C\uB2E4."
+  skillDelayStat: 1
   passiveDatas:
-  - type: 0
-    name: "\uD2B8\uB9AC\uD50C\uC810\uD504"
-    ext: "\uACF5\uC911\uC5D0\uC11C \uB450\uBC88 \uB354 \uC810\uD504 \uAC00\uB2A5"
-  - type: 2
-    name: "\uD2B8\uB9AC\uD50C\uC810\uD504"
-    ext: "\uACF5\uC911\uC5D0\uC11C \uB450\uBC88 \uB354 \uC810\uD504 \uAC00\uB2A5"
-  - type: 7
-    name: "\uD2B8\uB9AC\uD50C\uC810\uD504"
-    ext: "\uACF5\uC911\uC5D0\uC11C \uB450\uBC88 \uB354 \uC810\uD504 \uAC00\uB2A5"
-  - type: 11
-    name: "\uD2B8\uB9AC\uD50C\uC810\uD504"
-    ext: "\uACF5\uC911\uC5D0\uC11C \uB450\uBC88 \uB354 \uC810\uD504 \uAC00\uB2A5"
-  - type: 12
-    name: "\uD2B8\uB9AC\uD50C\uC810\uD504"
-    ext: "\uACF5\uC911\uC5D0\uC11C \uB450\uBC88 \uB354 \uC810\uD504 \uAC00\uB2A5"
-  - type: 20
-    name: "\uD2B8\uB9AC\uD50C\uC810\uD504"
-    ext: "\uACF5\uC911\uC5D0\uC11C \uB450\uBC88 \uB354 \uC810\uD504 \uAC00\uB2A5"
-  - type: 21
-    name: "\uD2B8\uB9AC\uD50C\uC810\uD504"
-    ext: "\uACF5\uC911\uC5D0\uC11C \uB450\uBC88 \uB354 \uC810\uD504 \uAC00\uB2A5"
-  - type: 27
-    name: "\uD2B8\uB9AC\uD50C\uC810\uD504"
-    ext: "\uACF5\uC911\uC5D0\uC11C \uB450\uBC88 \uB354 \uC810\uD504 \uAC00\uB2A5"
+  - {fileID: 11400000, guid: deb090d3069000048a65e744ae373eb1, type: 2}
+  - {fileID: 11400000, guid: 3a4ec5ba89754524ba16b07db921f19f, type: 2}
+  - {fileID: 11400000, guid: 85bab13d4d5bf2248a3da9e121453fca, type: 2}
+  - {fileID: 11400000, guid: 0d9bc710efad20948a7b590b9e02109d, type: 2}

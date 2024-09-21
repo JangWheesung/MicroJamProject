@@ -14,10 +14,12 @@ public enum HandlePlayerBaseType
 };
 
 [CreateAssetMenu(fileName = "Passive_X", menuName = "SO/Character/Passive")]
-public class PassiveBase : ScriptableObject
+public class PassiveData : ScriptableObject
 {
     public PassiveType passiveType;
     public HandlePlayerBaseType handlePlayerBaseType;
+    public string passiveName;
+    public string passiveExt;
 
     private Action<PlayerBase> passiveAction;
 

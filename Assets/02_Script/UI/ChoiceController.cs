@@ -14,7 +14,7 @@ public class ChoiceController : MonoBehaviour
 
     [Header("PrefabObj")]
     [SerializeField] private CharacterSlot characterSlotObj;
-    [SerializeField] private AbilitySlot abilitySlotObj;
+    [SerializeField] private PassiveSlot abilitySlotObj;
 
     [Header("Panel")]
     [SerializeField] private RectTransform selectRoot;
@@ -22,14 +22,12 @@ public class ChoiceController : MonoBehaviour
     [SerializeField] private RectTransform rightRoot;
     [SerializeField] private RectTransform topRoot;
     [SerializeField] private RectTransform buttonRoot;
-    //private Image namePanel;
     private Image statPanel;
     private Image attackPanel;
-    //private Image abilityPanel;
 
     [Header("UIRoot")]
     [SerializeField] private RectTransform characterPanelTrs;
-    [SerializeField] private RectTransform abilityPanelContext;
+    //[SerializeField] private RectTransform abilityPanelContext;
 
     [Header("Name")]
     [SerializeField] private TMP_Text nameText;
@@ -37,17 +35,17 @@ public class ChoiceController : MonoBehaviour
     [Header("Stat")]
     [SerializeField] private Slider speedSlider;
     [SerializeField] private Slider jumpSlider;
-    [SerializeField] private Slider dashSlider;
     [SerializeField] private TMP_Text speedText;
     [SerializeField] private TMP_Text jumpText;
-    [SerializeField] private TMP_Text dashText;
 
     [Header("AttackText")]
     [SerializeField] private TMP_Text attackText;
+    [SerializeField] private TMP_Text attackDelayText;
     [SerializeField] private TMP_Text exNameText;
     [SerializeField] private TMP_Text exExtText;
 
     private string choiceCharacterName;
+    private CharacterSlot currentSlot;
     private Camera cam;
 
     private void Awake()
@@ -59,11 +57,9 @@ public class ChoiceController : MonoBehaviour
             CharacterSlot slot = Instantiate(characterSlotObj, characterPanelTrs);
             slot.SetSlot(stat, this);
         }
-
-        //namePanel = topRoot.Find("NamePanel").GetComponent<Image>();
+        
         statPanel = buttonRoot.Find("StatPanel").GetComponent<Image>();
         attackPanel = buttonRoot.Find("AttackPanel").GetComponent<Image>();
-        //abilityPanel = rightRoot.Find("AbilityPanel").GetComponent<Image>();
 
         cam = Camera.main;
     }
@@ -73,10 +69,12 @@ public class ChoiceController : MonoBehaviour
         selectRoot.DOLocalMoveY(0f, 0.5f).SetEase(Ease.OutBack);
     }
 
-    public void SeEntryPanel(CharacterStat stat, Vector2 slotPos)
+    public void SeEntryPanel(CharacterSlot slot, CharacterStat stat, Vector2 slotPos)
     {
+        currentSlot = slot;
+
         TextSetting(stat); //텍스트 세팅
-        AbilityPanelSetting(stat.passiveDatas); //특성 UI 세팅
+        //AbilityPanelSetting(stat.passiveDatas); //특성 UI 세팅
         PanelColorSetting(stat.characterColor); //UI 색깔 조정
 
         FocusMove(slotPos); //카메라 무빙
@@ -91,36 +89,35 @@ public class ChoiceController : MonoBehaviour
 
         speedSlider.value = stat.speedStat;
         jumpSlider.value = stat.jumpStat;
-        dashSlider.value = stat.skillDelayStat;
 
         speedText.text = stat.speedStat.ToString();
         jumpText.text = stat.jumpStat.ToString();
-        dashText.text = stat.skillDelayStat.ToString();
 
         attackText.text = $"\"{stat.attackExt}\"";
-        
+        attackDelayText.text = $"공격 딜레이 : {stat.attackDelayStat}s";
+
         exNameText.color = stat.characterColor;
         exNameText.text = stat.exName;
         exExtText.color = stat.characterColor;
         exExtText.text = stat.exExt;
     }
 
-    private void AbilityPanelSetting(PassiveData[] datas)
-    {
-        for (int i = 0; i < abilityPanelContext.childCount; i++)
-        {
-            Destroy(abilityPanelContext.GetChild(i).gameObject);
-        }
-        abilityPanelContext.sizeDelta = Vector2.zero;
+    //private void AbilityPanelSetting(PassiveData[] datas)
+    //{
+    //    for (int i = 0; i < abilityPanelContext.childCount; i++)
+    //    {
+    //        Destroy(abilityPanelContext.GetChild(i).gameObject);
+    //    }
+    //    abilityPanelContext.sizeDelta = Vector2.zero;
 
-        foreach (PassiveData abilityData in datas)
-        {
-            AbilitySlot slot = Instantiate(abilitySlotObj, abilityPanelContext);
-            slot.SetSlot(abilityData.name, abilityData.ext);
+    //    foreach (PassiveData abilityData in datas)
+    //    {
+    //        AbilitySlot slot = Instantiate(abilitySlotObj, abilityPanelContext);
+    //        slot.SetSlot(abilityData.passiveName, abilityData.passiveExt);
 
-            abilityPanelContext.sizeDelta += new Vector2(320f, 0f);
-        }
-    }
+    //        abilityPanelContext.sizeDelta += new Vector2(320f, 0f);
+    //    }
+    //}
 
     private void PanelColorSetting(Color color)
     {
@@ -131,6 +128,8 @@ public class ChoiceController : MonoBehaviour
 
     public void OnBackClick()
     {
+        currentSlot.CloseSlot();
+
         FocusMove();
         PanelMove(false);
     }

@@ -43,9 +43,9 @@ public class PlayerPassive : MonoBehaviour
     {
         var player = GetComponent<PlayerBase>();
         
-        foreach (var passive in player.passiveDatas)
+        foreach (var passive in player.passiveTypes)
         {
-            var dataList = Resources.LoadAll<PassiveBase>("PassiveData").ToList();
+            var dataList = Resources.LoadAll<PassiveData>("PassiveDatas").ToList();
             var findData = dataList.Find(x => x.passiveType == passive);
             findData.AddPassive(player);
         }

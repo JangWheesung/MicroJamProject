@@ -84,7 +84,7 @@ public class PassiveInitializer : MonoBehaviour
                 LastBuff(() => { HitSetting(player, -0.5f); }) },
         };
 
-        var passiveList = Resources.LoadAll<PassiveBase>("PassiveData");
+        var passiveList = Resources.LoadAll<PassiveData>("PassiveDatas");
 
         foreach (var passive in passiveList)
         {

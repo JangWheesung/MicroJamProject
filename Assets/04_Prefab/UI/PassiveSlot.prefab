@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5426870374356794582}
   - component: {fileID: 8236886463815755982}
   m_Layer: 5
-  m_Name: AbilityName
+  m_Name: PassiveName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 15, y: -10}
-  m_SizeDelta: {x: 320, y: 50}
+  m_AnchoredPosition: {x: 2.5, y: -3.7}
+  m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5426870374356794582
 CanvasRenderer:
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 5721666402131405936}
   - component: {fileID: 2797341612993230321}
   m_Layer: 5
-  m_Name: AbilitySlot
+  m_Name: PassiveSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,7 +172,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 200}
+  m_SizeDelta: {x: 110, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2842116385513923776
 CanvasRenderer:
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 3105881300292700720}
   - component: {fileID: 7650224103434086913}
   m_Layer: 5
-  m_Name: AbilityExt
+  m_Name: PassiveExt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,8 +260,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 15, y: 0}
-  m_SizeDelta: {x: 270, y: 130}
+  m_AnchoredPosition: {x: 4.7, y: 2.7}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &3105881300292700720
 CanvasRenderer:
@@ -291,7 +291,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ext
+  m_text: "\u315B\u3147\u3134\u3134\u3134\u3134\u3134\u3134\u3134\u3134\u3134\u3134\u3134\u3134\u3134\u3134\u3134\u3134\u3134\u3134\u3134\u3134\u3134\u3134\u3134\u3147\u3147\u3147\u3147\u3147\u3147\u3147\u3147\u3147\u3147\u3147\u3147\u3147\u3147"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4c4d54e43c241cf46b15832803dac356, type: 2}
   m_sharedMaterial: {fileID: -4734863637970727069, guid: 4c4d54e43c241cf46b15832803dac356, type: 2}
@@ -318,8 +318,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 8
+  m_fontSizeBase: 8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

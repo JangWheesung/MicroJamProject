@@ -12,14 +12,6 @@ public enum AbilityStat
     EX
 };
 
-[System.Serializable]
-public struct PassiveData
-{
-    public PassiveType type;
-    public string name;
-    public string ext;
-}
-
 [CreateAssetMenu(fileName = "???Stat", menuName = "SO/Character/Stat")]
 public class CharacterStat : ScriptableObject
 {
@@ -33,18 +25,24 @@ public class CharacterStat : ScriptableObject
     public float speedStat;
     public float jumpStat;
     public float attackStat;
-    public float skillDelayStat;
-    public float attackDelayStat;
 
     [Header("Attack")]
     public string attackExt;
     public string exName;
     public string exExt;
+    public float attackDelayStat;
+
+    [Header("Skill")]
+    public string skillName;
+    public string skillExt;
+    public float skillDelayStat;
+
 
     [Header("Passive")]
     public PassiveData[] passiveDatas;
+
     public PassiveType[] GetPassiveTypes()
     {
-        return passiveDatas.Select(p => p.type).ToArray();
+        return passiveDatas.Select(p => p.passiveType).ToArray();
     }
 }

@@ -19,13 +19,16 @@ MonoBehaviour:
   speedStat: 11
   jumpStat: 13
   attackStat: 2
-  skillDelayStat: 1
-  attackDelayStat: 0.8
   attackExt: "\uC7A5\uAC70\uB9AC\uC774\uB098 \uC791\uC740 \uACF5\uACA9 \uBC94\uC704\uB97C
     \uAC00\uC9C4 \uBE60\uB978 \uC0AC\uACA9"
   exName: "\uD035 \uB4DC\uB85C\uC6B0"
   exExt: "\uC5D0\uB108\uC9C0\uC758 \uD798\uC73C\uB85C \uB450 \uAD8C\uCD1D\uC744 \uC18C\uD658\uD558\uC5EC
     \uC0AC\uBC29\uC73C\uB85C \uB09C\uC0AC\uD55C\uB2E4."
-  abilityDatas:
-  - name: "\uC720\uB9AC \uBAB8"
-    ext: "\uD53C\uACA9 \uC2DC \uC783\uB294 \uC2DC\uAC04 -5\uCD08 \uCD94\uAC00"
+  attackDelayStat: 0.8
+  skillName: "\uCCA0\uAC11\uD0C4"
+  skillExt: "\uD604\uC7AC \uB0A8\uC544\uC788\uB294 \uCD1D\uC54C \uC911 \uCD5C\uB300
+    3\uBC1C\uC744 \uAD00\uD1B5\uAE30\uB2A5\uC744 \uC9C0\uB2CC \uCCA0\uAC11\uD0C4\uC73C\uB85C
+    \uBC14\uAFBC\uB2E4."
+  skillDelayStat: 3
+  passiveDatas:
+  - {fileID: 11400000, guid: deb090d3069000048a65e744ae373eb1, type: 2}

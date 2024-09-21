@@ -9,6 +9,10 @@ public class Gamma : PlayerBase
     [SerializeField] private TMP_Text bulletText;
     [SerializeField] private int bulletCount;
     private int currentBullet;
+    private int upgradeBullet;
+
+    private bool isEmpty => currentBullet <= 0;
+    private bool isUpgrade => upgradeBullet > 0;
 
     protected override void Start()
     {
@@ -20,6 +24,17 @@ public class Gamma : PlayerBase
 
     protected override void Skill() //¾ÆÁ÷ Ã¶°©Åº º¸·ù
     {
+        if (!pSkill) return;
+
+        if(currentBullet >= 3)
+            upgradeBullet = 3;
+        else
+            upgradeBullet = currentBullet;
+
+        BulletCountCheck();
+
+        AudioManager.Instance.StartSfx("EnergeUp", 0.6f);
+
         base.Skill();
     }
 
@@ -27,12 +42,13 @@ public class Gamma : PlayerBase
     {
         if (!pAttack) return;
 
-        currentBullet--;
-        BulletCountCheck();
-
-        AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(attackEffect.name, transform.position);
+        GammaAttackEffect effect = PoolingManager.Instance.Pop<GammaAttackEffect>(attackEffect.name, transform.position);
         effect.SetTimeAmount(attackValue);
-        effect.PopEffect(MouseVec());
+        effect.PopEffect(MouseVec(), isUpgrade);
+
+        currentBullet--;
+        upgradeBullet--;
+        BulletCountCheck();
 
         AudioManager.Instance.StartSfx("Bullet_1", 0.6f);
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Rock_S);
@@ -40,13 +56,12 @@ public class Gamma : PlayerBase
 
     private void BulletCountCheck()
     {
-        bool isEmpty = currentBullet <= 0;
-
         if (isEmpty)
         {
             pAttack = false;
             StartCoroutine(AttackDelay());
         }
+        bulletText.color = isUpgrade ? Color.yellow : Color.white;
         bulletText.text = isEmpty ? "Reloading..." : $"{currentBullet}/{bulletCount}";
         bulletText.fontSize = isEmpty ? 1.7f : 2.4f;
     }

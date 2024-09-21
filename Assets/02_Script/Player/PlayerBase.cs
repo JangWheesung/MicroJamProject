@@ -29,7 +29,7 @@ public class PlayerBase : MonoBehaviour
     protected float attackDelay;
 
     [Header("Data_Passive")]
-    [HideInInspector] public PassiveType[] passiveDatas;
+    [HideInInspector] public PassiveType[] passiveTypes;
     [HideInInspector] public int jumpCount;
     [HideInInspector] public float originGravity;
     [HideInInspector] public float exAttackProduct; //°ö¿¬»ê
@@ -286,7 +286,7 @@ public class PlayerBase : MonoBehaviour
         attackAmount =  attack;
         skillDelay = skill_Delay;
         attackDelay = attack_Delay;
-        passiveDatas = passive;
+        passiveTypes = passive;
 
         playerPassive.SetPassive();
 

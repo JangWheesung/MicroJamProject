@@ -11,6 +11,7 @@ public class CopeBombState : CopeBaseState
     protected override void OnStateEnter()
     {
         AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(bombEffect.name, copeFSM.transform.position);
+        effect.SetTimeAmount(attackAmount);
         effect.PopEffect();
 
         //AudioManager.Instance.StartSfx("Lazer_2");

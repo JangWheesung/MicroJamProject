@@ -312,6 +312,7 @@ MonoBehaviour:
   bombRangeEffect: {fileID: 7787501557781503496, guid: b837b04ff82cb1443add89c7c17c96e3, type: 3}
   countText: {fileID: 8261343405097666396}
   moveSpeed: 5
+  attackAmount: 30
   attackRange: 5
   countDelay: 3
 --- !u!1 &7431043100128282095

@@ -10,6 +10,7 @@ public class ShifrBaseState : BaseState<ShifrState>
 
     protected float jumpPower;
     protected float moveSpeed;
+    protected float attackAmount;
     protected float attackDelay;
 
     public ShifrBaseState(ShifrFSM fsm) : base(fsm)
@@ -20,6 +21,7 @@ public class ShifrBaseState : BaseState<ShifrState>
 
         jumpPower = fsm.jumpPower;
         moveSpeed = fsm.moveSpeed;
+        attackAmount = fsm.attackAmount;
         attackDelay = fsm.attackDelay;
     }
 }

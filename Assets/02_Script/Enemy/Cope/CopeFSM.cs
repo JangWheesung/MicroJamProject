@@ -21,6 +21,7 @@ public class CopeFSM : EnemyBase<CopeState>
     public TMP_Text countText;
 
     public float moveSpeed;
+    public float attackAmount;
     public float attackRange;
     public float countDelay;
 

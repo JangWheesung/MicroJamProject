@@ -13,6 +13,7 @@ public class CopeBaseState : BaseState<CopeState>
 
     protected float moveSpeed;
     protected float countDelay;
+    protected float attackAmount;
     protected float attackRange;
 
     public CopeBaseState(CopeFSM fsm) : base(fsm)
@@ -25,6 +26,7 @@ public class CopeBaseState : BaseState<CopeState>
 
         moveSpeed = fsm.moveSpeed;
         countDelay = fsm.countDelay;
+        attackAmount = fsm.attackAmount;
         attackRange = fsm.attackRange;
     }
 }

@@ -18,6 +18,7 @@ public class ShifrFSM : EnemyBase<ShifrState>
 
     public float jumpPower;
     public float moveSpeed;
+    public float attackAmount;
     public float attackDelay;
     public float attackRange;
 

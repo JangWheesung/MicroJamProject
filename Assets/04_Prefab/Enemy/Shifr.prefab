@@ -328,5 +328,6 @@ MonoBehaviour:
   circleEffect: {fileID: 600244033636821116, guid: 221f79deee1c13f4ab4610e15d82b21b, type: 3}
   jumpPower: 12
   moveSpeed: 4
+  attackAmount: 2
   attackDelay: 1
   attackRange: 1.8

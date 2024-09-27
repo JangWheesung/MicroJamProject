@@ -76,12 +76,6 @@ public class PassiveInitializer : MonoBehaviour
 
             { PassiveType.Passive_28, (player) =>
                 LastBuff(() => { TimeOperation(60f); }) },
-
-            { PassiveType.Passive_29, (player) =>
-                LastBuff(() => { AttackSetting(player, 1.5f); }) },
-
-            { PassiveType.Passive_30, (player) =>
-                LastBuff(() => { HitSetting(player, -0.5f); }) },
         };
 
         var passiveList = Resources.LoadAll<PassiveData>("PassiveDatas");

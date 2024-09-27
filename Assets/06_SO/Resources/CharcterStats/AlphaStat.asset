@@ -28,7 +28,4 @@ MonoBehaviour:
   skillExt: "\uC804\uBC29\uC73C\uB85C \uBE60\uB974\uAC8C \uC774\uB3D9\uD55C\uB2E4."
   skillDelayStat: 1
   passiveDatas:
-  - {fileID: 11400000, guid: deb090d3069000048a65e744ae373eb1, type: 2}
-  - {fileID: 11400000, guid: 3a4ec5ba89754524ba16b07db921f19f, type: 2}
-  - {fileID: 11400000, guid: 85bab13d4d5bf2248a3da9e121453fca, type: 2}
-  - {fileID: 11400000, guid: 0d9bc710efad20948a7b590b9e02109d, type: 2}
+  - {fileID: 11400000, guid: ef8fa403d56e56e459d5929e936f45e6, type: 2}

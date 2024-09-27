@@ -331,6 +331,7 @@ MonoBehaviour:
   jumpPower: 7
   moveSpeed: 7
   fadeDelay: 2.5
+  attackAmount: 1.5
   attackDelay: 0.6
   attackRange: 4
   gravityScale: 0

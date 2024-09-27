@@ -22,22 +22,26 @@ public class CharacterStat : ScriptableObject
     public string chatacterName;
 
     [Header("Value")]
-    public float speedStat;
-    public float jumpStat;
-    public float attackStat;
+    [Range(0, 12f)] public float speedStat;
+    [Range(0, 15f)] public float jumpStat;
+    [Range(0, 2f)] public float attackStat;
 
+    [Space(20f)]
     [Header("Attack")]
     public string attackExt;
-    public string exName;
-    public string exExt;
-    public float attackDelayStat;
 
+    [Space(5f)]
+    public string exName;
+    [TextArea] public string exExt;
+    [Range(0, 1f)] public float attackDelayStat;
+
+    [Space(20f)]
     [Header("Skill")]
     public string skillName;
-    public string skillExt;
-    public float skillDelayStat;
+    [TextArea] public string skillExt;
+    [Range(0, 10f)] public float skillDelayStat;
 
-
+    [Space(20f)]
     [Header("Passive")]
     public PassiveData[] passiveDatas;
 

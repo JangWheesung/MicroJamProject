@@ -11,6 +11,7 @@ public class StigmaBaseState : BaseState<StigmaState>
 
     public float jumpPower;
     public float moveSpeed;
+    protected float attackAmount;
     public float attackRange;
 
     public StigmaBaseState(StigmaFSM fsm) : base(fsm)
@@ -22,6 +23,7 @@ public class StigmaBaseState : BaseState<StigmaState>
 
         jumpPower = fsm.jumpPower;
         moveSpeed = fsm.moveSpeed;
+        attackAmount = fsm.attackAmount;
         attackRange = fsm.attackRange;
     }
 }

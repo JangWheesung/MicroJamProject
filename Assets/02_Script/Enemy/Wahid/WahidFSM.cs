@@ -20,6 +20,7 @@ public class WahidFSM : EnemyBase<WahidState>
     public float waveAmount;
     public float waveInterval;
     public float moveSpeed;
+    public float attackAmount;
     public float meleeDelay;
     public float rangeDelay;
     public float meleeRange;

@@ -25,6 +25,7 @@ public class HasitFSM : EnemyBase<HasitState>
     public float jumpPower;
     public float moveSpeed;
     public float moveDelay;
+    public float attackAmount;
     public float attackDelay;
     public float attackRange;
 

@@ -29,6 +29,7 @@ public class StigmaFSM : EnemyBase<StigmaState>
     public float jumpPower;
     public float moveSpeed;
     public float fadeDelay;
+    public float attackAmount;
     public float attackDelay;
     public float attackRange;
     [HideInInspector] public float gravityScale;

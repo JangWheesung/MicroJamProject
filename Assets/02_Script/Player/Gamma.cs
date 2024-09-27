@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class Gamma : PlayerBase
 {
@@ -31,6 +32,7 @@ public class Gamma : PlayerBase
         else
             upgradeBullet = currentBullet;
 
+        bulletText.transform.DOShakeScale(0.2f).SetEase(Ease.OutBounce);
         BulletCountCheck();
 
         AudioManager.Instance.StartSfx("EnergeUp", 0.6f);

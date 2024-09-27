@@ -22,6 +22,7 @@ public class WahidRangeAttackState : WahidBaseState
         if (currentTime <= 0)
         {
             AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(rangeAttackEffect.name, wahidFSM.transform.position);
+            effect.SetTimeAmount(attackAmount);
             effect.PopEffect(LookPlayerVec());
 
             AudioManager.Instance.StartSfx("Bullet_2", 0.8f);

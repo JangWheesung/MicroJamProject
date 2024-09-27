@@ -330,6 +330,7 @@ MonoBehaviour:
   waveAmount: 0.02
   waveInterval: 5
   moveSpeed: 3
+  attackAmount: 1
   meleeDelay: 1
   rangeDelay: 0.8
   meleeRange: 1.5

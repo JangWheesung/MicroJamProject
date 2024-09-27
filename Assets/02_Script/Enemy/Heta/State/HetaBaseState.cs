@@ -11,6 +11,7 @@ public class HetaBaseState : BaseState<HetaState>
 
     protected float jumpPower;
     protected float moveSpeed;
+    protected float attackAmount;
     protected float aimingDelay;
     protected float attackDelay;
     protected float attackRange;
@@ -24,6 +25,7 @@ public class HetaBaseState : BaseState<HetaState>
 
         jumpPower = fsm.jumpPower;
         moveSpeed = fsm.moveSpeed;
+        attackAmount = fsm.attackAmount;
         aimingDelay = fsm.aimingDelay;
         attackDelay = fsm.attackDelay;
         attackRange = fsm.attackRange;

@@ -191,6 +191,7 @@ MonoBehaviour:
   jumpPower: 16
   moveSpeed: 5
   moveDelay: 1.2
+  attackAmount: 3
   attackDelay: 1.5
   attackRange: 2
 --- !u!1 &6397388903234550478

@@ -22,6 +22,7 @@ public class WahidMeleeAttackState : WahidBaseState
             wahidFSM.transform.right = LookPlayerVec();
 
             AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(meleeAttackEffect.name, wahidFSM.transform.position);
+            effect.SetTimeAmount(attackAmount);
             effect.PopEffect();
 
             SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_S);

@@ -467,6 +467,7 @@ MonoBehaviour:
   aimingLine: {fileID: 129160053320598660}
   jumpPower: 10
   moveSpeed: 3
+  attackAmount: 12
   aimingDelay: 3
   attackDelay: 1
   attackRange: 5

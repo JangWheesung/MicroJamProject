@@ -22,6 +22,7 @@ public class HetaFSM : EnemyBase<HetaState>
 
     public float jumpPower;
     public float moveSpeed;
+    public float attackAmount;
     public float aimingDelay;
     public float attackDelay;
     public float attackRange;

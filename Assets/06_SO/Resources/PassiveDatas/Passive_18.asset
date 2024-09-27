@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passiveType: 17
   handlePlayerBaseType: 4
+  passiveName: "\uD53C\uB85C"
+  passiveExt: "\uD544\uC0B4\uAE30\uB97C \uC4F4 \uC9C1\uD6C4 \uD53C\uACA9 \uC2DC \uC5BB\uB294
+    \uC2DC\uAC04 \uAC10\uC18C(-1)"

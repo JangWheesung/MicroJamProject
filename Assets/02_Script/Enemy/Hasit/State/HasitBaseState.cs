@@ -12,6 +12,7 @@ public class HasitBaseState : BaseState<HasitState>
     protected float jumpPower;
     protected float moveSpeed;
     protected float moveDelay;
+    protected float attackAmount;
     protected float attackDelay;
     protected float attackRange;
 
@@ -24,6 +25,7 @@ public class HasitBaseState : BaseState<HasitState>
         jumpPower = fsm.jumpPower;
         moveSpeed = fsm.moveSpeed;
         moveDelay = fsm.moveDelay;
+        attackAmount = fsm.attackAmount;
         attackDelay = fsm.attackDelay;
         attackRange = fsm.attackRange;
     }

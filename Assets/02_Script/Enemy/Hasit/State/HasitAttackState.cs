@@ -13,6 +13,7 @@ public class HasitAttackState : HasitBaseState
         if (currentTime <= 0)
         {
             AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(circleEffect.name, hasitFSM.transform.position);
+            effect.SetTimeAmount(attackAmount);
             effect.PopEffect();
 
             SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_M);

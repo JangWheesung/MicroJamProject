@@ -19,6 +19,7 @@ public class StigmaDieState : DieState<StigmaState>
         }
         else
         {
+            stigmaFSM.rb.gravityScale = 3f;
             base.OnStateEnter();
         }
     }

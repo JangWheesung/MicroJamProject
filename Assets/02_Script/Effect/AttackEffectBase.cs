@@ -46,7 +46,6 @@ public class AttackEffectBase : EffectBase
 
     protected virtual void PlayerHit(PlayerBase player)
     {
-        Debug.Log(timeAmount);
         player.Hit(timeAmount);
 
         if (isPopNormalEffect)

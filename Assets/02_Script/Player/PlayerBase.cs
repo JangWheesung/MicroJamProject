@@ -309,6 +309,11 @@ public class PlayerBase : MonoBehaviour
         }
     }
 
+    public void SetSpriteVisuality(bool value)
+    {
+        sp.enabled = value;
+    }
+
     protected void SetRigidbody(Vector2 newRb)
     {
         if (isEX)

@@ -103,7 +103,7 @@ MonoBehaviour:
   energeParticle: {fileID: 2995867814679522010, guid: caf6374d4fa9ab5428f2070c5285891e, type: 3}
   moveTime: 1
   radius: 0.2
-  erengeAmout: 0.2
+  erengeAmout: 1
   playerLayer:
     serializedVersion: 2
     m_Bits: 128

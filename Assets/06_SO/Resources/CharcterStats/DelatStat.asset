@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a036d37d5d388cb408149a3c539ab9a0, type: 3}
+  m_Name: DelatStat
+  m_EditorClassIdentifier: 
+  player: {fileID: 5579142414923662687, guid: 5fe52d1c860cb8d43bf6eb510d7f3b96, type: 3}
+  characterSprite: {fileID: 21300000, guid: 51730507800ac8140809ca3ec1a9cb8d, type: 3}
+  characterColor: {r: 0, g: 1, b: 0.3, a: 1}
+  chatacterName: Delta
+  speedStat: 10
+  jumpStat: 12
+  attackStat: 2
+  attackExt: "\uB9AC\uCE58\uAC00 \uC9E7\uC9C0\uB9CC \uBE60\uB978 \uD0C0\uACA9"
+  exName: "\uB545\uC6B8\uB9BC"
+  exExt: "\uAE30\uD569\uC744 \uBAA8\uC544 \uB545\uC73C\uB85C \uC8FC\uBA39\uC744 \uB0B4\uB9AC\uCCD0
+    \uC8FC\uBCC0\uC5D0 \uCDA9\uACA9\uC744 \uAC00\uD55C\uB2E4."
+  attackDelayStat: 0.1
+  skillName: "\uC751\uCD95"
+  skillExt: "2\uCD08 \uB3D9\uC548 \uD589\uB3D9\uBD88\uB2A5, \uBB34\uC801 \uC0C1\uD0DC\uC5D0
+    \uB4E4\uC5B4\uAC04\uB2E4. \uC9C0\uC18D\uC2DC\uAC04\uC774 \uB05D\uB098\uBA74,
+    \uB9C8\uC6B0\uC2A4 \uBC29\uD5A5\uC73C\uB85C \uAC15\uB825\uD55C \uC8FC\uBA39\uC744
+    \uB0B4\uC9C0\uB974\uBA70 \uBC94\uC704 \uB0B4 \uC801\uB4E4\uC5D0\uAC8C \uD53C\uD574\uB97C
+    \uC900\uB2E4."
+  skillDelayStat: 10
+  passiveDatas:
+  - {fileID: 11400000, guid: 15d85f9907776c84bb6806bebd9faa70, type: 2}

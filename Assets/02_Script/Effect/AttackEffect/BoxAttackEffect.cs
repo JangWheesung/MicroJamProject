@@ -8,7 +8,16 @@ public class BoxAttackEffect : AttackEffectBase
 
     public override void PopEffect()
     {
-        HitRader(transform.position, colBox.localScale, 0f);
+        HitRader(colBox.transform.position, colBox.localScale, 0f);
+    }
+
+    public override void PopEffect(Vector2 vec)
+    {
+        transform.up = vec;
+        
+        float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg - 90f;
+
+        HitRader(colBox.transform.position, colBox.localScale, angle);
     }
 
 #if UNITY_EDITOR

@@ -1,20 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Delta : PlayerBase
 {
     [Header("DeltaBase")]
     [SerializeField] private EffectBase skillEffect;
-    [SerializeField] private float condensationTime;
-
-    private bool isCondensation;
+    [SerializeField] private float skillTime;
+    [SerializeField] private LayerMask enemyLayer;
 
     protected override void Skill()
     {
         if (!pSkill) return;
 
-        isCondensation = true;
+        StartCoroutine(SkillCoolCor());
 
         base.Skill();
     }
@@ -43,5 +43,18 @@ public class Delta : PlayerBase
         EXEffectBase effect = PoolingManager.Instance.Pop<EXEffectBase>(exEffect.name, Vector2.zero);
         effect.SetTimeAmount(exValue);
         effect.PopEffect(this);
+    }
+
+    private IEnumerator SkillCoolCor()
+    {
+        isInvincibility = true;
+        jumpCount--;
+        moveSpeed /= 2;
+
+        yield return new WaitForSeconds(skillTime);
+
+        isInvincibility = false;
+        jumpCount++;
+        moveSpeed *= 2;
     }
 }

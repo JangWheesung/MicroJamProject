@@ -27,9 +27,45 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private List<PageData> pageDatas;
 
+    private int waveCount;
+    private int extraCnt;
+    private float upgradeAmount;
+
+    private bool isEndless;
+
     private void Start()
     {
-        StartCoroutine(SpawnLoop());
+        ControlSystem.Instance.OnGameStartEvt += StartEnemySpawn;
+    }
+
+    private void StartEnemySpawn()
+        => StartCoroutine(SpawnLoop());
+
+    private void WaveTriggerEvent()
+    {
+        waveCount++;
+
+        string waveReading;
+        if (!isEndless)
+        {
+            waveReading = "새로운 적 출현!";
+        }
+        else
+        {
+            int randomEvent = Random.Range(0, 2);
+            if (randomEvent == 0 && upgradeAmount < 1f)
+            {
+                waveReading = "적 변종 츌현율 증가!";
+                upgradeAmount += 0.1f;
+            }
+            else
+            {
+                waveReading = "적 생성횟수 증가!";
+                extraCnt += Random.Range(1, 2);
+            }
+        }
+
+        UISystem.Instance.WaveUI.PopWaveSetting(waveCount, waveReading);
     }
 
     private IEnumerator SpawnLoop()
@@ -38,6 +74,8 @@ public class EnemySpawner : MonoBehaviour
         int idx = 0;
         foreach (PageData data in pageDatas)
         {
+            WaveTriggerEvent();
+
             data.SetDatas(Resources.LoadAll<EnemyWaveData>($"WaveData/Page_{idx + 1}"));
             idx++;
 
@@ -45,30 +83,30 @@ public class EnemySpawner : MonoBehaviour
         }
 
         //무한모드
+        isEndless = true;
         PageData endless = pageDatas[pageDatas.Count - 1];
         endless.SetDatas(Resources.LoadAll<EnemyWaveData>("WaveData/Endless"));
-
-        int extraCnt = 0;
         while (true)
         {
-            extraCnt += Random.Range(1, 2);
-            yield return PageLoop(endless, extraCnt);
+            WaveTriggerEvent();
+
+            yield return PageLoop(endless);
         }
     }
 
-    private IEnumerator PageLoop(PageData data, int extraCnt = 0)
+    private IEnumerator PageLoop(PageData data)
     {
         for (int i = 0; i < data.waveCnt; i++)
         {
             int waveIdx = Random.Range(0, data.GetDatas().Length - 1);
-            yield return WaveLoop(data.GetDatas()[waveIdx], data.spawnTime, extraCnt);
+            yield return WaveLoop(data.GetDatas()[waveIdx], data.spawnTime);
             yield return new WaitForSeconds(data.delayTime);
         }
 
         yield return null;
     }
 
-    private IEnumerator WaveLoop(EnemyWaveData data, float spawnTime, int extraCnt = 0)
+    private IEnumerator WaveLoop(EnemyWaveData data, float spawnTime)
     {
         List<int> amountCnt = new List<int>();
 
@@ -89,7 +127,10 @@ public class EnemySpawner : MonoBehaviour
             }
 
             int randomPoint = Random.Range(0, spawnPoint.Length);
-            PoolingManager.Instance.Pop<IEnemy>(amountData.enemy.name, spawnPoint[randomPoint].position);
+            bool randomUpgrade = Random.Range(0, 1f) < upgradeAmount;
+            IEnemy enemy = PoolingManager.Instance.Pop<IEnemy>(amountData.enemy.name, spawnPoint[randomPoint].position);
+            if (randomUpgrade)
+                enemy.Upgrade();
 
             yield return new WaitForSeconds(spawnTime);
 

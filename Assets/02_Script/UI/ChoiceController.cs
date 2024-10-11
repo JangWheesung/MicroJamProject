@@ -35,8 +35,6 @@ public class ChoiceController : MonoBehaviour
     [Header("Stat")]
     [SerializeField] private Slider speedSlider;
     [SerializeField] private Slider jumpSlider;
-    [SerializeField] private TMP_Text speedText;
-    [SerializeField] private TMP_Text jumpText;
 
     [Header("AttackText")]
     [SerializeField] private TMP_Text attackText;
@@ -89,9 +87,6 @@ public class ChoiceController : MonoBehaviour
 
         speedSlider.value = stat.speedStat;
         jumpSlider.value = stat.jumpStat;
-
-        speedText.text = stat.speedStat.ToString();
-        jumpText.text = stat.jumpStat.ToString();
 
         attackText.text = $"\"{stat.attackExt}\"";
         attackDelayText.text = $"°ø°Ý µô·¹ÀÌ : {stat.attackDelayStat}s";

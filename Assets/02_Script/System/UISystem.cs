@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
+using TMPro;
 
 public class UISystem : MonoBehaviour
 {
@@ -15,12 +16,14 @@ public class UISystem : MonoBehaviour
     [SerializeField] private EXGaugeBar gaugeBar;
     [SerializeField] private Profle profle;
     [SerializeField] private UX ux;
+    [SerializeField] private WaveUI waveUI;
 
     public EXGaugeBar EXGaugeBar => gaugeBar;
     public Profle Profle => profle;
+    public WaveUI WaveUI => waveUI;
 
-    private float highSocre_time = 0f;
-    private int highSocre_kill = 0;
+    public float highSocre_time { get; private set; }
+    public int highSocre_kill { get; private set; }
 
     private void Awake()
     {
@@ -36,7 +39,15 @@ public class UISystem : MonoBehaviour
 
     private void Update()
     {
-        highSocre_time += Time.deltaTime;
+        if (Input.anyKeyDown && !ControlSystem.Instance.isGameStart)
+        {
+            ControlSystem.Instance.SetGameStart();
+        }
+
+        if (!ControlSystem.Instance.IsStopLogic())
+        {
+            highSocre_time += Time.deltaTime;
+        }
     }
 
     public void GetKillCount()

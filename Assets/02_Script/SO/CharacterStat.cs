@@ -39,7 +39,7 @@ public class CharacterStat : ScriptableObject
     [Header("Skill")]
     public string skillName;
     [TextArea] public string skillExt;
-    [Range(0, 10f)] public float skillDelayStat;
+    [Range(0, 20f)] public float skillDelayStat;
 
     [Space(20f)]
     [Header("Passive")]

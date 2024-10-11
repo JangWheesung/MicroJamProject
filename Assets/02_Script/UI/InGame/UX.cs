@@ -8,13 +8,24 @@ public class UX : MonoBehaviour
 {
     [SerializeField] private Image[] panels;
 
+    private void Start()
+    {
+        ControlSystem.Instance.OnGameStartEvt += CloseUXUI;
+    }
+
     public void PopUXUI()
     {
         foreach (Image image in panels)
         {
+            image.DOFade(0.9f, 1f);
+        }
+    }
+
+    public void CloseUXUI()
+    {
+        foreach (Image image in panels)
+        {
             DOTween.Sequence()
-                .Append(image.DOFade(0.9f, 1f))
-                .AppendInterval(1f)
                 .Append(image.DOFade(0f, 1f))
                 .AppendCallback(() => { gameObject.SetActive(false); });
         }

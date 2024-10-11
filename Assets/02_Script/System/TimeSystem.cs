@@ -9,7 +9,8 @@ public class TimeSystem : MonoBehaviour
 {
     public static TimeSystem Instance;
 
-    [SerializeField] private TextMeshPro timeText;
+    [SerializeField] private TMP_Text timeText;
+    [SerializeField] private TMP_Text highSocreText;
     [SerializeField] private float timeSettingValue;
 
     private Sequence effectSequence;
@@ -59,6 +60,9 @@ public class TimeSystem : MonoBehaviour
             {
                 ControlSystem.Instance.SetDeath();
             }
+
+            string highScore_str = UISystem.Instance.highSocre_time.ToString("F1") + "s";
+            highSocreText.text = highScore_str;
         }
     }
 

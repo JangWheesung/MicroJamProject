@@ -31,12 +31,22 @@ public abstract class EnemyBase<T> : FSM<T>, IEnemy where T : Enum
         player = GameObject.FindWithTag("Player").GetComponent<PlayerBase>();
         playerTrs = player.transform;
         playerPos = player.transform.position;
-
+        sp.material.SetFloat("_On", 1);
         InitializeState();
     }
 
     protected abstract void InitializeState();
-    
+
+    public virtual void Upgrade()
+    {
+        sp.material.SetFloat("_On", 1);
+    }
+
+    public virtual void Stop(bool value)
+    {
+        isStop = value;
+    }
+
     public virtual void Death(float minusTime)
     {
         this.minusTime = minusTime;

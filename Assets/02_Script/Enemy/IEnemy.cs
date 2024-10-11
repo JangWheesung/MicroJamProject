@@ -4,5 +4,9 @@ using UnityEngine;
 
 public interface IEnemy
 {
+    public abstract void Upgrade();
+
+    public abstract void Stop(bool value);
+
     public abstract void Death(float minusTime);
 }

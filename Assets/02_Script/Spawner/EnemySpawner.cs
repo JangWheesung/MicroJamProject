@@ -36,13 +36,27 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         ControlSystem.Instance.OnGameStartEvt += StartEnemySpawn;
+        ControlSystem.Instance.OnDeathEvt += EnmeyDestory;
     }
 
     private void StartEnemySpawn()
         => StartCoroutine(SpawnLoop());
 
+    private void EnmeyDestory()
+    {
+        foreach (GameObject enemyObj in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            if (enemyObj.TryGetComponent(out IEnemy enemy))
+            {
+                enemy.Death(0f);
+            }
+        }
+    }
+
     private void WaveTriggerEvent()
     {
+        if (ControlSystem.Instance.IsStopLogic()) return;
+
         waveCount++;
 
         string waveReading;
@@ -131,6 +145,7 @@ public class EnemySpawner : MonoBehaviour
             IEnemy enemy = PoolingManager.Instance.Pop<IEnemy>(amountData.enemy.name, spawnPoint[randomPoint].position);
             if (randomUpgrade)
                 enemy.Upgrade();
+           
 
             yield return new WaitForSeconds(spawnTime);
 

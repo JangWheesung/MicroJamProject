@@ -21,10 +21,10 @@ public class CharacterSlot : MonoBehaviour
     [Header("Prefab")]
     [SerializeField] private PassiveSlot passiveSlotObj;
 
-    private ChoiceController characterController;
+    private SelectUIController characterController;
     private CharacterStat characterStat;
 
-    public void SetSlot(CharacterStat stat, ChoiceController controller)
+    public void SetSlot(CharacterStat stat, SelectUIController controller)
     {
         characterController = controller;
         characterStat = stat;

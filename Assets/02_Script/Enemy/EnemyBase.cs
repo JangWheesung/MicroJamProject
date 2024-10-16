@@ -31,7 +31,7 @@ public abstract class EnemyBase<T> : FSM<T>, IEnemy where T : Enum
         player = GameObject.FindWithTag("Player").GetComponent<PlayerBase>();
         playerTrs = player.transform;
         playerPos = player.transform.position;
-        sp.material.SetFloat("_On", 1);
+        
         InitializeState();
     }
 

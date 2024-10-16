@@ -458,7 +458,7 @@ MonoBehaviour:
   exAttackProduct: 0
   attackProduct: 0
   hitProduct: 0
-  skillEffect: {fileID: 4639906296781526867, guid: 80633eb0902cfda45bb88b255384d017, type: 3}
+  skillEffect: {fileID: 8850742001155811308, guid: bb8a3ee43cf554d4db9b681c23495e75, type: 3}
   skillTime: 3
   enemyLayer:
     serializedVersion: 2

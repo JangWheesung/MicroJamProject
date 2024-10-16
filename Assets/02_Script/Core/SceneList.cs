@@ -5,6 +5,6 @@ using UnityEngine;
 public static class SceneList
 {
     public static string Intro = "Intro";
-    public static string Choice = "Choice";
+    public static string Menu = "Menu";
     public static string InGame = "Play";
 }

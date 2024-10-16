@@ -264,6 +264,7 @@ public class PlayerBase : MonoBehaviour
         OnEndExPlayerEvt?.Invoke();
 
         isEX = false;
+        isInvincibility = false;
         SetRigidbody(new Vector2(0f, 3f));
     }
 
@@ -378,8 +379,6 @@ public class PlayerBase : MonoBehaviour
             SpecialEffectSystem.Instance.BackgroundDarkness(delayTime);
             AudioManager.Instance.StartSfx("TimeSlow");
         });
-
-        isInvincibility = false;
         ControlSystem.Instance.SetEX(true);
     }
 

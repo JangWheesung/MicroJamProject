@@ -6,7 +6,7 @@ using DG.Tweening;
 public class Delta : PlayerBase
 {
     [Header("DeltaBase")]
-    [SerializeField] private EffectBase skillEffect;
+    [SerializeField] private BoostEffect skillEffect;
     [SerializeField] private float skillTime;
     [SerializeField] private LayerMask enemyLayer;
 
@@ -15,6 +15,9 @@ public class Delta : PlayerBase
         if (!pSkill) return;
 
         StartCoroutine(SkillCoolCor());
+
+        BoostEffect effect = PoolingManager.Instance.Pop<BoostEffect>(skillEffect.name, transform.position);
+        effect.PopEffect(this);
 
         base.Skill();
     }

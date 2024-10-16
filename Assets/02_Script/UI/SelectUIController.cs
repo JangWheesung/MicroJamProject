@@ -7,7 +7,7 @@ using TMPro;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
-public class ChoiceController : MonoBehaviour
+public class SelectUIController : MonoBehaviour
 {
     [Header("Object")]
     [SerializeField] private TMP_Text timeObj;
@@ -27,7 +27,6 @@ public class ChoiceController : MonoBehaviour
 
     [Header("UIRoot")]
     [SerializeField] private RectTransform characterPanelTrs;
-    //[SerializeField] private RectTransform abilityPanelContext;
 
     [Header("Name")]
     [SerializeField] private TMP_Text nameText;

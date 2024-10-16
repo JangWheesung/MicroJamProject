@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
-using TMPro;
 
 public class UISystem : MonoBehaviour
 {

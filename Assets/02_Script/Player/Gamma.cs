@@ -7,6 +7,7 @@ using DG.Tweening;
 public class Gamma : PlayerBase
 {
     [Header("GammaBase")]
+    [SerializeField] private BoostEffect skillEffect;
     [SerializeField] private TMP_Text bulletText;
     [SerializeField] private int bulletCount;
     private int currentBullet;
@@ -23,7 +24,7 @@ public class Gamma : PlayerBase
         BulletCountCheck();
     }
 
-    protected override void Skill() //¾ÆÁ÷ Ã¶°©Åº º¸·ù
+    protected override void Skill()
     {
         if (!pSkill) return;
 
@@ -35,7 +36,10 @@ public class Gamma : PlayerBase
         bulletText.transform.DOShakeScale(0.2f).SetEase(Ease.OutBounce);
         BulletCountCheck();
 
-        AudioManager.Instance.StartSfx("EnergeUp", 0.6f);
+        BoostEffect effect = PoolingManager.Instance.Pop<BoostEffect>(skillEffect.name, transform.position);
+        effect.PopEffect(this);
+
+        AudioManager.Instance.StartSfx("EnergeDown", 0.8f);
 
         base.Skill();
     }

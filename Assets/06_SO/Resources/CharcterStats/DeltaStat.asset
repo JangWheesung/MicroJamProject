@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a036d37d5d388cb408149a3c539ab9a0, type: 3}
-  m_Name: DelatStat
+  m_Name: DeltaStat
   m_EditorClassIdentifier: 
   player: {fileID: 5579142414923662687, guid: 5fe52d1c860cb8d43bf6eb510d7f3b96, type: 3}
   characterSprite: {fileID: 21300000, guid: 51730507800ac8140809ca3ec1a9cb8d, type: 3}

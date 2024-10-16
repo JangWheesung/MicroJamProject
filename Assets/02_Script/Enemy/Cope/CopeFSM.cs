@@ -52,6 +52,13 @@ public class CopeFSM : EnemyBase<CopeState>
         ChangeState(CopeState.Idle);
     }
 
+    public override void Upgrade()
+    {
+        base.Upgrade();
+
+        moveSpeed += 1f;
+    }
+
     private void OnEnable()
     {
         ChangeState(CopeState.Idle);

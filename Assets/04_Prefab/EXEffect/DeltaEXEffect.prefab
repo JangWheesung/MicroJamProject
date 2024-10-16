@@ -376,7 +376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   liveTime: 1.8
-  normalEffect: {fileID: 2874610256297708771, guid: a875c093b7c115e479cc3fc5c1608a9f, type: 3}
+  normalEffect: {fileID: 1354777548436956985, guid: 53fde04425c8bbb4594085598393e3ee, type: 3}
 --- !u!1 &8698481982844232557
 GameObject:
   m_ObjectHideFlags: 0

@@ -64,7 +64,7 @@ public class IntroController : MonoBehaviour
 
             ground.DOMoveY(-5, 0.6f).OnComplete(() =>
             {
-                SceneManager.LoadScene(SceneList.Choice);
+                SceneManager.LoadScene(SceneList.Menu);
             });
         });
     }

@@ -29,6 +29,6 @@ MonoBehaviour:
   skillExt: "\uD604\uC7AC \uB0A8\uC544\uC788\uB294 \uCD1D\uC54C \uC911 \uCD5C\uB300
     3\uBC1C\uC744 \uAD00\uD1B5\uAE30\uB2A5\uC744 \uC9C0\uB2CC \uCCA0\uAC11\uD0C4\uC73C\uB85C
     \uBC14\uAFBC\uB2E4."
-  skillDelayStat: 3
+  skillDelayStat: 1
   passiveDatas:
   - {fileID: 11400000, guid: 15d85f9907776c84bb6806bebd9faa70, type: 2}

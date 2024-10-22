@@ -452,14 +452,13 @@ MonoBehaviour:
   attackEffect: {fileID: 6998994221616932456, guid: 4c4a1cdcf07ffaa40a07418d01ef1fae, type: 3}
   exEffect: {fileID: 4113080319566569493, guid: 501d3d3e24b49fb429c42479790b547e, type: 3}
   playerSlice: {fileID: 4892012691573461814, guid: f0652ca8e079dba41a6a5b97282c5145, type: 3}
-  passiveDatas: 
+  passiveTypes: 
   jumpCount: 1
   originGravity: 3
   exAttackProduct: 0
   attackProduct: 0
   hitProduct: 0
-  dashSpeed: 15
-  dashDuration: 0.3
+  parryingDuration: 0.8
 --- !u!114 &-430708052355588243
 MonoBehaviour:
   m_ObjectHideFlags: 0

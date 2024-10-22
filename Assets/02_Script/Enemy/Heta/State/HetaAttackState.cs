@@ -8,9 +8,9 @@ public class HetaAttackState : HetaBaseState
 
     protected override void OnStateEnter()
     {
-        AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(lazerEffect.name, playerTrs.position);
+        HetaAttackEffect effect = PoolingManager.Instance.Pop<HetaAttackEffect>(lazerEffect.name, playerTrs.position);
         effect.SetTimeAmount(attackAmount);
-        effect.PopEffect();
+        effect.PopEffect(hetaFSM);
 
         AudioManager.Instance.StartSfx("Lazer_2");
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_H);

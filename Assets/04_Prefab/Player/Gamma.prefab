@@ -488,6 +488,8 @@ MonoBehaviour:
   skillEffect: {fileID: 8850742001155811308, guid: bb8a3ee43cf554d4db9b681c23495e75, type: 3}
   bulletText: {fileID: 2828783510538581642}
   bulletCount: 12
+  dashSpeed: 24
+  dashDuration: 0.2
 --- !u!114 &-6206093290429848081
 MonoBehaviour:
   m_ObjectHideFlags: 0

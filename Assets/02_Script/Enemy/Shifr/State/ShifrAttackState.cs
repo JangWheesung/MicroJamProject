@@ -12,9 +12,9 @@ public class ShifrAttackState : ShifrBaseState
     {
         if (currentTime <= 0)
         {
-            AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(circleEffect.name, shifrFSM.transform.position);
+            ShifrAttackEffect effect = PoolingManager.Instance.Pop<ShifrAttackEffect>(circleEffect.name, shifrFSM.transform.position);
             effect.SetTimeAmount(attackAmount);
-            effect.PopEffect();
+            effect.PopEffect(shifrFSM);
 
             SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_S);
             AudioManager.Instance.StartSfx("Circle");

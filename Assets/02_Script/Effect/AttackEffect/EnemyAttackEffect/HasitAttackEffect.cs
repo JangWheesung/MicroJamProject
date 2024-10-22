@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class HasitAttackEffect : CircleAttackEffect
 {
+    public override void PopEffect(IEnemy enemy)
+    {
+        base.PopEffect(enemy);
+        base.PopEffect();
+    }
+
     public override void DisableEffect()
     {
         Color color = new Color(1, 0.5f, 1, 1);

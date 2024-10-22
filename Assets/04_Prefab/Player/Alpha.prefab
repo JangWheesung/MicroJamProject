@@ -105,9 +105,9 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 0.78431374}
-      key1: {r: 1, g: 1, b: 1, a: 0.39215687}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 1, g: 1, b: 1, a: 0.78431374}
+      key2: {r: 0, g: 0, b: 0, a: 0.39215687}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -122,9 +122,9 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 58982
-      atime2: 65535
-      atime3: 0
+      atime1: 1157
+      atime2: 58982
+      atime3: 65535
       atime4: 0
       atime5: 0
       atime6: 0
@@ -132,7 +132,7 @@ TrailRenderer:
       m_Mode: 0
       m_ColorSpace: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 3
+      m_NumAlphaKeys: 4
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
@@ -272,7 +272,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5, y: 5}
+    oldSize: {x: 0.9765625, y: 0.9765625}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -458,8 +458,11 @@ MonoBehaviour:
   exAttackProduct: 0
   attackProduct: 0
   hitProduct: 0
-  dashSpeed: 23
-  dashDuration: 0.2
+  skillEffect_smash: {fileID: 5925246018399338063, guid: 7c1a8339a5a56844fb975b9ec7309c18, type: 3}
+  skillEffect_line: {fileID: 660659025655284539, guid: f9fc38d9924fdd04083b258a2b917869, type: 3}
+  skillEffect_circle: {fileID: 6296323903780119162, guid: 2e471bbd3980c1040868bab460733528, type: 3}
+  dashSpeed: 30
+  dashDuration: 0.25
 --- !u!114 &1770291101945804794
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterSprite: {fileID: 21300000, guid: 51730507800ac8140809ca3ec1a9cb8d, type: 3}
   characterName: Delta
-  nickName: "\uBB50\uB0D0 \uC2DC\uBC1C"
+  nickName: "\uBB50\uB0D0"
   killCount: 2
   timeCount: 51.235092

@@ -224,7 +224,7 @@ public class PlayerBase : MonoBehaviour
 
     #region Virtual_Event
 
-    public virtual void Hit(float minusTime)
+    public virtual void Hit(IEnemy enemy, float minusTime)
     {
         if (isInvincibility) return;
 
@@ -313,6 +313,11 @@ public class PlayerBase : MonoBehaviour
     public void SetSpriteVisuality(bool value)
     {
         sp.enabled = value;
+    }
+
+    public void SetSpriteColor(Color color)
+    {
+        sp.color = color;
     }
 
     protected void SetRigidbody(Vector2 newRb)

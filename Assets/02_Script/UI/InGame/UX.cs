@@ -7,6 +7,7 @@ using DG.Tweening;
 public class UX : MonoBehaviour
 {
     [SerializeField] private Image[] panels;
+    [SerializeField] private GameObject pressObj;
 
     private void Start()
     {
@@ -23,6 +24,8 @@ public class UX : MonoBehaviour
 
     public void CloseUXUI()
     {
+        pressObj.SetActive(false);
+
         foreach (Image image in panels)
         {
             DOTween.Sequence()

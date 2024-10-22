@@ -4,6 +4,8 @@ using UnityEngine;
 
 public interface IEnemy
 {
+    public Vector2 EnemyPos();
+
     public abstract void Upgrade();
 
     public abstract void Stop(bool value);

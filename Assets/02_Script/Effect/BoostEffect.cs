@@ -9,4 +9,14 @@ public class BoostEffect : EffectBase
         transform.position = player.transform.position;
         transform.parent = player.transform;
     }
+
+    public void PopEffect(PlayerBase player, Vector2 vec, bool isUp = true)
+    {
+        if (isUp)
+            transform.up = vec;
+        else
+            transform.right = vec;
+
+        PopEffect(player);
+    }
 }

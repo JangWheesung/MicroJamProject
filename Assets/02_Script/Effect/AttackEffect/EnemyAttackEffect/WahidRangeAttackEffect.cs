@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class WahidRangeAttackEffect : BulletAttackEffect
 {
+    public void PopEffect(Vector2 vec, IEnemy enemy)
+    {
+        base.PopEffect(enemy);
+        base.PopEffect(vec);
+    }
+
     protected override void PlayerHit(PlayerBase player)
     {
-        player.Hit(timeAmount);
+        player.Hit(ownerAttackEnemy, timeAmount);
 
         if (isPopNormalEffect)
         {

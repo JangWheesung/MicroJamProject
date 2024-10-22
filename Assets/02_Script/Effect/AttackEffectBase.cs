@@ -9,7 +9,14 @@ public class AttackEffectBase : EffectBase
     [SerializeField] protected bool isPopNormalEffect;
     [SerializeField] private LayerMask hitLayer;
 
+    protected IEnemy ownerAttackEnemy;
+
     protected float timeAmount;
+
+    public override void PopEffect(IEnemy enemy)
+    {
+        ownerAttackEnemy = enemy;
+    }
 
     public void SetTimeAmount(float timeAmount)
     {
@@ -46,7 +53,7 @@ public class AttackEffectBase : EffectBase
 
     protected virtual void PlayerHit(PlayerBase player)
     {
-        player.Hit(timeAmount);
+        player.Hit(ownerAttackEnemy, timeAmount);
 
         if (isPopNormalEffect)
         {

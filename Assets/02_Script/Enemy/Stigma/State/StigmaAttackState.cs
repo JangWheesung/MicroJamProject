@@ -26,9 +26,9 @@ public class StigmaAttackState : StigmaBaseState
 
         rb.gravityScale = stigmaFSM.gravityScale;
 
-        AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(smashinEffect.name, stigmaFSM.transform.position);
+        StigmaAttackEffect effect = PoolingManager.Instance.Pop<StigmaAttackEffect>(smashinEffect.name, stigmaFSM.transform.position);
         effect.SetTimeAmount(attackAmount);
-        effect.PopEffect(-LookPlayerVec());
+        effect.PopEffect(-LookPlayerVec(), stigmaFSM);
 
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_M);
         AudioManager.Instance.StartSfx($"Smashing_4");

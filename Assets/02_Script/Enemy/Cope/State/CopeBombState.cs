@@ -10,9 +10,9 @@ public class CopeBombState : CopeBaseState
 
     protected override void OnStateEnter()
     {
-        AttackEffectBase effect = PoolingManager.Instance.Pop<AttackEffectBase>(bombEffect.name, copeFSM.transform.position);
+        CopeAttackEffect effect = PoolingManager.Instance.Pop<CopeAttackEffect>(bombEffect.name, copeFSM.transform.position);
         effect.SetTimeAmount(attackAmount);
-        effect.PopEffect();
+        effect.PopEffect(copeFSM);
 
         //AudioManager.Instance.StartSfx("Lazer_2");
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_H);

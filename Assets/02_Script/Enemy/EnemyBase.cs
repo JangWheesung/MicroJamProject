@@ -52,4 +52,9 @@ public abstract class EnemyBase<T> : FSM<T>, IEnemy where T : Enum
         this.minusTime = minusTime;
         isDie = true;
     }
+
+    public Vector2 EnemyPos()
+    {
+        return transform.position;
+    }
 }

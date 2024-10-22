@@ -6,48 +6,45 @@ using DG.Tweening;
 public class Beta : PlayerBase
 {
     [Header("BetaBase")]
-    [SerializeField] protected float dashSpeed = 15f;
-    [SerializeField] protected float dashDuration = 0.2f;
+    [SerializeField] protected float parryingDuration = 0.2f;
 
-    private bool isDash;
-
-    protected override void FixedUpdate()
-    {
-        if (isDash) return;
-
-        base.FixedUpdate();
-    }
+    private bool isParrying;
 
     protected override void Skill()
     {
         if (!pSkill) return;
 
-        isDash = true;
+        isParrying = true;
+        SetSpriteColor(Color.gray);
+        SetRigidbody(Vector2.zero);
 
-        AudioManager.Instance.StartSfx($"Dash");
-
-        Vector2 dashVelocity = new Vector2(isFacingRight ? dashSpeed : -dashSpeed, rb.velocity.y);
-        SetRigidbody(dashVelocity);
-
-        StartCoroutine(DashDelay());
-
-        int spinDown = isFacingRight ? -180 : 180;
-        int spinUp = isFacingRight ? -360 : 360;
-
-        isInvincibility = true;
-        sp.color = Color.gray;
-
-        DOTween.Sequence()
-            .Append(transform.DORotate(new Vector3(0, 0, spinDown), dashDuration / 2f))
-            .Append(transform.DORotate(new Vector3(0, 0, spinUp), dashDuration / 2f))
-            .OnComplete(() => 
-            {
-                isInvincibility = false;
-                sp.color = Color.white;
-                transform.rotation = new Quaternion(0, 0, 0, 0);
-            });
+        StartCoroutine(ParryingDelay());
 
         base.Skill();
+    }
+
+    private void Parrying(IEnemy enemy)
+    {
+        isParrying = false;
+
+        StopCoroutine(ParryingDelay());
+
+        transform.DOLocalMove(enemy.EnemyPos(), 0.05f)
+            .OnComplete(() => 
+            {
+                SetSpriteColor(Color.white);
+                enemy.Death(attackAmount);
+            });
+    }
+
+    public override void Hit(IEnemy enemy, float minusTime)
+    {
+        if (isParrying)
+        {
+            Parrying(enemy);
+            return;
+        }
+        base.Hit(enemy, minusTime);
     }
 
     protected override void Attack()
@@ -76,11 +73,12 @@ public class Beta : PlayerBase
         effect.PopEffect(this);
     }
 
-    private IEnumerator DashDelay()
+    private IEnumerator ParryingDelay()
     {
-        yield return new WaitForSeconds(dashDuration);
+        yield return new WaitForSeconds(parryingDuration);
 
-        isDash = false;
+        isParrying = false;
+        SetSpriteColor(Color.white);
         SetRigidbody(Vector2.zero);
     }
 }

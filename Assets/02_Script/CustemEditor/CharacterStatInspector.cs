@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
+
 [CanEditMultipleObjects]
 [CustomEditor(typeof(CharacterStat))]
 public class CharacterStatInspector : Editor
@@ -17,3 +19,5 @@ public class CharacterStatInspector : Editor
         base.OnInspectorGUI();
     }
 }
+
+#endif

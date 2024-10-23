@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Linq;
+using System.IO;
 
 public enum RankType
 {
@@ -42,17 +43,28 @@ public class RankUIController : MonoBehaviour
 
     private void RankInitializer()
     {
-        RankData[] rankDatas = Resources.LoadAll<RankData>("RankData");
+        // JSON 파일 경로
+        string path = $"{Application.streamingAssetsPath}/RankData.json";
 
+        // JSON 파일에서 RankData 불러오기
+        if (!File.Exists(path)) return;
+
+        string jsonData = File.ReadAllText(path);
+        List<RankDataJSON> rankDataList = JsonUtility.FromJson<RankDataList>(jsonData).rankDatas;
+
+        // 랭크 타입에 따른 정렬
         if (rankType == RankType.Time)
-            rankDatas = rankDatas.OrderByDescending(data => data.timeCount).ToArray();
+            rankDataList = rankDataList.OrderByDescending(data => data.timeCount).ToList();
         else
-            rankDatas = rankDatas.OrderByDescending(data => data.killCount).ToArray();
+            rankDataList = rankDataList.OrderByDescending(data => data.killCount).ToList();
 
         int rankCount = 1;
-        foreach (var data in rankDatas)
+        foreach (var data in rankDataList)
         {
             RankSlot slot;
+
+            // Resources 폴더에서 스프라이트 로드
+            //Sprite characterSprite = Resources.Load<Sprite>($"CharacterSprites/{data.characterSpriteName}");
 
             if (content.childCount < rankCount)
             {

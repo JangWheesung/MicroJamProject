@@ -53,7 +53,7 @@ public class EXGaugeBar : MonoBehaviour
         fillImage.color = Color.white;
 
         SpecialEffectSystem.Instance.BackgroundAura(Color.cyan);
-        SpecialEffectSystem.Instance.BloomIntensity(BloomType.Light_H);
+        //SpecialEffectSystem.Instance.BloomIntensity(BloomType.Light_H);
     }
 
     public void PlusGauge(float value)

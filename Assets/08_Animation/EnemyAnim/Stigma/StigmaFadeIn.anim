@@ -93,4 +93,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.38333333
+    functionName: SetSpriteColorA
+    data: 
+    objectReferenceParameter: {fileID: 9060308261438211631, guid: 236960bc8d1533743b5b6ee11e00f1b2, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

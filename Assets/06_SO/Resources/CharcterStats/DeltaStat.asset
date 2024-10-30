@@ -18,18 +18,17 @@ MonoBehaviour:
   chatacterName: Delta
   speedStat: 10
   jumpStat: 12
-  attackStat: 2
-  attackExt: "\uB9AC\uCE58\uAC00 \uC9E7\uC9C0\uB9CC \uBE60\uB978 \uD0C0\uACA9"
+  attackStat: 1.8
+  attackExt: "\uCD08\uADFC\uAC70\uB9AC \uD0C0\uACA9"
   exName: "\uB545\uC6B8\uB9BC"
   exExt: "\uAE30\uD569\uC744 \uBAA8\uC544 \uB545\uC73C\uB85C \uC8FC\uBA39\uC744 \uB0B4\uB9AC\uCCD0
     \uC8FC\uBCC0\uC5D0 \uCDA9\uACA9\uC744 \uAC00\uD55C\uB2E4."
-  attackDelayStat: 0.1
-  skillName: "\uAC70\uBD80\uBC18\uC751"
+  attackDelayStat: 0.18
+  skillName: "\uC751\uCD95"
   skillExt: "3\uCD08\uB3D9\uC548 \uBB34\uC801\uC0C1\uD0DC\uC5D0 \uB4E4\uC5B4\uAC04\uB2E4.
     \uBB34\uC801\uC0C1\uD0DC\uC5D0\uC120 \uC774\uB3D9\uC18D\uB3C4, \uC810\uD504\uD69F\uC218\uAC00
     \uC81C\uD55C\uB41C\uB2E4."
-  skillDelayStat: 1
+  skillDelayStat: 13
   passiveDatas:
-  - {fileID: 11400000, guid: 85bab13d4d5bf2248a3da9e121453fca, type: 2}
   - {fileID: 11400000, guid: ef8fa403d56e56e459d5929e936f45e6, type: 2}
   - {fileID: 11400000, guid: a7f8e256f5736c846a76288482f92cf4, type: 2}

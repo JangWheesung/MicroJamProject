@@ -19,7 +19,7 @@ public class CircleAttackEffect : AttackEffectBase
         CircleEffect();
     }
 
-    public override void PopEffect(PlayerBase player)
+    public override void PopEffect(PlayerBase player, bool isParent = false)
     {
         HitRader(player.transform.position, scaleSize);
         CircleEffect();

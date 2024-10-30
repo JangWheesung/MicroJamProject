@@ -485,9 +485,12 @@ MonoBehaviour:
   exAttackProduct: 0
   attackProduct: 0
   hitProduct: 0
-  skillEffect: {fileID: 8850742001155811308, guid: bb8a3ee43cf554d4db9b681c23495e75, type: 3}
+  skillEffect_reload: {fileID: 2879059027570425137, guid: a8f751540811aa6498044ac7e1341409, type: 3}
+  skillEffect_set: {fileID: 8850742001155811308, guid: bb8a3ee43cf554d4db9b681c23495e75, type: 3}
+  skillEffect_attack: {fileID: 8579207571274134901, guid: 95c6521b3e3bbc641b44fdbc24626b9d, type: 3}
   bulletText: {fileID: 2828783510538581642}
   bulletCount: 12
+  bulletDelay: 0.1
   dashSpeed: 24
   dashDuration: 0.2
 --- !u!114 &-6206093290429848081

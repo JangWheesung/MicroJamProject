@@ -18,7 +18,7 @@ public class DieState<T> : BaseState<T> where T : Enum
         Slice slices = PoolingManager.Instance.Pop<Slice>(enemySlice.name, enemyBase.transform.position);
         slices.BreakEffect(breakPower);
 
-        TimeSystem.Instance.PlusTime(enemyFSM.minusTime);
+        TimeSystem.Instance.PlusTime(enemyFSM.minusTime - enemyFSM.upgradeTime);
         UISystem.Instance.GetKillCount();
         AudioManager.Instance.StartSfx("EnemyDeath");
         PoolingManager.Instance.Push(enemyBase.gameObject);

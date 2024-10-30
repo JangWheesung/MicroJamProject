@@ -57,7 +57,7 @@ public class PassiveInitializer : MonoBehaviour
                 () => { EnergeOperation(0.1f); }) },
 
             { PassiveType.Passive_23, (player) =>
-                ProbabilityBuff(0.08f,
+                ProbabilityBuff(0.05f,
                 () => { EnergeOperation(0.1f); }) },
 
             { PassiveType.Passive_24, (player) =>

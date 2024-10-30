@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoostEffect : EffectBase
 {
-    public override void PopEffect(PlayerBase player)
+    public override void PopEffect(PlayerBase player, bool isParent = false)
     {
         transform.position = player.transform.position;
         transform.parent = player.transform;

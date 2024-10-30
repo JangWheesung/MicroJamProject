@@ -25,8 +25,8 @@ public class PlayerBase : MonoBehaviour
     protected float moveSpeed;
     protected float jumpPower;
     protected float attackAmount;
-    protected float skillDelay;
-    protected float attackDelay;
+    [HideInInspector] public float skillDelay { get; set; }
+    [HideInInspector] public float attackDelay { get; set; }
 
     [Header("Data_Passive")]
     [HideInInspector] public PassiveType[] passiveTypes;
@@ -45,8 +45,8 @@ public class PlayerBase : MonoBehaviour
     protected bool isEX;
     protected bool isDead = false;
 
-    protected bool pSkill = true;
-    protected bool pAttack = true;
+    [HideInInspector] public bool pSkill { get; set; }
+    [HideInInspector] public bool pAttack { get; set; }
 
     protected int currentJumpCount = 0;
     protected bool isInvincibility = false;
@@ -75,6 +75,9 @@ public class PlayerBase : MonoBehaviour
         exAttackProduct = 3f;
         hitProduct = 0f;
         attackProduct = 0f;
+
+        pSkill = true;
+        pAttack = true;
     }
 
     protected virtual void Start() //죽는 이벤트 구독

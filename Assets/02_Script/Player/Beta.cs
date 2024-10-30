@@ -6,19 +6,28 @@ using DG.Tweening;
 public class Beta : PlayerBase
 {
     [Header("BetaBase")]
-    [SerializeField] protected float parryingDuration = 0.2f;
+    [SerializeField] protected BoostEffect skillEffect_set;
+    [SerializeField] protected EffectBase skillEffect_x;
+    [SerializeField] protected AttackEffectBase skillEffect_attack;
+    [SerializeField] protected float parryingDuration;
+    [SerializeField] protected float parryingDelay;
 
+    private BoostEffect skillSetEffect;
     private bool isParrying;
 
     protected override void Skill()
     {
         if (!pSkill) return;
-
+        
         isParrying = true;
         SetSpriteColor(Color.gray);
-        SetRigidbody(Vector2.zero);
+
+        skillSetEffect = PoolingManager.Instance.Pop<BoostEffect>(skillEffect_set.name, transform.position);
+        skillSetEffect.PopEffect(this);
 
         StartCoroutine(ParryingDelay());
+
+        AudioManager.Instance.StartSfx($"Boost", 0.6f);
 
         base.Skill();
     }
@@ -29,11 +38,28 @@ public class Beta : PlayerBase
 
         StopCoroutine(ParryingDelay());
 
-        transform.DOLocalMove(enemy.EnemyPos(), 0.05f)
-            .OnComplete(() => 
+        PoolingManager.Instance.Pop<EffectBase>(skillEffect_x.name, transform.position).PopEffect();
+
+        SpecialEffectSystem.Instance.BackgroundDarkness(parryingDelay);
+        AudioManager.Instance.StartSfx($"BetaSkill");
+
+        DOTween.Sequence()
+            .Append(DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 0.2f, parryingDelay).SetUpdate(true))
+            .AppendCallback(() => { Time.timeScale = 1f; })
+            .Append(transform.DOLocalMove(enemy.EnemyPos(), 0.1f))
+            .AppendCallback(() => 
             {
                 SetSpriteColor(Color.white);
                 enemy.Death(attackAmount);
+
+                var skillAttackEffect = PoolingManager.Instance.Pop<AttackEffectBase>(skillEffect_attack.name, transform.position);
+                skillAttackEffect.SetTimeAmount(attackAmount);
+                skillAttackEffect.PopEffect();
+
+                skillSetEffect.DisableEffect();
+
+                SpecialEffectSystem.Instance.BackgroundDarkness(0.1f, false);
+                AudioManager.Instance.StartSfx($"Smashing_3");
             });
     }
 

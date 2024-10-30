@@ -130,7 +130,11 @@ public class SelectUIController : MonoBehaviour
 
     public void OnChoiceCilck()
     {
-        if (choiceCharacterName == null) return;
+        if (choiceCharacterName == null)
+        {
+            PlayerPrefs.SetString("PlayerName", "");
+            return;
+        }
 
         PlayerPrefs.SetString("PlayerName", choiceCharacterName);
 

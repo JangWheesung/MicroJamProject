@@ -17,7 +17,7 @@ public class EffectBase : MonoBehaviour
     public virtual void PopEffect() { }
     public virtual void PopEffect(Vector2 vec) { }
     public virtual void PopEffect(object value) { }
-    public virtual void PopEffect(PlayerBase player) { }
+    public virtual void PopEffect(PlayerBase player, bool isParent = false) { }
     public virtual void PopEffect(IEnemy enemy) { }
 
     public virtual void UnityAnimEvent() { }

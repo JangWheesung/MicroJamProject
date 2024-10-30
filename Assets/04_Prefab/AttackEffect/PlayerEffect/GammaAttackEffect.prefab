@@ -4956,10 +4956,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb55eb6940943743a3f19c5d9b8f69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liveTime: 0.4
+  liveTime: 0.32
   normalEffect: {fileID: 4639906296781526867, guid: 80633eb0902cfda45bb88b255384d017, type: 3}
   isPopNormalEffect: 1
-  attackAmount: 1.5
   hitLayer:
     serializedVersion: 2
     m_Bits: 64

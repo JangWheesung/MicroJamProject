@@ -41,6 +41,31 @@ public class RankUIController : MonoBehaviour
         rankRoot.DOLocalMoveY(0f, 0.5f).SetEase(Ease.OutBack);
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.R) && Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.N) && Input.GetKey(KeyCode.K))
+        {
+            Debug.Log("Rank");
+            RankDestroyCommanderKey();
+        }
+    }
+
+    private void RankDestroyCommanderKey()
+    {
+        string directoryPath = $"{Application.streamingAssetsPath}";
+        string filePath = $"{directoryPath}/RankData.json";
+
+        if (!Directory.Exists(directoryPath)) return;
+
+        List<RankDataJSON> rankDataList = new List<RankDataJSON>();
+        RankDataList rankDataWrapper = new RankDataList { rankDatas = rankDataList };
+        string updatedJson = JsonUtility.ToJson(rankDataWrapper, true);
+
+        File.WriteAllText(filePath, updatedJson);
+
+        RankInitializer();
+    }
+
     private void RankInitializer()
     {
         // JSON 파일 경로
@@ -100,5 +125,12 @@ public class RankUIController : MonoBehaviour
         }
 
         RankInitializer();
+    }
+
+    public void OnChoiceCilck()
+    {
+        if (PlayerPrefs.GetString("PlayerName") == "") return;
+
+        rankRoot.DOLocalMoveY(10f, 0.2f).SetEase(Ease.InQuart);
     }
 }

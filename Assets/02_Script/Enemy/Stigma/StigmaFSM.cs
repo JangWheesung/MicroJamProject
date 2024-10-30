@@ -73,4 +73,11 @@ public class StigmaFSM : EnemyBase<StigmaState>
     {
         ChangeState(StigmaState.Idle);
     }
+
+    public void SetSpriteColorA(float value)
+    {
+        Color c = sp.color;
+        c.a = value;
+        sp.color = c;
+    }
 }

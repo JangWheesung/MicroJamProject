@@ -5,27 +5,9 @@ using DG.Tweening;
 
 public class AlphaEXEffect : EXEffectBase
 {
-    [SerializeField] private float effectTime;
-    private SpriteRenderer sp;
-
-    protected override void OnEnable()
+    public override void UnityAnimEvent()
     {
-        sp = GetComponent<SpriteRenderer>();
-
-        transform.localScale = Vector2.zero;
-        sp.color = Color.red;
-
-        base.OnEnable();
-    }
-
-    public override void PopEffect()
-    {
-        AudioManager.Instance.StartSfx("AlphaEX");
-        SpecialEffectSystem.Instance.CameraShaking(CameraType.Rock_H, effectTime);
-
-        DOTween.Sequence()
-            .Append(transform.DOScale(new Vector3(8, 8, 1), effectTime).SetEase(Ease.Linear))
-            .Join(sp.DOColor(Color.white, effectTime))
-            .AppendCallback(() => { DisableEffect(); });
+        SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_H);
+        AudioManager.Instance.StartSfx("Smashing_4");
     }
 }

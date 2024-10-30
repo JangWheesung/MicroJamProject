@@ -7,15 +7,20 @@ using DG.Tweening;
 public class Gamma : PlayerBase
 {
     [Header("GammaBase")]
-    [SerializeField] private BoostEffect skillEffect;
+    [SerializeField] private BoostEffect skillEffect_reload;
+    [SerializeField] private BoostEffect skillEffect_set;
+    [SerializeField] private AttackEffectBase skillEffect_attack;
     [SerializeField] private TMP_Text bulletText;
     [SerializeField] private int bulletCount;
+    [SerializeField] private float bulletDelay;
     [SerializeField] protected float dashSpeed = 15f;
     [SerializeField] protected float dashDuration = 0.2f;
 
     private int currentBullet;
     private int upgradeBullet;
     private bool isDash;
+
+    private bool pFire;
 
     private bool isEmpty => currentBullet <= 0;
     private bool isUpgrade => upgradeBullet > 0;
@@ -24,6 +29,7 @@ public class Gamma : PlayerBase
     {
         base.Start();
 
+        pFire = true;
         currentBullet = bulletCount;
         BulletCountCheck();
     }
@@ -41,31 +47,44 @@ public class Gamma : PlayerBase
 
         isDash = true;
 
+        StartCoroutine(DashDelay());
+
         AudioManager.Instance.StartSfx($"Dash");
+        SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_H);
+
+        var skillSetEffect = PoolingManager.Instance.Pop<BoostEffect>(skillEffect_set.name, transform.position);
+        skillSetEffect.PopEffect(this);
 
         Vector2 dashVelocity = new Vector2(isFacingRight ? dashSpeed : -dashSpeed, rb.velocity.y);
         SetRigidbody(dashVelocity);
 
-        StartCoroutine(DashDelay());
+        isInvincibility = true;
+        SetSpriteColor(Color.gray);
 
         int spinDown = isFacingRight ? -180 : 180;
         int spinUp = isFacingRight ? -360 : 360;
 
-        isInvincibility = true;
-        sp.color = Color.gray;
-
         DOTween.Sequence()
-            //.Append(transform.DORotate(new Vector3(0, 0, spinDown), dashDuration / 2f))
-            //.Append(transform.DORotate(new Vector3(0, 0, spinUp), dashDuration / 2f))
-            .AppendInterval(dashDuration)
-            .OnComplete(() =>
+            .Append(transform.DORotate(new Vector3(0, 0, spinDown), dashDuration / 2f))
+            .Append(transform.DORotate(new Vector3(0, 0, spinUp), dashDuration / 2f))
+            //.AppendInterval(dashDuration)
+            .AppendCallback(() =>
             {
                 SetRigidbody(Vector2.zero);
-                StartCoroutine(SkillAttackDelay());
+
+                var skillAttackEffect = PoolingManager.Instance.Pop<AttackEffectBase>(skillEffect_attack.name, transform.position);
+                skillAttackEffect.SetTimeAmount(attackAmount);
+                skillAttackEffect.PopEffect(this, true);
+
+                currentBullet = 0;
+                BulletCountCheck();
 
                 isInvincibility = false;
-                sp.color = Color.white;
+                SetSpriteColor(Color.white);
                 transform.rotation = new Quaternion(0, 0, 0, 0);
+
+                SpecialEffectSystem.Instance.CameraShaking(CameraType.Rock_H, 0.6f);
+                AudioManager.Instance.StartSfx($"GammaSkill", 1.2f);
             });
 
         //if (currentBullet >= 3)
@@ -86,7 +105,11 @@ public class Gamma : PlayerBase
 
     protected override void Attack()
     {
+        if (!pFire) return;
         if (!pAttack) return;
+
+        pFire = false;
+        StartCoroutine(BulletDelay());
 
         GammaAttackEffect effect = PoolingManager.Instance.Pop<GammaAttackEffect>(attackEffect.name, transform.position);
         effect.SetTimeAmount(attackValue);
@@ -106,6 +129,9 @@ public class Gamma : PlayerBase
         {
             pAttack = false;
             StartCoroutine(AttackDelay());
+
+            var skillReloadEffect = PoolingManager.Instance.Pop<BoostEffect>(skillEffect_reload.name, transform.position);
+            skillReloadEffect.PopEffect(this);
         }
         bulletText.color = isUpgrade ? Color.yellow : Color.white;
         bulletText.text = isEmpty ? "Reloading..." : $"{currentBullet}/{bulletCount}";
@@ -136,27 +162,11 @@ public class Gamma : PlayerBase
         SetRigidbody(Vector2.zero);
     }
 
-    private IEnumerator SkillAttackDelay()
+    protected IEnumerator BulletDelay()
     {
-        int deg = 30;
-        float spinDeg = 360;
-        float delayTime = dashDuration / (spinDeg / deg);
+        yield return new WaitForSeconds(bulletDelay);
 
-        for (int i = 0; i < spinDeg; i += deg)
-        {
-            float radian = i * Mathf.Deg2Rad;
-            Vector2 fireVec = new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
-
-            GammaAttackEffect effect = PoolingManager.Instance.Pop<GammaAttackEffect>(attackEffect.name, transform.position);
-            effect.SetTimeAmount(attackValue);
-            effect.PopEffect(fireVec, isUpgrade);
-
-            AudioManager.Instance.StartSfx("Bullet_1", 0.6f);
-            SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_S);
-            SpecialEffectSystem.Instance.CameraShaking(CameraType.Rock_S, delayTime);
-
-            yield return new WaitForSeconds(delayTime);
-        }
+        pFire = true;
     }
 
     protected override IEnumerator AttackDelay()

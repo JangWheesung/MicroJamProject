@@ -14,6 +14,7 @@ public abstract class EnemyBase<T> : FSM<T>, IEnemy where T : Enum
     [HideInInspector] public Collider2D col;
     [HideInInspector] public TrailRenderer trail;
 
+    public float upgradeTime { get; set; }
     public float minusTime { get; set; }
     public bool isDie { get; set; }
     public bool isStop { get; set; }
@@ -40,6 +41,7 @@ public abstract class EnemyBase<T> : FSM<T>, IEnemy where T : Enum
     public virtual void Upgrade()
     {
         sp.material.SetFloat("_On", 1);
+        upgradeTime = 0.5f;
     }
 
     public virtual void Stop(bool value)

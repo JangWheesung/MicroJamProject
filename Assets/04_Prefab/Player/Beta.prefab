@@ -458,7 +458,11 @@ MonoBehaviour:
   exAttackProduct: 0
   attackProduct: 0
   hitProduct: 0
-  parryingDuration: 0.8
+  skillEffect_set: {fileID: 1973344438467331423, guid: 76990080410f6a145916f3bc3c469919, type: 3}
+  skillEffect_x: {fileID: 4119173779128979633, guid: b520124051dab3748b6e221c3627c202, type: 3}
+  skillEffect_attack: {fileID: 6343303018965294809, guid: c974140be9285914ebe632cc26ef3753, type: 3}
+  parryingDuration: 0.15
+  parryingDelay: 0.1
 --- !u!114 &-430708052355588243
 MonoBehaviour:
   m_ObjectHideFlags: 0

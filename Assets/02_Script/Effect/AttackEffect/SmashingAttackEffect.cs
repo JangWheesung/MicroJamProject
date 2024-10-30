@@ -18,8 +18,14 @@ public class SmashingAttackEffect : AttackEffectBase
         HitRader(transform.position, attackRadius);
     }
 
-    public override void PopEffect(PlayerBase player)
+    public override void PopEffect(PlayerBase player, bool isParent = false)
     {
         HitRader(player.transform.position, attackRadius);
+
+        if (isParent)
+        {
+            transform.position = player.transform.position;
+            transform.parent = player.transform;
+        }
     }
 }

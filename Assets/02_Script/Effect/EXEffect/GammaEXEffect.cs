@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class GammaEXEffect : EXEffectBase
 {
-    public override void PopEffect(PlayerBase player)
+    public override void PopEffect(PlayerBase player, bool isParent = false)
     {
         player.transform.DOLocalMove(Vector2.zero, 0.1f).SetEase(Ease.OutExpo);
     }

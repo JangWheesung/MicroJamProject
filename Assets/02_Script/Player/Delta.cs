@@ -35,7 +35,7 @@ public class Delta : PlayerBase
         effect.SetTimeAmount(attackValue);
         effect.PopEffect(-MouseVec());
 
-        //AudioManager.Instance.StartSfx();
+        AudioManager.Instance.StartSfx("Punch");
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Rock_H, 0.2f);
     }
 
@@ -50,14 +50,20 @@ public class Delta : PlayerBase
 
     private IEnumerator SkillCoolCor()
     {
+        AudioManager.Instance.StartSfx($"BetaSkill");
+
         isInvincibility = true;
         jumpCount--;
         moveSpeed /= 2;
+
+        SetSpriteColor(Color.gray);
 
         yield return new WaitForSeconds(skillTime);
 
         isInvincibility = false;
         jumpCount++;
         moveSpeed *= 2;
+
+        SetSpriteColor(Color.white);
     }
 }

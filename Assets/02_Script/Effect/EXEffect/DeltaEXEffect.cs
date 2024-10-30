@@ -7,7 +7,7 @@ public class DeltaEXEffect : EXEffectBase
 {
     PlayerBase player;
 
-    public override void PopEffect(PlayerBase player)
+    public override void PopEffect(PlayerBase player, bool isParent = false)
     {
         this.player = player;
 
@@ -29,19 +29,18 @@ public class DeltaEXEffect : EXEffectBase
 
     public override void UnityAnimEvent()
     {
-        //AudioManager.Instance.StartSfx("BetaEX");
         SpecialEffectSystem.Instance.BackgroundAura(Color.green);
     }
 
     public void UnityAnimEvent_1()
     {
-        //AudioManager.Instance.StartSfx("BetaEX");
+        AudioManager.Instance.StartSfx("Punch");
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_H);
     }
 
     public void UnityAnimEvent_2()
     {
-        //AudioManager.Instance.StartSfx("BetaEX");
+        AudioManager.Instance.StartSfx("DeltaEX");
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_H, 1.2f);
     }
 }

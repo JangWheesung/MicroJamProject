@@ -68,9 +68,12 @@ public class Alpha : PlayerBase
             AudioManager.Instance.StartSfx($"Smashing_1");
             SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_S);
         }
-        
-        transform.DOLocalMove(startDashPoint, 0.1f);
-        isInvincibility = false;
+
+        transform.DOLocalMove(startDashPoint, 0.1f)
+            .OnComplete(() =>
+            {
+                isInvincibility = false;
+            });
     }
 
     protected override void Attack()
@@ -94,6 +97,15 @@ public class Alpha : PlayerBase
         int idx = Random.Range(1, 3);
         AudioManager.Instance.StartSfx($"Smashing_{idx}"); //1 ~ 2
         SpecialEffectSystem.Instance.CameraShaking(CameraType.Shake_M);
+    }
+
+    protected override void EX()
+    {
+        rb.velocity = Vector2.zero;
+
+        EXEffectBase effect = PoolingManager.Instance.Pop<EXEffectBase>(exEffect.name, Vector2.zero);
+        effect.SetTimeAmount(exValue);
+        effect.PopEffect(this);
     }
 
     private IEnumerator DashDelay()

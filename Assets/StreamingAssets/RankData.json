@@ -1,25 +1,3 @@
 {
-    "rankDatas": [
-        {
-            "characterSpriteName": "GammaSprite",
-            "characterName": "Gamma",
-            "nickName": "efbt",
-            "killCount": 0.0,
-            "timeCount": 8.997157096862793
-        },
-        {
-            "characterSpriteName": "BetaSprite",
-            "characterName": "Beta",
-            "nickName": "th",
-            "killCount": 0.0,
-            "timeCount": 11.865767478942871
-        },
-        {
-            "characterSpriteName": "AlphaSprite_New",
-            "characterName": "Alpha",
-            "nickName": "한글 되나?",
-            "killCount": 9.0,
-            "timeCount": 22.104278564453126
-        }
-    ]
+    "rankDatas": []
 }

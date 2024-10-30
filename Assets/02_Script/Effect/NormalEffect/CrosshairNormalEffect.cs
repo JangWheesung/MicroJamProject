@@ -16,7 +16,7 @@ public class CrosshairNormalEffect : EffectBase
         //transform.Rotate(Vector2.left, 10f);
     }
 
-    public override void PopEffect(PlayerBase player)
+    public override void PopEffect(PlayerBase player, bool isParent = false)
     {
         targetPlayer = player;
 

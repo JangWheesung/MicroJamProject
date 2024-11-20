@@ -20,6 +20,7 @@ public class IntroController : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera vcam;
     private CinemachineBasicMultiChannelPerlin noiseCam;
     [SerializeField] private TextMeshProUGUI pressText;
+    [SerializeField] private TextMeshProUGUI createdbyText;
     [SerializeField] private Transform mainTrs;
     [SerializeField] private Transform ground;
 
@@ -34,6 +35,7 @@ public class IntroController : MonoBehaviour
             fadeImage.gameObject.SetActive(false);
         });
         pressText.DOFade(0f, 0.7f).SetLoops(-1, LoopType.Yoyo);
+        createdbyText.DOFade(0f, 0.7f).SetLoops(-1, LoopType.Yoyo);
 
         Sprite sprite = particleSprites[Random.Range(0, particleSprites.Length)];
         introParticle.textureSheetAnimation.SetSprite(0, sprite);

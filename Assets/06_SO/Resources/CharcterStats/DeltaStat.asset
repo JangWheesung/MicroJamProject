@@ -17,18 +17,18 @@ MonoBehaviour:
   characterColor: {r: 0, g: 1, b: 0.3, a: 1}
   chatacterName: Delta
   speedStat: 10
-  jumpStat: 12
-  attackStat: 1.8
+  jumpStat: 9
+  attackStat: 1.5
   attackExt: "\uCD08\uADFC\uAC70\uB9AC \uD0C0\uACA9"
-  exName: "\uB545\uC6B8\uB9BC"
-  exExt: "\uAE30\uD569\uC744 \uBAA8\uC544 \uB545\uC73C\uB85C \uC8FC\uBA39\uC744 \uB0B4\uB9AC\uCCD0
-    \uC8FC\uBCC0\uC5D0 \uCDA9\uACA9\uC744 \uAC00\uD55C\uB2E4."
+  exName: "\uD06C\uB7EC\uC154"
+  exExt: "\uC5D0\uB108\uC9C0\uC758 \uD798\uC73C\uB85C \uAC74\uD2C0\uB81B\uC744 \uC18C\uD658\uD574
+    \uC9C0\uBA74\uC744 \uB0B4\uB9AC\uCCD0 \uAC70\uB300\uD55C \uCDA9\uACA9\uC744 \uAC00\uD55C\uB2E4."
   attackDelayStat: 0.18
   skillName: "\uC751\uCD95"
   skillExt: "3\uCD08\uB3D9\uC548 \uBB34\uC801\uC0C1\uD0DC\uC5D0 \uB4E4\uC5B4\uAC04\uB2E4.
     \uBB34\uC801\uC0C1\uD0DC\uC5D0\uC120 \uC774\uB3D9\uC18D\uB3C4, \uC810\uD504\uD69F\uC218\uAC00
     \uC81C\uD55C\uB41C\uB2E4."
-  skillDelayStat: 13
+  skillDelayStat: 15
   passiveDatas:
   - {fileID: 11400000, guid: ef8fa403d56e56e459d5929e936f45e6, type: 2}
   - {fileID: 11400000, guid: a7f8e256f5736c846a76288482f92cf4, type: 2}
